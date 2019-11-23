@@ -1,0 +1,29 @@
+package Objects;
+
+public class Ovni extends Ship{
+	/*
+	 * 
+	 *   You shoot me, you get power
+	 * 
+	 * */
+	
+	//ATTRIBUTES
+	
+	private boolean stillAlive;
+	
+	//CONSTRUCTOR 
+	public Ovni(int startX, int startY, int hp, int points, Game game, boolean stillAlive) {
+		this.stillAlive = stillAlive;
+		super(startX, startY, hp, points, game);
+	}
+	
+	//SETTER AND GETTER
+	
+	public void setStillAlive(boolean live) {
+		this.stillAlive = live;
+	}
+	
+	public boolean getStillAlive() {
+		return this.stillAlive;
+	}
+}
