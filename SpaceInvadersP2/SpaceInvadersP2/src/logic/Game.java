@@ -32,7 +32,7 @@ public class Game implements IPlayerController{
 	public void initGame () {
 		currentCycle = 0;
 		board = initializer.initialize(this, level);
-		navi = new UCMShip(DIM_X / 2, DIM_Y - 1, 3, 0, this, false, 0);
+		navi = new UCMShip(DIM_X / 2, DIM_Y - 1, 3, 0, this, false);
 		board.add(navi);
 	}
 
@@ -86,11 +86,11 @@ public class Game implements IPlayerController{
 	public String infoToString(){
 	
 		String info = "Life: " + this.navi.getHp() + "\n";
-		info += "Number of cycles: " + this.getCycles() + "\n";
+		info += "Number of cycles: " + this.currentCycle + "\n";
 		info += "Points: " + this.navi.getPoints() + "\n";
-		info += "Remaining Aliens: " + this.aliensRemaining() + "\n";
+		info += "Remaining Aliens: " + this.board.aliensRemaining() + "\n"; //contar en gameObject board cuantos aliens quedan
 		info += "Shockwave: ";
-		if(this.getShockWave()) {
+		if(this.getShockWave()) { // mirar en board si el objecto shock existe
 			info += "YES" + "\n";
 		}
 		else {

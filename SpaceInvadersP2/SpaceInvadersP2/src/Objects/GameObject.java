@@ -51,4 +51,6 @@ public abstract class GameObject {
 		public abstract void move();
 		
 		public abstract String toString();
+
+		protected abstract boolean isAlien();
 }

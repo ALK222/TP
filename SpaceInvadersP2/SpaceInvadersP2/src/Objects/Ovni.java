@@ -2,7 +2,7 @@ package Objects;
 
 import logic.Game;
 
-public class Ovni extends Ship{
+public final class Ovni extends Ship{
 	/*
 	 * 
 	 *   You shoot me, you get power

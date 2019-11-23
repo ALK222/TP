@@ -1,6 +1,6 @@
 package Objects;
 
-public class RegularShip extends Ship{
+public final class RegularShip extends Ship{
 	//ATRIBUTES
 	
 	private boolean explosive;

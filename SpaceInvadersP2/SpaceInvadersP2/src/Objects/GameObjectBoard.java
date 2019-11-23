@@ -19,12 +19,20 @@ public class GameObjectBoard {
 	
 	private GameObject getObjectInPosition (int x, int y) {
 		for (int i = 0; i < this.currentObjects; i++) {
-			if(this.GameObjects[i].)
+			if(this.objects[i].isIn(x, y)) {
+				return objects[i];
+			}
 		}
+		return null;
 	}
 	
-	private int getIndex( /* coordinadas */ ) {
-		// TODO implement
+	private int getIndex(int x, int y ) {
+		for(int i = 0; i < currentObjects; i++) {
+			if(objects[i].isIn(x, y)) {
+				return i;
+			}
+		}
+		return -1;
 	}
 
 	private void remove (GameObject object) {
@@ -49,6 +57,16 @@ public class GameObjectBoard {
 
 	public String toString(int x, int y) {
 		return this.getObjectInPosition(x, y).toString();
+	}
+
+	public int aliensRemaining() {
+		int aliensRemaining = 0;
+		for(int i = 0; i < this.currentObjects; i++) {
+			if(objects[i].isAlien()) {
+				aliensRemaining++;
+			}
+		}
+		return aliensRemaining;
 	}
 
 }
