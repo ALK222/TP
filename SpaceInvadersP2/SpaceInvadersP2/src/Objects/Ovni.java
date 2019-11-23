@@ -1,5 +1,7 @@
 package Objects;
 
+import logic.Game;
+
 public class Ovni extends Ship{
 	/*
 	 * 
@@ -12,9 +14,9 @@ public class Ovni extends Ship{
 	private boolean stillAlive;
 	
 	//CONSTRUCTOR 
-	public Ovni(int startX, int startY, int hp, int points, Game game, boolean stillAlive) {
+	public Ovni(int startX, int startY, int hp, int points, Game game, boolean alien, boolean stillAlive) {
+		super(startX, startY, hp, points, game, alien);
 		this.stillAlive = stillAlive;
-		super(startX, startY, hp, points, game);
 	}
 	
 	//SETTER AND GETTER

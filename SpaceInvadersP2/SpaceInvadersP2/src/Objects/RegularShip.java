@@ -7,12 +7,12 @@ public class RegularShip extends Ship{
 	
 	//CONSTRUCTOR
 	public RegularShip(int startX, int startY, int hp, int points, Game game, boolean alien, boolean explosive) {
-		this.explosive = explosive;
 		super(startX, startY, hp, points, game, alien);
+		this.explosive = explosive;
 	}
 	
 	//SETTERS AND GETTERS
-	 public void setExplosive(int explosive) {
+	 public void setExplosive(boolean explosive) {
 		 this.explosive = explosive;
 	 }
 	 

@@ -1,5 +1,7 @@
 package Objects;
 
+import logic.Game;
+
 public class DestroyerShip extends Ship{
 	//ATTRIBUTES
 	private Laser laser;

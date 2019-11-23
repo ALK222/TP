@@ -1,5 +1,7 @@
 package Objects;
 
+import logic.Game;
+
 /* Class "GameObject":
  * 			
  * 			Defines common attributes and methods for both ships and projectiles
@@ -12,7 +14,7 @@ public abstract class GameObject {
 		protected int x;
 		protected int y;
 		
-		public GameObject(Game game, int startX, int startY) {
+		public GameObject(int startX, int startY, Game game) {
 			this.game = game;
 			this.x = startX;
 			this.y = startY;
@@ -35,11 +37,18 @@ public abstract class GameObject {
 		}
 		
 		public boolean isIn(int x, int y) {
-			if(this.x == x && this.y == y) {
-				return true;
-			}
-			return false;
+			return this.x == x && this.y == y;
 		}
+		
+		public boolean isOut() {
+			return !game.isOnBoard(this.x, this.y);
+		}
+
+		public abstract void computerAction();
+		
+		public abstract void onDelete();
+		
+		public abstract void move();
 		
 		public abstract String toString();
 }

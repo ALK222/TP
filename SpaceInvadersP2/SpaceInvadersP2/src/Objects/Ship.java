@@ -1,5 +1,6 @@
 package Objects;
 
+import logic.Game;
 
 /* Class "Ship":
  * 
