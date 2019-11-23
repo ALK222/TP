@@ -1,4 +1,4 @@
-package /* nombre de paquete */ ;
+package utils;
 
 
 public enum Level {
@@ -13,7 +13,7 @@ public enum Level {
 	private double ovniFrequency;
 	private double shootFrequency;
 	private int numRowsOfRegularAliens;
-	private int turnExplodeFrequency = 0.05; // actualmente no depende del nivel
+	private double turnExplodeFrequency = 0.05; // actualmente no depende del nivel
 
 	private Level(
 			int numRegularAliens, 
@@ -60,7 +60,7 @@ public enum Level {
 	}
 	
 	public int  getNumDestroyerAliensPerRow() {
-		return getNumDestroyerAliens();ff 
+		return getNumDestroyerAliens(); 
 	}
 	
 	public static Level parse(String cadenaEntrada) {

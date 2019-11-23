@@ -1,8 +1,7 @@
+package utils;
+
 import interfaces.GamePrinter;
-
-package /* nombre de paquete */;
-
-/* clases importadas */
+import logic.Game;
 
 public enum PrinterTypes {
 	

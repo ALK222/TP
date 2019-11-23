@@ -1,5 +1,6 @@
 package Objects;
 
+import interfaces.IAttack;
 import logic.Game;
 
 /* Class "GameObject":
@@ -8,49 +9,68 @@ import logic.Game;
  * 
  * */
 
-public abstract class GameObject {
+public abstract class GameObject implements IAttack{
+	
+	
+		//ATTRIBUTES
 	
 		protected Game game;
 		protected int x;
 		protected int y;
+		protected boolean alien;
 		
-		public GameObject(int startX, int startY, Game game) {
+		
+		//CONSTRUCTOR
+		
+		public GameObject(int startX, int startY, Game game, boolean alien) {
 			this.game = game;
 			this.x = startX;
 			this.y = startY;
+			this.alien = alien;
 		}
 		
-		public void setX(int x) {
+		
+		//SETTERS AND GETTERS
+		
+		public final void setX(int x) {
 			this.x = x;
 		}
 		
-		public void setY(int y) {
+		public final void setY(int y) {
 			this.y = y;
 		}
 		
-		public int getX() {
+		public final int getX() {
 			return this.x;
 		}
 		
-		public int getY() {
+		public final int getY() {
 			return this.y;
 		}
 		
-		public boolean isIn(int x, int y) {
+		public void setAlien(boolean alien) {
+			this.alien = alien;
+		}
+		
+		public boolean isAlien() {
+			return this.alien;
+		}
+		
+		
+		//METHODS
+		
+		public final boolean isIn(int x, int y) {
 			return this.x == x && this.y == y;
 		}
 		
-		public boolean isOut() {
+		public final boolean isOut() {
 			return !game.isOnBoard(this.x, this.y);
 		}
 
 		public abstract void computerAction();
 		
-		public abstract void onDelete();
-		
 		public abstract void move();
 		
 		public abstract String toString();
 
-		protected abstract boolean isAlien();
 }

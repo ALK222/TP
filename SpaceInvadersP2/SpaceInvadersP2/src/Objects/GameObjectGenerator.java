@@ -1,6 +1,8 @@
-package /* nombre de paquete */;
+package Objects;
 
-/* clases importadas */
+import logic.Game;
+import utils.FileContentsVerifier;
+
 
 public class GameObjectGenerator {
 

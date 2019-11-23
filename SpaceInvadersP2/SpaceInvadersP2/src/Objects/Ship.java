@@ -13,14 +13,12 @@ public abstract class Ship extends GameObject {
 	//ATTRIBUTES
 	protected int hp;
 	protected int points;
-	protected boolean alien;
 	
 	//CONSTRUCTOR
 	public Ship(int startX, int startY, int hp, int points, Game game, boolean alien) {
-		super(startX, startY, game);
+		super(startX, startY, game, alien);
 		this.hp = hp;
 		this.points = points;
-		this.alien = alien;
 	}
 	
 	//SETTERS AND GETTERS

@@ -1,6 +1,6 @@
-package /* nombre de paquete */;
+package utils;
 
-/* clases importadas */
+import logic.Game;
 
 public class FileContentsVerifier{
 	

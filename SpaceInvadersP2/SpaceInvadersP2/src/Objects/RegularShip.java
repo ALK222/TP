@@ -1,6 +1,16 @@
 package Objects;
 
-public final class RegularShip extends Ship{
+import logic.Game;
+
+public final class RegularShip extends AlienShip{
+	
+	/* Class "RegularShip":
+	 * 
+	 * 		Just your regular alien ship, but with an explosive temperament
+	 * 
+	 * */
+	
+	
 	//ATRIBUTES
 	
 	private boolean explosive;
@@ -19,4 +29,15 @@ public final class RegularShip extends Ship{
 	 public boolean isExplosive() {
 		 return this.explosive;
 	 }
+
+	public void computerAction() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public String toString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
