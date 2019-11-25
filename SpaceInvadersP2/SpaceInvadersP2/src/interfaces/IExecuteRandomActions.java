@@ -2,6 +2,7 @@ package interfaces;
 
 import logic.*;
 
+
 public interface IExecuteRandomActions {
 	
 	static boolean canGenerateRandomOvni(Game game){

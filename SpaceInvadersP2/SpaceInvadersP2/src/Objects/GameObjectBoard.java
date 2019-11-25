@@ -9,7 +9,7 @@ public class GameObjectBoard {
 		// TODO implement
 	}
 	
-	private int getCurrentObjects () {
+	private final int getCurrentObjects() {
 		return currentObjects;
 	}
 	
@@ -17,7 +17,7 @@ public class GameObjectBoard {
 		// TODO implement
 	}
 	
-	private GameObject getObjectInPosition (int x, int y) {
+	private final GameObject getObjectInPosition (int x, int y) {
 		for (int i = 0; i < this.currentObjects; i++) {
 			if(this.objects[i].isIn(x, y)) {
 				return objects[i];
@@ -26,7 +26,7 @@ public class GameObjectBoard {
 		return null;
 	}
 	
-	private int getIndex(int x, int y ) {
+	private final int getIndex(int x, int y ) {
 		for(int i = 0; i < currentObjects; i++) {
 			if(objects[i].isIn(x, y)) {
 				return i;
@@ -59,7 +59,7 @@ public class GameObjectBoard {
 		return this.getObjectInPosition(x, y).toString();
 	}
 
-	public int aliensRemaining() {
+	public final int aliensRemaining() {
 		int aliensRemaining = 0;
 		for(int i = 0; i < this.currentObjects; i++) {
 			if(objects[i].isAlien()) {

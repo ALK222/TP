@@ -14,6 +14,7 @@ public class Game implements IPlayerController{
 	private int currentCycle;
 	private Random rand;
 	private Level level;
+	private char lastDir;
 
 	GameObjectBoard board;
 
@@ -25,6 +26,7 @@ public class Game implements IPlayerController{
 	public Game (Level level, Random random){
 		this.rand = random;
 		this.level = level;
+		this.lastDir = 'b';
 		initializer = new BoardInitializer();
 		initGame();
 	}
@@ -35,7 +37,15 @@ public class Game implements IPlayerController{
 		navi = new UCMShip(DIM_X / 2, DIM_Y - 1, 3, 0, this, false);
 		board.add(navi);
 	}
-
+	
+	public char getLastDir() {
+		return this.lastDir;
+	}
+	
+	public void setLastDir(char lastDir) {
+		this.lastDir = lastDir;
+	}
+	
 	public Random getRandom() {
 		return rand;
 	}
@@ -106,7 +116,7 @@ public class Game implements IPlayerController{
 		else return "This should not happen";
 	}
 
-	@Override
+
 	public boolean move(int numCells) {
 		// TODO Auto-generated method stub
 		return false;

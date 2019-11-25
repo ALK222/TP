@@ -15,12 +15,16 @@ public  abstract class AlienShip extends Ship{
 		super(startX, startY, hp, points, game, alien);
 	}
 	
-	public boolean haveLanded() {
+	public final boolean haveLanded() {
 		return y >= 0;
 	}
 
-	public boolean allDead() {
+	public final boolean allDead() {
 		return hp < 0;
+	}
+	
+	public final void move() {
+		
 	}
 	
 }
