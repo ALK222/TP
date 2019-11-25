@@ -17,16 +17,14 @@ public abstract class GameObject implements IAttack{
 		protected Game game;
 		protected int x;
 		protected int y;
-		protected boolean alien;
 		
 		
 		//CONSTRUCTOR
 		
-		public GameObject(int startX, int startY, Game game, boolean alien) {
+		public GameObject(int startX, int startY, Game game) {
 			this.game = game;
 			this.x = startX;
 			this.y = startY;
-			this.alien = alien;
 		}
 		
 		
@@ -47,15 +45,7 @@ public abstract class GameObject implements IAttack{
 		public final int getY() {
 			return this.y;
 		}
-		
-		public void setAlien(boolean alien) {
-			this.alien = alien;
-		}
-		
-		public boolean isAlien() {
-			return this.alien;
-		}
-		
+
 		
 		//METHODS
 		

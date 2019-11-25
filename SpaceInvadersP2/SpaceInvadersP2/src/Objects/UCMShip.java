@@ -20,4 +20,16 @@ public final class UCMShip extends Ship{
 		return this.hp > 0;
 	}
 
+	@Override
+	public void computerAction() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void move() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

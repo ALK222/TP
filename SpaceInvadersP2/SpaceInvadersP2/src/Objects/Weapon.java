@@ -12,7 +12,7 @@ public abstract class Weapon extends GameObject{
 	//CONSTRUCTOR
 	
 	public Weapon(int startX, int startY, Game game, int damage, boolean active) {
-		super(startX, startY, game);
+		super(startX, startY, game, active);
 		this.damage = damage;
 		this.active = active;
 	}
@@ -37,7 +37,7 @@ public abstract class Weapon extends GameObject{
 	
 	//METHODS
 	
-	public abstract void damage();
+	public abstract void damage(GameObject target);
 	
 	public abstract void move();
 

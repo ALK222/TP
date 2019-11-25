@@ -13,12 +13,14 @@ public abstract class Ship extends GameObject {
 	//ATTRIBUTES
 	protected int hp;
 	protected int points;
+	protected boolean alien;
 	
 	//CONSTRUCTOR
 	public Ship(int startX, int startY, int hp, int points, Game game, boolean alien) {
-		super(startX, startY, game, alien);
+		super(startX, startY, game);
 		this.hp = hp;
 		this.points = points;
+		this.alien = alien;
 	}
 	
 	//SETTERS AND GETTERS
@@ -38,8 +40,16 @@ public abstract class Ship extends GameObject {
 		return this.points;
 	}
 	
+	public void setAlien(boolean alien) {
+		this.alien = alien;
+	}
+	
 	//I don't belong in area 51, or do I?
 	public boolean isAlien() {
 		return this.alien;
+	}
+	
+	public void damage() {
+		this.setHp(this.hp - 1);
 	}
 }
