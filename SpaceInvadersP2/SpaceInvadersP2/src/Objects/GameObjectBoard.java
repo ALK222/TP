@@ -6,18 +6,16 @@ public class GameObjectBoard {
 	private int currentObjects;
 	
 	public GameObjectBoard (int width, int height) {
-		// TODO implement
-	}
-	
-	private final int getCurrentObjects() {
-		return currentObjects;
+		objects = new GameObject[width * height];
+		this.currentObjects = 0;
 	}
 	
 	public void add (GameObject object) {
-		// TODO implement
+		objects[this.getCurrentObjects()] = object;
+		this.currentObjects++;
 	}
 	
-	private final GameObject getObjectInPosition (int x, int y) {
+	public final GameObject getObjectInPosition (int x, int y) {
 		for (int i = 0; i < this.currentObjects; i++) {
 			if(this.objects[i].isIn(x, y)) {
 				return objects[i];
@@ -26,24 +24,13 @@ public class GameObjectBoard {
 		return null;
 	}
 	
-	private final int getIndex(int x, int y ) {
-		for(int i = 0; i < currentObjects; i++) {
-			if(objects[i].isIn(x, y)) {
-				return i;
-			}
-		}
-		return -1;
-	}
 
-	private void remove (GameObject object) {
-		// TODO implement
+	
+	public int getCurrentObjects() {
+		return this.currentObjects;
 	}
 	
 	public void update() {
-		// TODO implement
-	}
-	
-	private void checkAttacks(GameObject object) {
 		// TODO implement
 	}
 	
@@ -51,10 +38,6 @@ public class GameObjectBoard {
 		// TODO implement
 	}
 	
-	private void removeDead() {
-		// TODO implement
-	}
-
 	public String toString(int x, int y) {
 		return this.getObjectInPosition(x, y).toString();
 	}

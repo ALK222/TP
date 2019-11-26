@@ -12,9 +12,10 @@ public class Game implements IPlayerController{
 	public final static int DIM_Y = 8;
 
 	private int currentCycle;
-	private Random rand;
+	private String seed;
 	private Level level;
 	private char lastDir;
+	private Random rand;
 
 	GameObjectBoard board;
 
@@ -23,10 +24,12 @@ public class Game implements IPlayerController{
 	private boolean doExit;
 	private BoardInitializer initializer;
 	
-	public Game (Level level, Random random){
-		this.rand = random;
+	public Game (Level level, String seed){
+		this.seed = seed;
 		this.level = level;
 		this.lastDir = 'b';
+		this.rand = new Random(Long.parseLong(seed));
+		
 		initializer = new BoardInitializer();
 		initGame();
 	}
@@ -46,8 +49,8 @@ public class Game implements IPlayerController{
 		this.lastDir = lastDir;
 	}
 	
-	public Random getRandom() {
-		return rand;
+	public String getSeed() {
+		return seed;
 	}
 	
 	public Level getLevel() {
@@ -150,6 +153,10 @@ public class Game implements IPlayerController{
 	public void enableMissile() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public String characterAtToString(int x, int y) {
+		return board.getObjectInPosition(x, y).toString();
 	}
 	
 	// TODO implementar los métodos del interfaz IPlayerController

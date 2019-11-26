@@ -18,7 +18,7 @@ public class CommandGenerator {
 			update = update(),
 			move = move(),
 			shock = shock()
-	}
+	};
 	
 	public static ListCommand list() {
 		ListCommand l;

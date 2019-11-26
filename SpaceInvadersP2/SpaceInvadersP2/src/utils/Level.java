@@ -15,14 +15,8 @@ public enum Level {
 	private int numRowsOfRegularAliens;
 	private double turnExplodeFrequency = 0.05; // actualmente no depende del nivel
 
-	private Level(
-			int numRegularAliens, 
-			int numDestroyerAliens, 
-			double shootFrequency, 
-			int numCyclesToMoveOneCell, 
-			double ovniFrequency, 
-			int numRowsOfRegularAliens)
-	{
+	private Level(int numRegularAliens, int numDestroyerAliens,	double shootFrequency, 
+				  int numCyclesToMoveOneCell,	double ovniFrequency, int numRowsOfRegularAliens) {
 		this.numRegularAliens = numRegularAliens;
 		this.numDestroyerAliens = numDestroyerAliens;
 		this.shootFrequency = shootFrequency;
