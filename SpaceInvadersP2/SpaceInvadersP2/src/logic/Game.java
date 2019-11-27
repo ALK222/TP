@@ -37,7 +37,7 @@ public class Game implements IPlayerController{
 	public void initGame () {
 		currentCycle = 0;
 		board = initializer.initialize(this, level);
-		navi = new UCMShip(DIM_X / 2, DIM_Y - 1, 3, 0, this, false);
+		navi = new UCMShip(DIM_X / 2, DIM_Y - 1, 3, 0, this, false, true);
 		board.add(navi);
 	}
 	

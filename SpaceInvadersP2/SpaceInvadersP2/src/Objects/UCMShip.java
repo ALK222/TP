@@ -7,9 +7,9 @@ public final class UCMShip extends Ship{
 	private Laser laser;
 	
 	//CONSTRUCTOR
-	public UCMShip(int startX, int startY, int hp, int points, Game game, boolean alien) {
-		super(startX, startY, hp, points, game, alien);
-		laser = new laser(this.x, this.y);
+	public UCMShip(int startX, int startY, int hp, int points, Game game, boolean alien, boolean alive) {
+		super(startX, startY, hp, points, game, alien, alive);
+		laser = new Laser(this.x, this.y, game, false, false);
 	}
 	
 	public String toString() {
@@ -29,6 +29,11 @@ public final class UCMShip extends Ship{
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
+		
+	}
+
+	public void damage(GameObject target) {
+		this.hp--;
 		
 	}
 

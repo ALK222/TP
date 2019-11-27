@@ -17,19 +17,43 @@ public abstract class GameObject implements IAttack{
 		protected Game game;
 		protected int x;
 		protected int y;
+		protected boolean alien;
+		protected boolean alive;
 		
 		
 		//CONSTRUCTOR
 		
-		public GameObject(int startX, int startY, Game game) {
+		public GameObject(int startX, int startY, Game game, boolean alien, boolean alive) {
 			this.game = game;
 			this.x = startX;
 			this.y = startY;
+			this.alien = alien;
+			this.alive = alive;
 		}
 		
 		
 		//SETTERS AND GETTERS
 		
+		public boolean isAlien() {
+			return alien;
+		}
+
+
+		public void setAlien(boolean alien) {
+			this.alien = alien;
+		}
+
+
+		public boolean isAlive() {
+			return alive;
+		}
+
+
+		public void setAlive(boolean alive) {
+			this.alive = alive;
+		}
+
+
 		public final void setX(int x) {
 			this.x = x;
 		}
@@ -62,5 +86,7 @@ public abstract class GameObject implements IAttack{
 		public abstract void move();
 		
 		public abstract String toString();
+		
+		public abstract void damage(GameObject target);
 
 }

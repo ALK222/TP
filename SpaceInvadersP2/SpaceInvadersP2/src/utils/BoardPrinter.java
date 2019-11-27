@@ -41,7 +41,7 @@ public class BoardPrinter implements GamePrinter{
 		}
 	}
 	
-	public String toString() {
+	public String toString(Game game) {
 
 		int cellSize = 7;
 		int marginSize = 2;
@@ -64,6 +64,19 @@ public class BoardPrinter implements GamePrinter{
 				str.append(lineDelimiter);
 		}
 		return str.toString();
+	}
+
+
+	@Override
+	public GamePrinter parse(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String helpText() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -16,8 +16,8 @@ public abstract class Ship extends GameObject {
 	protected boolean alien;
 	
 	//CONSTRUCTOR
-	public Ship(int startX, int startY, int hp, int points, Game game, boolean alien) {
-		super(startX, startY, game);
+	public Ship(int startX, int startY, int hp, int points, Game game, boolean alien,boolean alive) {
+		super(startX, startY, game, alien, alive);
 		this.hp = hp;
 		this.points = points;
 		this.alien = alien;

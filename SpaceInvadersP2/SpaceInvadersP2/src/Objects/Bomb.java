@@ -5,36 +5,36 @@ import logic.Game;
 
 public final class Bomb extends Weapon{
 	
-	//ATTRIBUTES
-	
-	private int damage;
-	private boolean active;
 	
 	//CONSTRUCTOR
 	
-	public Bomb(int startX, int startY, Game game, int damage, boolean active) {
-		super(startX, startY, game, damage, active);
-		this.damage = damage;
-		this.active = active;
+	public Bomb(int startX, int startY, Game game, boolean alien, boolean active) {
+		super(startX, startY, game, alien, active);
+
 	}
 
 	public void damage(GameObject target) {
 		if(!target.isAlien()) {
-			target.damage();
+			target.damage(this);
 		}
 		
 	}
 
 	public void move() {
 		if(this.isActive()) {
-			this.setY(this.getY() + 1);
+			this.setY(this.getX() + 1);
 		}
 		
 	}
 
-	@Override
 	public String toString() {
-		return "บบ";
+		return ".";
+	}
+
+	@Override
+	public void computerAction() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

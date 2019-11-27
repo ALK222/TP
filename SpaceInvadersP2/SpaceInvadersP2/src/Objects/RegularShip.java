@@ -16,8 +16,8 @@ public final class RegularShip extends AlienShip{
 	private boolean explosive;
 	
 	//CONSTRUCTOR
-	public RegularShip(int startX, int startY, int hp, int points, Game game, boolean alien, boolean explosive) {
-		super(startX, startY, hp, points, game, alien);
+	public RegularShip(int startX, int startY, int hp, int points, Game game, boolean alien, boolean alive, boolean explosive) {
+		super(startX, startY, hp, points, game, alien, alive);
 		this.explosive = explosive;
 	}
 	
@@ -39,5 +39,11 @@ public final class RegularShip extends AlienShip{
 	public String toString() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void damage(GameObject target) {
+		this.hp--;
+		
 	}
 }

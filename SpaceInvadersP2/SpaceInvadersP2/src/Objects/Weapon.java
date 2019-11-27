@@ -6,15 +6,12 @@ public abstract class Weapon extends GameObject{
 	
 	//ATTRIBUTES
 	
-	private int damage;
 	private boolean active;
 	
 	//CONSTRUCTOR
 	
-	public Weapon(int startX, int startY, Game game, int damage, boolean active) {
-		super(startX, startY, game, active);
-		this.damage = damage;
-		this.active = active;
+	public Weapon(int startX, int startY, Game game, boolean alien , boolean alive) {
+		super(startX, startY, game, alien , alive);
 	}
 	
 	//SETTERS AND GETTERS
@@ -27,9 +24,6 @@ public abstract class Weapon extends GameObject{
 		return this.active;
 	}
 	
-	public final void setDamage(int damage) {
-		this.damage = damage;
-	}
 	
 	public final void setActive(boolean active) {
 		this.active = active;
