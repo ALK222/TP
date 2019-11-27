@@ -6,7 +6,7 @@ import utils.FileContentsVerifier;
 
 public class GameObjectGenerator {
 
-	private static GameObject[] availableGameObjects = {
+	/*private static GameObject[] availableGameObjects = {
 			new UCMShip(),
 			new Ovni(),
 			new RegularAlien(),
@@ -26,6 +26,6 @@ public class GameObjectGenerator {
 			if (gameObject != null) break;
 		}
 		return gameObject;
-	}
+	}*/
 
 }

@@ -34,6 +34,10 @@ public class Game implements IPlayerController{
 		initGame();
 	}
 	
+	public Random getRandom() {
+		return this.rand;
+	}
+	
 	public void initGame () {
 		currentCycle = 0;
 		board = initializer.initialize(this, level);
@@ -133,9 +137,12 @@ public class Game implements IPlayerController{
 		return false;
 	}
 
-	@Override
+
 	public boolean shootLaser() {
-		// TODO Auto-generated method stub
+		if(navi.getLaser().isAlive()) {
+			navi.shoot();
+			return true;
+		}
 		return false;
 	}
 
@@ -164,8 +171,10 @@ public class Game implements IPlayerController{
 	}
 
 	public String characterAtToString(int x, int y) {
-		return board.getObjectInPosition(x, y).toString();
+		if(board.getObjectInPosition(x, y) != null) {
+			return board.getObjectInPosition(x, y).toString();
+		}
+		return "";
 	}
 	
-	// TODO implementar los métodos del interfaz IPlayerController
 }

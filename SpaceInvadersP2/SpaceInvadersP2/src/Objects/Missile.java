@@ -4,8 +4,8 @@ import logic.Game;
 
 public final class Missile extends Weapon{
 
-	public Missile(int startX, int startY, Game game, int damage, boolean active) {
-		super(startX, startY, game, damage, active);
+	public Missile(int startX, int startY, Game game, boolean alien, boolean active) {
+		super(startX, startY, game, alien, active);
 	}
 
 	public void damage(GameObject target) {

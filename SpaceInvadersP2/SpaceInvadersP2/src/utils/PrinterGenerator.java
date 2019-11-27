@@ -5,8 +5,8 @@ import logic.Game;;
 
 public class PrinterGenerator {
 		private static GamePrinter[] availablePrinters = {
-			new BoardPrinter(Game.DIM_X, Game.DIM_Y),
-			new Serializer(),
+			//new BoardPrinter(Game.DIM_X, Game.DIM_Y),
+			//new Serializer(),
 			
 		};
 

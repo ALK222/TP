@@ -37,4 +37,15 @@ public final class UCMShip extends Ship{
 		
 	}
 
+	public Laser getLaser() {
+		return this.laser;
+	}
+
+	public void shoot() {
+		laser.setX(this.x);
+		laser.setY(this.y);
+		laser.setActive(true);
+		
+	}
+
 }

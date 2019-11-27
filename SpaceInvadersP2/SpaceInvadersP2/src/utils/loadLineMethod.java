@@ -1,5 +1,5 @@
 
-public static final String wrongPrefixMsg = "unknown game attribute: "
+/*public static final String wrongPrefixMsg = "unknown game attribute: "
 public static final String lineTooLongMsg = "too many words on line commencing: "
 public static final String lineTooShortMsg = "missing data on line commencing: "
 
@@ -46,5 +46,5 @@ public String[] loadLine(BufferedReader inStream, String prefix, boolean isList)
 
 	return words;
 
-}
+}*/
 
