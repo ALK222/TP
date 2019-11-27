@@ -14,8 +14,6 @@ public final class DestroyerShip extends AlienShip{
 	public final Bomb getLaser() {
 		return this.bomb;
 	}
-return null;
-	}
 	
 	
 	

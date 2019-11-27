@@ -29,7 +29,7 @@ public class Game implements IPlayerController{
 		this.level = level;
 		this.lastDir = 'b';
 		this.rand = new Random(Long.parseLong(seed));
-		
+		this.doExit = false;
 		initializer = new BoardInitializer();
 		initGame();
 	}
@@ -39,6 +39,14 @@ public class Game implements IPlayerController{
 		board = initializer.initialize(this, level);
 		navi = new UCMShip(DIM_X / 2, DIM_Y - 1, 3, 0, this, false);
 		board.add(navi);
+	}
+	
+	public boolean isDoExit() {
+		return this.doExit;
+	}
+	
+	public void setDoExit(boolean doExit) {
+		this.doExit = doExit;
 	}
 	
 	public char getLastDir() {
