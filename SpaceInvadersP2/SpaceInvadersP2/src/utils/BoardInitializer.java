@@ -21,7 +21,7 @@ public class BoardInitializer {
 	}
 	
 	private void initializeOvni () {
-		board.add(new Ovni(0, 0, 1, 10, game, true, false));
+		board.add(new Ovni(0, 8, 1, 10, game, true, false));
 	}
 
 	private void initializeRegularAliens () {
@@ -29,18 +29,26 @@ public class BoardInitializer {
 		int y = 6;
 		for(int i = 0; i < this.level.getNumRowsOfRegularAliens(); i++) {
 			for(int j = 0; j < level.getNumRegularAliensPerRow(); j++) {
-				board.add(new RegularShip(x + j, y - i, 1, 5, game, true, false, true));
+				board.add(new RegularShip(x + i, y - j, 1, 5, game, true, false, true));
 			}
 		}
 	}
 	
 	private void initializeDestroyerAliens() {
-		int x = 1;
-		int y = 6;
-		for(int i = 0; i < this.level.getNumDestroyerAliens(); i++) {
-			for(int j = 0; j < this.level.getNumDestroyerAliensPerRow(); j++) {
-				board.add(new DestroyerShip(x + j, y + 2 + i, 2, 10, game, true, true));
-			}
+		int x = 2;
+		int y = 5;
+		if(level.getNumRegularAliens() > 4) {
+			y ++;
+		}
+		if(level.getNumRegularAliens() > 8) {
+			x++;
+		}
+		if(level.getNumDestroyerAliens() > 2) {
+			x++;
+		}
+		
+		for(int i = 0; i < level.getNumDestroyerAliens(); i++) {
+			board.add(new DestroyerShip(x, y - i, 2, 10, game, true, false));
 		}
 	}
 }

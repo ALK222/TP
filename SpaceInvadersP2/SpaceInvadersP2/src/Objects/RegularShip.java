@@ -27,9 +27,10 @@ public final class RegularShip extends AlienShip{
 	 }
 	 
 	 public boolean isExplosive() {
-		 return this.explosive;
+		 return this.explosive;  //Allahu Akbar
 	 }
 
+	 @Override
 	public void computerAction() {
 		// TODO Auto-generated method stub
 		
@@ -37,8 +38,7 @@ public final class RegularShip extends AlienShip{
 
 
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		return "R[" + this.getHp() +"]";
 	}
 
 	@Override

@@ -41,7 +41,7 @@ public class Game implements IPlayerController{
 	public void initGame () {
 		currentCycle = 0;
 		board = initializer.initialize(this, level);
-		navi = new UCMShip(DIM_X / 2, DIM_Y - 1, 3, 0, this, false, true);
+		navi = new UCMShip(7, 4, 3, 0, this, false, true);
 		board.add(navi);
 	}
 	
@@ -99,10 +99,10 @@ public class Game implements IPlayerController{
 		currentCycle += 1;
 	}
 	
-	public boolean isOnBoard(int x, int y) {
+	/*public boolean isOnBoard(int x, int y) {
 
-		return /* condición de rango sobre las coordenadas */ ;
-	}
+		return null ;
+	}*/
 	
 	public void exit() {
 		doExit = true;
