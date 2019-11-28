@@ -4,7 +4,7 @@ import logic.Game;
 
 public class MoveCommand extends Commands{
 
-	public MoveCommand(String name, String shortcut, String details, String help) {
+	public MoveCommand(String name, String shortcut, String[] details, String help) {
 		super(name, shortcut, details, help);
 	}
 

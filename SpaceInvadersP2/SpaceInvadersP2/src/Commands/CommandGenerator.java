@@ -76,7 +76,7 @@ public class CommandGenerator {
 		return new ShockwaveCommand(name, shortcut, details, help);
 	}
 	
-	public Commands parse(String[] command) {
+	public static Commands parse(String[] command) {
 		
 		return null;
 		
