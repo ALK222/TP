@@ -69,7 +69,6 @@ public class BoardPrinter implements GamePrinter{
 
 	@Override
 	public GamePrinter parse(String name) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

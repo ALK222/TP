@@ -28,7 +28,8 @@ public class Controller implements IExecuteRandomActions{
 	
 	public void run() {
 		while(!game.isFinished()){
-			System.out.println(b);
+			this.b = new BoardPrinter(game, 8, 9);
+			System.out.print(b);
 			String[]  words = in.nextLine().toLowerCase().trim().split ("\\s+");
 			Commands command = CommandGenerator.parse(words);
 			if(command != null) {
@@ -36,7 +37,7 @@ public class Controller implements IExecuteRandomActions{
 					System.out.println(game);
 			}
 			else{
-				System.out.format(unknownCommandMsg);
+				//System.out.format(unknownCommandMsg);
 			}
 		}
 	}
