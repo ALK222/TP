@@ -13,7 +13,10 @@ public final class UCMShip extends Ship{
 	}
 	
 	public String toString() {
-		return "^_^";
+		if(isAlive()) {
+			return "^_^";
+		}
+		return "!xx!";
 	}
 	
 	public boolean isAlive() {

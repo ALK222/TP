@@ -14,7 +14,6 @@ public class Game implements IPlayerController{
 	private int currentCycle;
 	private String seed;
 	private Level level;
-	private char lastDir;
 	private Random rand;
 
 	GameObjectBoard board;
@@ -27,7 +26,6 @@ public class Game implements IPlayerController{
 	public Game (Level level, String seed){
 		this.seed = seed;
 		this.level = level;
-		this.lastDir = 'b';
 		this.rand = new Random(Long.parseLong(seed));
 		this.doExit = false;
 		initializer = new BoardInitializer();
@@ -51,14 +49,6 @@ public class Game implements IPlayerController{
 	
 	public void setDoExit(boolean doExit) {
 		this.doExit = doExit;
-	}
-	
-	public char getLastDir() {
-		return this.lastDir;
-	}
-	
-	public void setLastDir(char lastDir) {
-		this.lastDir = lastDir;
 	}
 	
 	public String getSeed() {
@@ -99,10 +89,6 @@ public class Game implements IPlayerController{
 		currentCycle += 1;
 	}
 	
-	/*public boolean isOnBoard(int x, int y) {
-
-		return null ;
-	}*/
 	
 	public void exit() {
 		doExit = true;

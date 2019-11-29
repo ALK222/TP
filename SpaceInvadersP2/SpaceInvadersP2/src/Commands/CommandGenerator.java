@@ -17,7 +17,7 @@ public class CommandGenerator {
 			exit = exit(),
 			update = update(),
 			move = move(String parameters),
-			shock = shock()
+			shock = shock();
 	};
 	
 	public static ListCommand list() {

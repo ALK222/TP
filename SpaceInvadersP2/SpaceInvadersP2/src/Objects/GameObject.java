@@ -77,9 +77,6 @@ public abstract class GameObject implements IAttack{
 			return this.x == x && this.y == y;
 		}
 		
-		public final boolean isOut() {
-			return !game.isOnBoard(this.x, this.y);
-		}
 
 		public abstract void computerAction();
 		

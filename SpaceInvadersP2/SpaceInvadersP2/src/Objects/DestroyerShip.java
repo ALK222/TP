@@ -1,5 +1,7 @@
 package Objects;
 
+import interfaces.IAttack;
+import interfaces.IExecuteRandomActions;
 import logic.Game;
 
 public final class DestroyerShip extends AlienShip{
@@ -14,9 +16,18 @@ public final class DestroyerShip extends AlienShip{
 	public final Bomb getLaser() {
 		return this.bomb;
 	}
-	@Override
+
+	
 	public void computerAction() {
-		// TODO Auto-generated method stub
+		//Primero comprobamos la vida, luego movemos la nave y luego disparamos si es posible
+		if(this.getHp() > 1) {
+			//delete
+		}
+		
+		move();
+		if(IExecuteRandomActions.canGenerateRandomBomb(game)){
+			this.shoot();
+		}
 		
 	}
 	
@@ -27,6 +38,12 @@ public final class DestroyerShip extends AlienShip{
 	public void damage(GameObject target) {
 		this.setHp(getHp() - 1);
 		
+	}
+	
+	public void shoot() {
+		this.getLaser().setActive(true);
+		this.getLaser().setX(this.getX());
+		this.getLaser().setY(this.getY());
 	}
 	
 	

@@ -24,7 +24,15 @@ public  abstract class AlienShip extends Ship{
 	}
 	
 	public final void move() {
-		
+		if(this.getY() == 0 || this.getY() == 8) {
+			this.setX(this.getX() - 1);
+		}
+		if(this.getX() % 2 == 0) {
+			this.setY(getY() + 1);
+		}
+		else {
+			this.setY(getY() - 1);
+		}
 	}
 	
 }

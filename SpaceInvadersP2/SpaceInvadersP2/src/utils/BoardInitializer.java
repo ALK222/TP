@@ -27,8 +27,8 @@ public class BoardInitializer {
 	private void initializeRegularAliens () {
 		int x = 1;
 		int y = 6;
-		for(int i = 0; i < this.level.getNumRowsOfRegularAliens(); i++) {
-			for(int j = 0; j < level.getNumRegularAliensPerRow(); j++) {
+		for(int i = 0; i < this.level.getNumRowsOfRegularAliens(); ++i) {
+			for(int j = 0; j < level.getNumRegularAliensPerRow(); ++j) {
 				board.add(new RegularShip(x + i, y - j, 1, 5, game, true, false, true));
 			}
 		}
@@ -38,13 +38,13 @@ public class BoardInitializer {
 		int x = 2;
 		int y = 5;
 		if(level.getNumRegularAliens() > 4) {
-			y ++;
+			++y;
 		}
 		if(level.getNumRegularAliens() > 8) {
-			x++;
+			++x;
 		}
 		if(level.getNumDestroyerAliens() > 2) {
-			x++;
+			++x;
 		}
 		
 		for(int i = 0; i < level.getNumDestroyerAliens(); i++) {

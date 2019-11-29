@@ -10,32 +10,31 @@ public final class Missile extends Weapon{
 
 	public void damage(GameObject target) {
 		if(target.isAlien()) {
-			//inflict damage
+			target.damage(this);
+			this.setActive(false);
 		}
 	}
 
-	@Override
+
 	public void move() {
-		// TODO Auto-generated method stub
+		this.setY(getX() - 1);
 		
 	}
 
-	@Override
 	public void computerAction() {
-		// TODO Auto-generated method stub
+		if(this.getX() < 0) {
+			this.setActive(false);
+		}
+		
+		if(isActive()) {
+			move();
+		}
 		
 	}
 
-	@Override
-	public void onDelete() {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		return ".";
 	}
 
 }

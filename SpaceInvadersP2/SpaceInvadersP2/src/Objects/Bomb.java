@@ -31,9 +31,13 @@ public final class Bomb extends Weapon{
 		return ".";
 	}
 
-	@Override
 	public void computerAction() {
-		// TODO Auto-generated method stub
+		if(this.getX() > 8) {
+			setActive(false);
+		}
+		if(this.isActive()) {
+			move();
+		}
 		
 	}
 
