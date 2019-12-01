@@ -8,27 +8,34 @@ public class Laser extends Weapon{
 		super(startX, startY, game, alien, alive);
 	}
 
-	public void damage(GameObject target) {
-		if(target.isAlien()) {
-			target.damage(this);
-			this.alive = false;
-		}
-	}
 
 	public void move() {
 		this.setY(getX() - 1);
 		
 	}
 
-	@Override
+	
 	public void computerAction() {
+		move();
+	}
+
+	
+	public String toString() {
+		return "oo";
+	}
+
+	@Override
+	public void damage(GameObject target) {
 		// TODO Auto-generated method stub
 		
 	}
 
+
 	@Override
-	public String toString() {
-		return "oo";
+	public void damage() {
+		// TODO Auto-generated method stub
+		
 	}
+
 	
 }

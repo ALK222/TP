@@ -19,7 +19,6 @@ public final class DestroyerShip extends AlienShip{
 
 	
 	public void computerAction() {
-		
 		move();
 		if(IExecuteRandomActions.canGenerateRandomBomb(game)){
 			this.shoot();
@@ -44,6 +43,7 @@ public final class DestroyerShip extends AlienShip{
 		this.getLaser().setX(this.getX());
 		this.getLaser().setY(this.getY());
 	}
+
 	
 	
 	

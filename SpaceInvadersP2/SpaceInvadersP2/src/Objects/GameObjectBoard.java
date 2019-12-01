@@ -32,7 +32,7 @@ public class GameObjectBoard {
 	
 	public void update() {
 		for(int i = 0; i < getCurrentObjects(); ++i) {
-			if(!this.objects[i].isAlive()) {
+			if(!this.objects[i].isAlive() && this.objects[i].isAlien()) {
 				delete(i);
 			}
 		}
@@ -52,9 +52,9 @@ public class GameObjectBoard {
 	}
 
 	public void computerAction() {
-		for(int i = 0; i < currentObjects; ++i) {
+		/*for(int i = 0; i < currentObjects; ++i) {
 			this.objects[i].computerAction();
-		}
+		}*/
 	}
 	
 	public String toString(int x, int y) {
@@ -80,6 +80,12 @@ public class GameObjectBoard {
 			}
 		}
 		return false;
+	}
+	
+	public void move() {
+		if(objects[0].getClass() == EnemyShip.class) {
+			objects[0].move();
+		}
 	}
 
 }
