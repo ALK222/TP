@@ -1,6 +1,7 @@
 package logic;
 
 import interfaces.IPlayerController;
+import interfaces.IAttack;
 import java.lang.String;
 import java.util.Random;
 
@@ -200,11 +201,11 @@ public class Game implements IPlayerController{
 		for(int i = 0; i < radio; ++i) {
 			for(int j = 0; j < radio; ++j) {
 				if(board.getObjectInPosition(x + i, y +j) != null) {
-					board.getObjectInPosition(x + i, y +j).damage();
+					board.getObjectInPosition(x + i, y +j).damage(null);
 				}
 			}
 		}
 		
 	}
-	
+		
 }

@@ -24,18 +24,18 @@ public class Laser extends Weapon{
 		return "oo";
 	}
 
+
 	@Override
 	public void damage(GameObject target) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	
 
-	@Override
-	public void damage() {
-		// TODO Auto-generated method stub
-		
-	}
+
+
+
 
 	
 }
