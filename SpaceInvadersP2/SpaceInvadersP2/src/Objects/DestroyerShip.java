@@ -19,7 +19,6 @@ public final class DestroyerShip extends AlienShip{
 
 	
 	public void computerAction() {
-		//Primero comprobamos la vida, luego movemos la nave y luego disparamos si es posible
 		if(this.getHp() > 1) {
 			//delete
 		}

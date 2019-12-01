@@ -32,7 +32,10 @@ public final class RegularShip extends AlienShip{
 
 	 @Override
 	public void computerAction() {
-		// TODO Auto-generated method stub
+		move();
+		if(isExplosive()) {
+			game.explosion(this.x, this.y);
+		}
 		
 	}
 

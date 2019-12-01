@@ -15,6 +15,8 @@ public class Game implements IPlayerController{
 	private String seed;
 	private Level level;
 	private Random rand;
+	private int line;
+	private char lastDir;
 
 	GameObjectBoard board;
 
@@ -30,6 +32,8 @@ public class Game implements IPlayerController{
 		this.doExit = false;
 		initializer = new BoardInitializer();
 		initGame();
+		line = 0;
+		lastDir = 'b';
 	}
 	
 	public Random getRandom() {
@@ -63,6 +67,22 @@ public class Game implements IPlayerController{
 		initGame();
 	}
 	
+	public void setLastDir(char lastDir) {
+		this.lastDir = lastDir;
+	}
+	
+	public char getLastDir() {
+		return this.lastDir;
+	}
+	
+	public int getLine() {
+		return line;
+	}
+
+	public void setLine(int line) {
+		this.line = line;
+	}
+
 	public void addObject(GameObject object) {
 		board.add(object);
 	}
@@ -80,6 +100,9 @@ public class Game implements IPlayerController{
 	}
 	
 	private boolean playerWin () {
+		if(board.aliensRemaining() == 0) {
+			return true;
+		}
 		return false;
 	}
 	
@@ -161,6 +184,20 @@ public class Game implements IPlayerController{
 			return board.getObjectInPosition(x, y).toString();
 		}
 		return "";
+	}
+	
+	
+	public void move() {
+		
+	}
+
+	public void explosion(int x, int y) {
+		board.getObjectInPosition(x, y).damage(null);
+		board.getObjectInPosition(x - 1, y).damage(null);
+		board.getObjectInPosition(x + 1, y).damage(null);
+		board.getObjectInPosition(x, y - 1).damage(null);
+		board.getObjectInPosition(x, y + 1).damage(null);
+		
 	}
 	
 }

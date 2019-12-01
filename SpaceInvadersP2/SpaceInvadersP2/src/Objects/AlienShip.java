@@ -24,14 +24,24 @@ public  abstract class AlienShip extends EnemyShip{
 	}
 	
 	public final void move() {
-		if(this.getY() == 0 || this.getY() == 8) {
-			this.setX(this.getX() - 1);
+		boolean bajar = false;
+		if(game.getLastDir() != 'b') {
+			if(this.y >= 8 || this.y <= 0) {
+				this.x++;
+				game.setLastDir('b');
+				bajar = true;
+				game.setLine(game.getLine() + 1);
+			}
 		}
-		if(this.getX() % 2 == 0) {
-			this.setY(getY() + 1);
-		}
-		else {
-			this.setY(getY() - 1);
+		if (!bajar) {
+			if(game.getLine() % 2 == 0) {
+				this.y--;
+				game.setLastDir('i');
+			}
+			else {
+				++this.y;
+				game.setLastDir('d');
+			}
 		}
 	}
 	

@@ -24,6 +24,8 @@ public final class Ovni extends EnemyShip{
 			move();
 		}
 		if(IExecuteRandomActions.canGenerateRandomOvni(game)) {
+			this.x = 0;
+			this.y = 8;
 			this.setAlien(true);
 		}
 	}
@@ -34,7 +36,10 @@ public final class Ovni extends EnemyShip{
 	}
 
 	public String toString() {
-		return "O[" + this.getHp() + "]";
+		if(isAlive()) {
+			return "O[" + this.getHp() + "]";
+		}
+		return "";
 	}
 
 	public void damage(GameObject target) {
