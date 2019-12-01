@@ -31,11 +31,30 @@ public class GameObjectBoard {
 	}
 	
 	public void update() {
-		// TODO implement
+		for(int i = 0; i < getCurrentObjects(); ++i) {
+			if(this.objects[i].isAlive()) {
+				delete(i);
+			}
+		}
 	}
 	
+	public void delete(int n) {
+		if(this.getCurrentObjects() > 1) {
+			for(int i = n; i < this.getCurrentObjects() - 1; ++i) {
+				objects[i] = objects[i + 1];
+			}
+		}
+		this.setCurrentObjects(getCurrentObjects() - 1); 
+	}
+	
+	public void setCurrentObjects(int currentObjects) {
+		this.currentObjects = currentObjects;
+	}
+
 	public void computerAction() {
-		// TODO implement
+		for(int i = 0; i < currentObjects; ++i) {
+			this.objects[i].computerAction();
+		}
 	}
 	
 	public String toString(int x, int y) {
@@ -46,7 +65,7 @@ public class GameObjectBoard {
 		int aliensRemaining = 0;
 		for(int i = 0; i < this.currentObjects; i++) {
 			if(objects[i].isAlien()) {
-				aliensRemaining++;
+				++aliensRemaining;
 			}
 		}
 		return aliensRemaining;

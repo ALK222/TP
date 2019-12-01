@@ -3,7 +3,7 @@ package Objects;
 import interfaces.IExecuteRandomActions;
 import logic.Game;
 
-public final class Ovni extends Ship{
+public final class Ovni extends EnemyShip{
 	/*
 	 * 
 	 *   You shoot me, you get power

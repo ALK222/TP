@@ -21,7 +21,7 @@ public class BoardInitializer {
 	}
 	
 	private void initializeOvni () {
-		board.add(new Ovni(0, 8, 1, 10, game, true, false));
+		board.add(new Ovni(0, 8, 1, 25, game, true, false));
 	}
 
 	private void initializeRegularAliens () {

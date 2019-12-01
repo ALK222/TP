@@ -35,6 +35,7 @@ public class Controller implements IExecuteRandomActions{
 			if(command != null) {
 				if(command.execute(game))
 					System.out.println(game);
+				game.update();
 			}
 			else{
 				//System.out.format(unknownCommandMsg);

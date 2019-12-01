@@ -2,7 +2,7 @@ package Objects;
 
 import logic.Game;
 
-public  abstract class AlienShip extends Ship{
+public  abstract class AlienShip extends EnemyShip{
 	/*
 	 * 
 	 * 		Alien Mothership, the beggining of all aliens

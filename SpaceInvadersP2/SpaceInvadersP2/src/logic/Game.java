@@ -138,9 +138,9 @@ public class Game implements IPlayerController{
 		return false;
 	}
 
-	@Override
+
 	public void receivePoints(int points) {
-		// TODO Auto-generated method stub
+		navi.setPoints(navi.getPoints() + points);
 		
 	}
 
@@ -150,9 +150,9 @@ public class Game implements IPlayerController{
 		
 	}
 
-	@Override
+
 	public void enableMissile() {
-		// TODO Auto-generated method stub
+		navi.getLaser().setActive(true);
 		
 	}
 
