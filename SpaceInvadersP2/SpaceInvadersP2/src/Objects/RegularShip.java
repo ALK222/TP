@@ -1,6 +1,7 @@
 package Objects;
 
 import logic.Game;
+import interfaces.IExecuteRandomActions;
 
 public final class RegularShip extends AlienShip{
 	
@@ -36,6 +37,9 @@ public final class RegularShip extends AlienShip{
 		if(isExplosive()) {
 			game.explosion(this.x, this.y);
 		}
+		if(IExecuteRandomActions.canTurnExplosive(game)) {
+			this.setExplosive(true);
+		}
 		
 	}
 
@@ -47,6 +51,9 @@ public final class RegularShip extends AlienShip{
 	@Override
 	public void damage(GameObject target) {
 		this.hp--;
+		if(this.hp >= 0) {
+			this.setAlive(false);
+		}
 		
 	}
 }

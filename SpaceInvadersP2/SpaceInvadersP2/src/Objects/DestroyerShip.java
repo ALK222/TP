@@ -19,9 +19,6 @@ public final class DestroyerShip extends AlienShip{
 
 	
 	public void computerAction() {
-		if(this.getHp() > 1) {
-			//delete
-		}
 		
 		move();
 		if(IExecuteRandomActions.canGenerateRandomBomb(game)){
@@ -36,6 +33,9 @@ public final class DestroyerShip extends AlienShip{
 	
 	public void damage(GameObject target) {
 		this.setHp(getHp() - 1);
+		if(this.hp >= 0) {
+			this.setAlive(false);
+		}
 		
 	}
 	

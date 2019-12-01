@@ -29,7 +29,7 @@ public class BoardInitializer {
 		int y = 6;
 		for(int i = 0; i < this.level.getNumRowsOfRegularAliens(); ++i) {
 			for(int j = 0; j < level.getNumRegularAliensPerRow(); ++j) {
-				board.add(new RegularShip(x + i, y - j, 1, 5, game, true, false, true));
+				board.add(new RegularShip(x + i, y - j, 1, 5, game, true, true, false));
 			}
 		}
 	}
@@ -48,7 +48,7 @@ public class BoardInitializer {
 		}
 		
 		for(int i = 0; i < level.getNumDestroyerAliens(); i++) {
-			board.add(new DestroyerShip(x, y - i, 2, 10, game, true, false));
+			board.add(new DestroyerShip(x, y - i, 2, 10, game, true, true));
 		}
 	}
 }

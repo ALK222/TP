@@ -32,7 +32,7 @@ public class GameObjectBoard {
 	
 	public void update() {
 		for(int i = 0; i < getCurrentObjects(); ++i) {
-			if(this.objects[i].isAlive()) {
+			if(!this.objects[i].isAlive()) {
 				delete(i);
 			}
 		}
@@ -65,10 +65,21 @@ public class GameObjectBoard {
 		int aliensRemaining = 0;
 		for(int i = 0; i < this.currentObjects; i++) {
 			if(objects[i].isAlien()) {
-				++aliensRemaining;
+				if(objects[i].isAlive()) {
+					++aliensRemaining;
+				}
 			}
 		}
 		return aliensRemaining;
+	}
+	
+	public final boolean haveLanded() {
+		for(int i = 0; i < currentObjects; i++) {
+			if(objects[i].isAlien() && objects[i].getX() >= 7) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

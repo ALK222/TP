@@ -48,7 +48,6 @@ public abstract class GameObject implements IAttack{
 			return alive;
 		}
 
-
 		public void setAlive(boolean alive) {
 			this.alive = alive;
 		}

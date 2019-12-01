@@ -17,6 +17,7 @@ public class Game implements IPlayerController{
 	private Random rand;
 	private int line;
 	private char lastDir;
+	private ShockWave shock;
 
 	GameObjectBoard board;
 
@@ -96,11 +97,11 @@ public class Game implements IPlayerController{
 	}
 	
 	public boolean aliensWin() {
-		return !navi.isAlive() || false;
+		return !navi.isAlive() || board.haveLanded();
 	}
 	
 	private boolean playerWin () {
-		if(board.aliensRemaining() == 0) {
+		if(board.aliensRemaining() <= 0) {
 			return true;
 		}
 		return false;
@@ -124,7 +125,7 @@ public class Game implements IPlayerController{
 		info += "Points: " + this.navi.getPoints() + "\n";
 		info += "Remaining Aliens: " + this.board.aliensRemaining() + "\n"; //contar en gameObject board cuantos aliens quedan
 		info += "Shockwave: ";
-		if(this.getShockWave()) { // mirar en board si el objecto shock existe
+		if(this.shockWave()) { // checks if shockwave is active or not
 			info += "YES" + "\n";
 		}
 		else {
@@ -142,7 +143,7 @@ public class Game implements IPlayerController{
 
 
 	public boolean move(int numCells) {
-		// TODO Auto-generated method stub
+		navi.move();
 		return false;
 	}
 
@@ -155,9 +156,10 @@ public class Game implements IPlayerController{
 		return false;
 	}
 
-	@Override
 	public boolean shockWave() {
-		// TODO Auto-generated method stub
+		if(shock.isActive()) {
+			return true;
+		}
 		return false;
 	}
 
@@ -167,9 +169,9 @@ public class Game implements IPlayerController{
 		
 	}
 
-	@Override
+
 	public void enableShockWave() {
-		// TODO Auto-generated method stub
+		this.shock.setActive(true);
 		
 	}
 
@@ -192,11 +194,16 @@ public class Game implements IPlayerController{
 	}
 
 	public void explosion(int x, int y) {
-		board.getObjectInPosition(x, y).damage(null);
-		board.getObjectInPosition(x - 1, y).damage(null);
-		board.getObjectInPosition(x + 1, y).damage(null);
-		board.getObjectInPosition(x, y - 1).damage(null);
-		board.getObjectInPosition(x, y + 1).damage(null);
+		x -= 1;
+		y -= 1;
+		int radio = 3;
+		for(int i = 0; i < radio; ++i) {
+			for(int j = 0; j < radio; ++j) {
+				if(board.getObjectInPosition(x + i, y +j) != null) {
+					board.getObjectInPosition(x + i, y +j).damage(null);
+				}
+			}
+		}
 		
 	}
 	
