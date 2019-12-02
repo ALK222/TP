@@ -19,7 +19,6 @@ public final class DestroyerShip extends AlienShip{
 
 	
 	public void computerAction() {
-		move();
 		if(IExecuteRandomActions.canGenerateRandomBomb(game)){
 			this.shoot();
 		}

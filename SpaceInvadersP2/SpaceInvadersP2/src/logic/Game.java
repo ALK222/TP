@@ -112,6 +112,9 @@ public class Game implements IPlayerController{
 	public void update() {
 		board.computerAction();
 		board.update();
+		if(currentCycle % this.getLevel().getNumCyclesToMoveOneCell() == 0 && currentCycle != 0) {
+			board.move();
+		}
 		currentCycle += 1;
 	}
 	
@@ -201,6 +204,7 @@ public class Game implements IPlayerController{
 				}
 			}
 		}
+		board.update();
 	}
 		
 }

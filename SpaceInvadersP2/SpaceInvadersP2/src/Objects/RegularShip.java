@@ -32,8 +32,8 @@ public final class RegularShip extends AlienShip{
 	 }
 
 	public void computerAction() {
-		move();
 		if(isExplosive()) {
+			System.out.print("Explosion!");
 			game.explosion(this.x, this.y);
 		}
 		if(IExecuteRandomActions.canTurnExplosive(game)) {

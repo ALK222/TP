@@ -52,10 +52,9 @@ public class GameObjectBoard {
 	}
 
 	public void computerAction() {
-		/*for(int i = 0; i < currentObjects; ++i) {
+		for(int i = 0; i < currentObjects; ++i) {
 			this.objects[i].computerAction();
-		}*/
-		move();
+		}
 	}
 	
 	public String toString(int x, int y) {
