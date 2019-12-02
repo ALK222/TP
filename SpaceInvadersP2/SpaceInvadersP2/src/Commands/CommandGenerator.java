@@ -23,7 +23,7 @@ public class CommandGenerator {
 		return show;
 	}
 	
-	public static Commands parseCommand(String[] commandWords) {
+	public static Commands parse(String[] commandWords) {
 		int i = 0;
 		boolean ok = false;
 		while (!ok && i<availableCommands.length) {
@@ -36,5 +36,7 @@ public class CommandGenerator {
 		}
 		return null;
 	}
+
+
 	
 }

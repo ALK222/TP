@@ -84,31 +84,34 @@ public class GameObjectBoard {
 	}
 	
 	public void move() {
-		for(int x = 0; x < 9; ++x) {
+		int x = 0;
+		boolean moved = false;
+		while(x < 9 && !moved){
 			if(getObjectInPosition(x, 0) != null) {
 				if(getObjectInPosition(x, 0).getClass() == RegularShip.class || getObjectInPosition(x, 0).getClass() == DestroyerShip.class) {
 					for (int i = 0; i < currentObjects; ++i) {
-						if(objects[0].getClass() == RegularShip.class || objects[0].getClass() == DestroyerShip.class) {
+						if(objects[i].getClass() == RegularShip.class || objects[i].getClass() == DestroyerShip.class) {
 							objects[i].move('b');
 						}
 					}
-					break;
+					moved = true;
 				}
 			}
-			if(getObjectInPosition(x, 8) != null) {
+			else if(getObjectInPosition(x, 8) != null) {
 				if(getObjectInPosition(x, 8).getClass() == RegularShip.class || getObjectInPosition(x, 8).getClass() == DestroyerShip.class) {
 					for (int i = 0; i < currentObjects; ++i) {
-						if(objects[0].getClass() == RegularShip.class || objects[0].getClass() == DestroyerShip.class) {
+						if(objects[i].getClass() == RegularShip.class || objects[i].getClass() == DestroyerShip.class) {
 							objects[i].move('b');
 						}
 					}
-					break;
+					moved = true;
 				}
 			}
+			++x;
 		}
 		if(objects[0].getX() % 2 == 0) {
 			for (int i = 0; i < currentObjects; ++i) {
-				if(objects[0].getClass() == RegularShip.class || objects[0].getClass() == DestroyerShip.class) {
+				if(objects[i].getClass() == RegularShip.class || objects[i].getClass() == DestroyerShip.class) {
 					objects[i].move('d');
 				}
 			}

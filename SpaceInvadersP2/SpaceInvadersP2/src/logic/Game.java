@@ -47,6 +47,7 @@ public class Game implements IPlayerController{
 		board = initializer.initialize(this, level);
 		navi = new UCMShip(7, 4, 3, 0, this, false, true);
 		board.add(navi);
+		shock = new ShockWave(0, 0, this, false, false);
 	}
 	
 	public boolean isDoExit() {
