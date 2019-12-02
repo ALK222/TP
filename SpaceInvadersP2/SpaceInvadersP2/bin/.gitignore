@@ -1,6 +1,12 @@
+/BoardInitializer.class
+/BoardPrinter.class
 /Commands/
+/FileContentsVerifier.class
+/Level.class
+/MyStringUtils.class
 /Objects/
+/PrinterGenerator.class
+/PrinterTypes.class
 /interfaces/
 /logic/
 /main/
-/utils/

@@ -8,16 +8,21 @@ public class ExitCommand extends Commands{
 		super(name, shortcut, details, help);
 	}
 
-
+	@Override
 	public boolean execute(Game game) {
-		game.setDoExit(true);
-		return false;
+		game.exit();
+		return true;
 	}
 
 	@Override
-	public Commands Parse(String[] commandWord) {
-		// TODO Auto-generated method stub
-		return null;
+	public Commands parse(String[] commandWords) {
+		if(commandWords.length != 1) return null;
+		else if (commandWords[0].equalsIgnoreCase("exit") || commandWords[0].equalsIgnoreCase("e")) {
+			return new ExitCommand("Exit", "E", "", "Exit: Ends the program.");
+		}
+		else {
+			return null;
+		}
 	}
 
 }

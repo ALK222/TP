@@ -12,13 +12,18 @@ public class HelpCommand extends Commands{
 
 		@Override
 		public boolean execute(Game game) {
-			// TODO Auto-generated method stub
+			System.out.print(CommandGenerator.commandHelp());
 			return false;
 		}
-
+		
 		@Override
-		public Commands Parse(String[] commandWord) {
-			// TODO Auto-generated method stub
-			return null;
+		public Commands parse(String[] commandWord) {
+			if(commandWord.length != 1) return null;
+			else if (commandWord[0].equalsIgnoreCase("help") || commandWord[0].equalsIgnoreCase("h")) {
+				return new HelpCommand("Help", "H", "", "Help message");
+			}
+			else {
+				return null;
+			}
 		}
 }

@@ -10,14 +10,19 @@ public class UpdateCommand extends Commands {
 
 	@Override
 	public boolean execute(Game game) {
-		// TODO Auto-generated method stub
-		return false;
+		game.update();
+		return true;
 	}
 
 	@Override
-	public Commands Parse(String[] commandWord) {
-		// TODO Auto-generated method stub
-		return null;
+	public Commands parse(String[] commandWord) {
+		if(commandWord.length != 1) return null;
+		else if (commandWord[0].equalsIgnoreCase("update") || commandWord[0].equalsIgnoreCase("u")) {
+			return new UpdateCommand("Update", "U", "", "Game Updated.");
+		}
+		else {
+			return null;
+		}
 	}
-
+	
 }
