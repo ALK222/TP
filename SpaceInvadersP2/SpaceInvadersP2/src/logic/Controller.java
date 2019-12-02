@@ -39,7 +39,7 @@ public class Controller implements IExecuteRandomActions{
 			}
 			else{
 				game.update();
-				//System.out.format(unknownCommandMsg);
+				System.out.format(unknownCommandMsg);
 			}
 		}
 		game.getWinnerMessage();

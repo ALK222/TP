@@ -8,16 +8,19 @@ public class ResetCommand extends Commands {
 		super(name, shortcut, details, help);
 	}
 
-	@Override
+	
 	public boolean execute(Game game) {
 		game.reset();
 		return true;
 	}
 
-	@Override
+	
 	public Commands parse(String[] commandWord) {
 
-		if(commandWord.length != 1) return null;
+		if(commandWord.length != 1) {
+			System.out.print(Commands.incorrectNumArgsMsg);
+			return null;
+		}
 		else if (commandWord[0].equalsIgnoreCase("reset") || commandWord[0].equalsIgnoreCase("r")) {
 			return new ResetCommand("Reset", "R", "", "Reset: Resets the program.");
 		}

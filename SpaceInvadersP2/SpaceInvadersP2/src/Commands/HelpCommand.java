@@ -10,15 +10,18 @@ public class HelpCommand extends Commands{
 			super(name, shortcut, details, help);
 		}
 
-		@Override
+		
 		public boolean execute(Game game) {
 			System.out.print(CommandGenerator.commandHelp());
 			return false;
 		}
 		
-		@Override
+		
 		public Commands parse(String[] commandWord) {
-			if(commandWord.length != 1) return null;
+			if(commandWord.length != 1) {
+				System.out.print(Commands.incorrectNumArgsMsg);
+				return null;
+			}
 			else if (commandWord[0].equalsIgnoreCase("help") || commandWord[0].equalsIgnoreCase("h")) {
 				return new HelpCommand("Help", "H", "", "Help message");
 			}

@@ -10,15 +10,18 @@ public class ListCommand extends Commands{
 		super(name, shortcut, details, help);
 	}
 
-	@Override
+	
 	public boolean execute(Game game) {
 		game.infoToString();
 		return true;
 	}
 
-	@Override
+	
 	public Commands parse(String[] commandWord) {
-		if(commandWord.length != 1) return null;
+		if(commandWord.length != 1) {
+			System.out.print(Commands.incorrectNumArgsMsg);
+			return null;
+		}
 		else if (commandWord[0].equalsIgnoreCase("list") || commandWord[0].equalsIgnoreCase("l")) {
 			return new ListCommand("List", "L", "", "Game List:");
 		}
