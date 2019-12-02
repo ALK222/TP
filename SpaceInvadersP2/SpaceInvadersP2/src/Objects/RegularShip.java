@@ -31,7 +31,6 @@ public final class RegularShip extends AlienShip{
 		 return this.explosive;  //Allahu Akbar
 	 }
 
-	 @Override
 	public void computerAction() {
 		move();
 		if(isExplosive()) {
@@ -48,7 +47,6 @@ public final class RegularShip extends AlienShip{
 		return "R[" + this.getHp() +"]";
 	}
 
-	@Override
 	public void damage(GameObject target) {
 		this.hp--;
 		if(this.hp >= 0) {
@@ -56,4 +54,5 @@ public final class RegularShip extends AlienShip{
 		}
 		
 	}
+
 }

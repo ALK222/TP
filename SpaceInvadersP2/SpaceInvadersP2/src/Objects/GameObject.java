@@ -79,7 +79,7 @@ public abstract class GameObject implements IAttack{
 
 		public abstract void computerAction();
 		
-		public abstract void move();
+		public abstract void move(char dir);
 		
 		public abstract String toString();
 		

@@ -33,6 +33,5 @@ public abstract class Weapon extends GameObject{
 	
 	public abstract void damage(GameObject target);
 	
-	public abstract void move();
 
 }

@@ -23,14 +23,13 @@ public final class UCMShip extends Ship{
 		return this.hp > 0;
 	}
 
-	@Override
 	public void computerAction() {
-		// TODO Auto-generated method stub
+		this.getLaser().computerAction();
 		
 	}
 
 	@Override
-	public void move() {
+	public void move(char dir) {
 		// TODO Auto-generated method stub
 		
 	}

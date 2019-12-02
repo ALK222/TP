@@ -21,7 +21,7 @@ public final class Ovni extends EnemyShip{
 
 	public void computerAction() {
 		if(this.isAlive()) {
-			move();
+			move('b');
 		}
 		if(IExecuteRandomActions.canGenerateRandomOvni(game)) {
 			this.x = 0;
@@ -30,7 +30,7 @@ public final class Ovni extends EnemyShip{
 		}
 	}
 
-	public void move() {
+	public void move(char dir) {
 		this.setY(getY() + 1);
 		
 	}

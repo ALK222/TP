@@ -14,12 +14,6 @@ public class ShockWave extends Weapon{
 	}
 
 	@Override
-	public void move() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void computerAction() {
 		// TODO Auto-generated method stub
 		
@@ -29,6 +23,12 @@ public class ShockWave extends Weapon{
 	public String toString() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void move(char dir) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

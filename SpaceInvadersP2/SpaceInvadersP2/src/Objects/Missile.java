@@ -16,7 +16,7 @@ public final class Missile extends Weapon{
 	}
 
 
-	public void move() {
+	public void move(char dir) {
 		this.setY(getX() - 1);
 		
 	}
@@ -27,7 +27,7 @@ public final class Missile extends Weapon{
 		}
 		
 		if(isActive()) {
-			move();
+			move('b');
 		}
 		
 	}

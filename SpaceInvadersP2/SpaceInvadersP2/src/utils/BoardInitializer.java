@@ -14,9 +14,10 @@ public class BoardInitializer {
 		this.game = game;
 		board = new GameObjectBoard(Game.DIM_X, Game.DIM_Y);
 		
-		initializeOvni();
+		
 		initializeRegularAliens();
 		initializeDestroyerAliens();
+		initializeOvni();
 		return board;
 	}
 	

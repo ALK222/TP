@@ -9,14 +9,14 @@ public class Laser extends Weapon{
 	}
 
 
-	public void move() {
+	public void move(char dir) {
 		this.setY(getX() - 1);
 		
 	}
 
 	
 	public void computerAction() {
-		move();
+		move('b');
 	}
 
 	
@@ -30,6 +30,7 @@ public class Laser extends Weapon{
 		// TODO Auto-generated method stub
 		
 	}
+
 
 	
 

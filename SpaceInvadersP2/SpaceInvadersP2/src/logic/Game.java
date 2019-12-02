@@ -188,11 +188,6 @@ public class Game implements IPlayerController{
 		}
 		return "";
 	}
-	
-	
-	public void move() {
-		
-	}
 
 	public void explosion(int x, int y) {
 		x -= 1;
@@ -205,7 +200,6 @@ public class Game implements IPlayerController{
 				}
 			}
 		}
-		
 	}
 		
 }
