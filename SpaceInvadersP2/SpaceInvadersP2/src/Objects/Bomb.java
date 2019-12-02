@@ -20,12 +20,6 @@ public final class Bomb extends Weapon{
 		
 	}
 
-	public void move() {
-		if(this.isActive()) {
-			this.setY(this.getX() + 1);
-		}
-		
-	}
 
 	public String toString() {
 		return ".";
@@ -35,10 +29,14 @@ public final class Bomb extends Weapon{
 		if(this.getX() > 8) {
 			setActive(false);
 		}
-		if(this.isActive()) {
-			move();
-		}
+		move('b');
 		
+	}
+
+	public void move(char dir) {
+		if(this.isActive()) {
+			this.setY(this.getX() + 1);
+		}
 	}
 
 }

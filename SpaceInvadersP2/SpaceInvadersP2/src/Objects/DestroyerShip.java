@@ -1,6 +1,5 @@
 package Objects;
 
-import interfaces.IAttack;
 import interfaces.IExecuteRandomActions;
 import logic.Game;
 

@@ -10,7 +10,7 @@ public class MoveCommand extends Commands{
 
 	@Override
 	public boolean execute(Game game) {
-		game.move();
+		//game.move();
 		return false;
 	}
 

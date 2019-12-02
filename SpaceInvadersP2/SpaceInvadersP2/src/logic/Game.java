@@ -1,7 +1,6 @@
 package logic;
 
 import interfaces.IPlayerController;
-import interfaces.IAttack;
 import java.lang.String;
 import java.util.Random;
 
@@ -148,7 +147,7 @@ public class Game implements IPlayerController{
 
 
 	public boolean move(int numCells) {
-		navi.move();
+		//navi.move();
 		return false;
 	}
 
