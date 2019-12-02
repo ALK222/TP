@@ -32,10 +32,6 @@ public final class RegularShip extends AlienShip{
 	 }
 
 	public void computerAction() {
-		if(isExplosive()) {
-			System.out.print("Explosion!");
-			game.explosion(this.x, this.y);
-		}
 		if(IExecuteRandomActions.canTurnExplosive(game)) {
 			this.setExplosive(true);
 		}
@@ -44,12 +40,19 @@ public final class RegularShip extends AlienShip{
 
 
 	public String toString() {
+		if(isExplosive()) {
+			return "E[" + this.getHp() + "]";
+		}
 		return "R[" + this.getHp() +"]";
 	}
 
 	public void damage(GameObject target) {
 		this.hp--;
 		if(this.hp >= 0) {
+			if(isExplosive()) {
+				System.out.print("Explosion!");
+				game.explosion(this.x, this.y);
+			}
 			this.setAlive(false);
 		}
 		
