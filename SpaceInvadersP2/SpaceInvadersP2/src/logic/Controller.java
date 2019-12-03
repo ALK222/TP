@@ -4,12 +4,14 @@ package logic;
 import interfaces.GamePrinter;
 import interfaces.IExecuteRandomActions;
 import utils.BoardPrinter;
+import utils.Stringifier;
 
 import java.util.Scanner;
 
 import Commands.CommandGenerator;
 import Commands.Commands;
 import exceptions.CommandExecuteException;
+import exceptions.CommandParseException;
 
 public class Controller implements IExecuteRandomActions{
 	
@@ -18,6 +20,8 @@ public class Controller implements IExecuteRandomActions{
 	private Game game;
 	private Scanner in;
 	private GamePrinter b;
+	private GamePrinter s;
+	private char printerOption;
 	private String prompt = "Command >";
 	private String unknownCommandMsg = "Unknown command, please put a valid command";
 	
@@ -27,18 +31,20 @@ public class Controller implements IExecuteRandomActions{
 		this.game = g;
 		this.in = new Scanner(System.in);
 		this.b = new BoardPrinter(game, 8, 9);
+		this.s = new Stringifier(game);
+		printerOption = 'b';
 	}
 	
 	
 	public void run() {
-		System.out.println(b.toString(game));
+		printGame();
 		while(!game.isFinished()){
 			System.out.print(prompt);
 			String[]  words = in.nextLine().trim().split ("\\s+");
 			try{
 				Commands command = CommandGenerator.parseCommand(words);
 				if(command != null) {
-					if(command.execute(game)) System.out.println(b.toString(game));
+					if(command.execute(game)) printGame();
 				}
 				else
 					System.out.println(unknownCommandMsg);
@@ -46,6 +52,18 @@ public class Controller implements IExecuteRandomActions{
 			catch(CommandParseException | CommandExecuteException ex) {
 				System.out.format((ex).getMessage() +"%n%n");
 			}
+		}
+	}
+	
+	
+	public void printGame() {
+		if(this.printerOption == 'b') {
+			b.setGame(game);
+			System.out.println(b.toString(game));
+		}
+		else {
+			s.setGame(game);
+			System.out.println(s.toString(game));
 		}
 	}
 	

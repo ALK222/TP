@@ -7,6 +7,10 @@ public class Stringifier implements GamePrinter{
 	
 	final String space = " ";
 	
+	public Stringifier(Game game) {
+		encodeGame(game);
+	}
+	
 	private String encodeGame(Game game) {
 		String board = "";
 		for(int i = 0; i < game.DIM_X; i++) {
