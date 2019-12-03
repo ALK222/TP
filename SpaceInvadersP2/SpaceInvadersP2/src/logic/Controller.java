@@ -1,6 +1,7 @@
 package logic;
 
 
+import interfaces.GamePrinter;
 import interfaces.IExecuteRandomActions;
 import utils.BoardPrinter;
 
@@ -15,7 +16,8 @@ public class Controller implements IExecuteRandomActions{
 	
 	private Game game;
 	private Scanner in;
-	private BoardPrinter b;
+	private GamePrinter b;
+	private String prompt = "Command >";
 	
 	//CONSTRUCTOR
 	
@@ -27,23 +29,24 @@ public class Controller implements IExecuteRandomActions{
 	
 	
 	public void run() {
+		b.setGame(game);
+		System.out.println(b.toString(game));
 		while(!game.isFinished()){
-			this.b = new BoardPrinter(game, 8, 9);
-			System.out.print(b.toString(game));
-			String[]  words = in.nextLine().toLowerCase().trim().split ("\\s+");
-			Commands command = CommandGenerator.parse(words);
-			if(command != null) {
-				if(command.execute(game))
-					System.out.println(game);
-				game.update();
+			System.out.print(prompt);
+			String[]  words = in.nextLine().trim().split ("\\s+");
+			//try{
+				Commands command = CommandGenerator.parse(words);
+				if(command != null) {
+					if(command.execute(game)) System.out.println(b.toString(game));
+				//}
+				//else
+					//System.out.println(unknownCommandMsg);
+			//}
+			//catch(CommandParseException | CommandExecuteException ex) {
+			//System.out.format(ex.getMessage() +"%n%n");
 			}
-			else{
-				game.update();
-				//System.out.format(unknownCommandMsg);
-			}
+			
 		}
-		game.getWinnerMessage();
-		
 	}
 	
 }

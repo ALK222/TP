@@ -68,7 +68,7 @@ public class Game implements IPlayerController{
 		navi = new UCMShip(7, 4, 3, 0, this, false, true, laser);
 		addObject(navi);
 		shock = new ShockWave(0, 0, this, false, false);
-		superM = new SuperMisille(navi.getX(), navi.getY(), this, false, false);
+		superM = new SuperMisille(0, 0, this, false, false);
 		addObject(superM);
 		ammo = 0;
 	}
