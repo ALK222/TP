@@ -143,7 +143,7 @@ public class Game implements IPlayerController{
 	}
 
 
-	public boolean move(int numCells) {
+	public boolean move(String direction, int numCells ) {
 		navi.move();
 		return false;
 	}

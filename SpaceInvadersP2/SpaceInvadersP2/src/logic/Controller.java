@@ -28,6 +28,7 @@ public class Controller implements IExecuteRandomActions{
 	
 	public void run() {
 		/*while(!game.isFinished()){
+		 * try{
 			this.b = new BoardPrinter(game, 8, 9);
 			System.out.print(b.toString(game));
 			String[]  words = in.nextLine().toLowerCase().trim().split ("\\s+");
@@ -40,6 +41,8 @@ public class Controller implements IExecuteRandomActions{
 			else{
 				game.update();
 				//System.out.format(unknownCommandMsg);
+			} catch (CommandExecuteException || CommandParseException e) {
+				System.err.println(e.getMessage())}
 			}
 		}*/
 		while(!game.isFinished()) {

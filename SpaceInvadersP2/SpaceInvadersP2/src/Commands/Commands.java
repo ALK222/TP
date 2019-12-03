@@ -1,5 +1,9 @@
 package Commands;
 
+import java.io.IOException;
+
+import exceptions.CommandExecuteException;
+import exceptions.CommandParseException;
 import logic.Game;
 
 public abstract class Commands {
@@ -22,9 +26,9 @@ public abstract class Commands {
 		this.help = help;
 	}
 	
-	public abstract boolean execute(Game game);
+	public abstract boolean execute(Game game) throws CommandExecuteException;
 	
-	public abstract Commands parse(String[] commandWord);
+	public abstract Commands parse(String[] commandWord) throws CommandParseException;
 	
 	protected boolean matchCommandName(String name) {
 		return this.shortcut.equalsIgnoreCase(name) ||this.name.equalsIgnoreCase(name);
