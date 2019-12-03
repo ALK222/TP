@@ -1,5 +1,7 @@
 package Commands;
 
+import exceptions.CommandParseException;
+
 public class CommandGenerator {
 	
 	private static Commands[] availableCommands = {
@@ -9,7 +11,8 @@ public class CommandGenerator {
 			new ExitCommand("Exit","E","",""),
 			new UpdateCommand("Update","U","",""),
 			new MoveCommand("Move", "M","",""),
-			new ShockwaveCommand("ShockWave","W","","")
+			new ShockwaveCommand("ShockWave","W","",""),
+			new SaveCommand ("Save", "S", "", "")
 	};
 	
 	
@@ -23,7 +26,8 @@ public class CommandGenerator {
 		return show;
 	}
 	
-	public static Commands parse(String[] commandWords) {
+
+	public static Commands parseCommand(String[] commandWords) throws CommandParseException{
 		int i = 0;
 		boolean ok = false;
 		while (!ok && i<availableCommands.length) {

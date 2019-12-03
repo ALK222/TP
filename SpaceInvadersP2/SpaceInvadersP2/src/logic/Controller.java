@@ -29,21 +29,28 @@ public class Controller implements IExecuteRandomActions{
 	
 	
 	public void run() {
-		b.setGame(game);
-		System.out.println(b.toString(game));
+
+
 		while(!game.isFinished()){
-			System.out.print(prompt);
-			String[]  words = in.nextLine().trim().split ("\\s+");
-			//try{
-				Commands command = CommandGenerator.parse(words);
-				if(command != null) {
-					if(command.execute(game)) System.out.println(b.toString(game));
-				//}
-				//else
-					//System.out.println(unknownCommandMsg);
-			//}
-			//catch(CommandParseException | CommandExecuteException ex) {
-			//System.out.format(ex.getMessage() +"%n%n");
+		  try{
+
+		
+
+			this.b = new BoardPrinter(game, 8, 9);
+			System.out.print(b.toString(game));
+			String[]  words = in.nextLine().toLowerCase().trim().split ("\\s+");
+			Commands command = CommandGenerator.parse(words);
+			if(command != null) {
+				if(command.execute(game))
+					System.out.println(game);
+				game.update();
+			}
+			else{
+				game.update();
+				//System.out.format(unknownCommandMsg);
+			} catch (CommandExecuteException || CommandParseException e) {
+				System.err.println(e.getMessage())}
+
 			}
 			
 		}
