@@ -124,4 +124,11 @@ public class GameObjectBoard {
 		}
 	}
 
+	public void shockWaveDamage() {
+		for(int i = 0; i < getCurrentObjects(); ++i) {
+			objects[i].receiveShockWaveAttack(1);
+		}
+		
+	}
+
 }

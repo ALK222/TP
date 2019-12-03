@@ -45,15 +45,24 @@ public final class RegularShip extends AlienShip{
 		}
 		return "R[" + this.getHp() +"]";
 	}
+	public final String stringify() {
+		if(isExplosive()) {
+			return "E" + this.getX() + ";" + this.getY() + ";" + this.getHp() +";"
+					+ game.getCurrentCycle() % game.getLevel().getNumCyclesToMoveOneCell();
+		}
+		return "R" + this.getX() + ";" + this.getY() + ";" + this.getHp() +";"
+		+ game.getCurrentCycle() % game.getLevel().getNumCyclesToMoveOneCell();
+	}
 
-	public void damage(GameObject target) {
-		this.hp--;
+	public void damage(int damage) {
+		this.setHp(this.getHp() - damage);
 		if(this.hp >= 0) {
 			if(isExplosive()) {
 				System.out.print("Explosion!");
 				game.explosion(this.x, this.y);
 			}
 			this.setAlive(false);
+			game.receivePoints(points);
 		}
 		
 	}

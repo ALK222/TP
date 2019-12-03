@@ -10,25 +10,38 @@ public class Laser extends Weapon{
 
 
 	public void move(char dir) {
-		this.setY(getX() - 1);
+		this.setX(getX() - 1);
 		
 	}
 
 	
 	public void computerAction() {
 		move('b');
+		if(0 < x && x < 8) {
+			game.enableMissile();
+		}
 	}
 
 	
 	public String toString() {
-		return "oo";
+		if(isActive()) {
+			return "oo";
+		}
+		return "";
 	}
 
 
-	@Override
-	public void damage(GameObject target) {
-		// TODO Auto-generated method stub
+	
+	public void damage(int damage) {
+		this.setActive(false);
 		
+	}
+
+	public String stringify() {
+		if(this.isActive()) {
+			return "M" + this.getX() + ";" + this.getY();
+		}
+		return "";
 	}
 
 

@@ -13,20 +13,21 @@ public final class Bomb extends Weapon{
 
 	}
 
-	public void damage(GameObject target) {
-		if(!target.isAlien()) {
-			target.damage(this);
-		}
+	public void damage(int damage) {
+		
 		
 	}
 
 
 	public String toString() {
-		return ".";
+		if(isActive()) {
+			return ".";
+		}
+		return "";
 	}
 
 	public void computerAction() {
-		if(this.getX() > 8) {
+		if(this.getX() > 8 && this.getX() < 0) {
 			setActive(false);
 		}
 		move('b');
@@ -37,6 +38,11 @@ public final class Bomb extends Weapon{
 		if(this.isActive()) {
 			this.setY(this.getX() + 1);
 		}
+	}
+
+	
+	public String stringify() {
+		return "B;" + this.getX() + ";" + this.getY();
 	}
 
 }
