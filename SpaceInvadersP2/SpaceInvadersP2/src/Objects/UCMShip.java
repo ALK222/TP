@@ -7,9 +7,9 @@ public final class UCMShip extends Ship{
 	private Laser laser;
 	
 	//CONSTRUCTOR
-	public UCMShip(int startX, int startY, int hp, int points, Game game, boolean alien, boolean alive) {
+	public UCMShip(int startX, int startY, int hp, int points, Game game, boolean alien, boolean alive, Laser laser) {
 		super(startX, startY, hp, points, game, alien, alive);
-		laser = new Laser(this.x, this.y, game, false, false);
+		this.laser = laser;
 	}
 	
 	public String toString() {
@@ -34,8 +34,8 @@ public final class UCMShip extends Ship{
 		
 	}
 
-	public void damage(GameObject target) {
-		this.hp--;
+	public void damage(int damage) {
+		this.setHp(this.getHp() - damage);;
 		
 	}
 
@@ -48,6 +48,11 @@ public final class UCMShip extends Ship{
 		laser.setY(this.y);
 		laser.setActive(true);
 		
+	}
+	
+	public final String stringify() {
+		return "P;" + this.getX() + ";" + this.getY() + ";" + this.getHp() +";"
+				+ points + game.shockWave() + ";" + game.getAmmo();
 	}
 
 }

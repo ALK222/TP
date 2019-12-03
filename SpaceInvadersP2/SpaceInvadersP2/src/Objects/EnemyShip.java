@@ -18,5 +18,10 @@ public abstract class EnemyShip extends Ship{
 			break;
 		}
 	}
-
+	
+	
+	public boolean receiveMissileAttack(int damage) {
+		this.damage(damage);
+		return true;
+	}
 }

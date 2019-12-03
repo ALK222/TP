@@ -1,6 +1,5 @@
 package Objects;
 
-import interfaces.IAttack;
 import interfaces.IExecuteRandomActions;
 import logic.Game;
 
@@ -9,9 +8,9 @@ public final class DestroyerShip extends AlienShip{
 	private Bomb bomb;
 	
 	//CONSTRUCTOR
-	public DestroyerShip(int startX, int startY, int hp, int points, Game game, boolean alien, boolean alive){
+	public DestroyerShip(int startX, int startY, int hp, int points, Game game, boolean alien, boolean alive, Bomb bomb){
 		super(startX, startY, hp, points, game, alien, alive);
-		this.bomb = new Bomb(x, y, game, true, false);
+		this.bomb = bomb;
 	}
 	public final Bomb getLaser() {
 		return this.bomb;
@@ -19,7 +18,6 @@ public final class DestroyerShip extends AlienShip{
 
 	
 	public void computerAction() {
-		move();
 		if(IExecuteRandomActions.canGenerateRandomBomb(game)){
 			this.shoot();
 		}
@@ -33,10 +31,11 @@ public final class DestroyerShip extends AlienShip{
 		return "D[" + this.getHp() + "]";
 	}
 	
-	public void damage(GameObject target) {
-		this.setHp(getHp() - 1);
+	public void damage(int damage) {
+		this.setHp(getHp() - damage);
 		if(this.hp >= 0) {
 			this.setAlive(false);
+			game.receivePoints(points);
 		}
 		
 	}
@@ -45,6 +44,11 @@ public final class DestroyerShip extends AlienShip{
 		this.getLaser().setActive(true);
 		this.getLaser().setX(this.getX());
 		this.getLaser().setY(this.getY());
+	}
+	
+	public String stringify() {
+		return "D" + this.getX() + ";" + this.getY() + ";" + this.getHp() +";"
+				+ game.getCurrentCycle() % game.getLevel().getNumCyclesToMoveOneCell();
 	}
 
 	

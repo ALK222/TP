@@ -8,8 +8,7 @@ public class ShockWave extends Weapon{
 		super(startX, startY, game, alien, alive);
 	}
 	
-	@Override
-	public void damage(GameObject target) {
+	public void damage(int damage) {
 		
 	}
 
@@ -19,10 +18,8 @@ public class ShockWave extends Weapon{
 		
 	}
 
-	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
+		return "";
 	}
 
 	@Override
@@ -30,5 +27,11 @@ public class ShockWave extends Weapon{
 		// TODO Auto-generated method stub
 		
 	}
+
+	public String stringify() {
+		// TODO Auto-generated method stub
+		return "";
+	}
+
 
 }

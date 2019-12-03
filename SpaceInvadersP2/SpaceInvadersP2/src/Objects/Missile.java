@@ -8,11 +8,8 @@ public final class Missile extends Weapon{
 		super(startX, startY, game, alien, active);
 	}
 
-	public void damage(GameObject target) {
-		if(target.isAlien()) {
-			target.damage(this);
-			this.setActive(false);
-		}
+	public void damage(int damage) {
+		
 	}
 
 
@@ -35,6 +32,11 @@ public final class Missile extends Weapon{
 
 	public String toString() {
 		return ".";
+	}
+
+	
+	public final String stringify() {
+		return "B" + this.getX() + ";" +  this.getY();
 	}
 
 }

@@ -31,6 +31,9 @@ public class BoardPrinter implements GamePrinter{
 		this.numCols = cols;		
 		encodeGame(game);
 	}
+	public BoardPrinter() {
+	
+	}
 	
 	private void encodeGame(Game game) {
 		board = new String[numRows][numCols];
@@ -74,8 +77,12 @@ public class BoardPrinter implements GamePrinter{
 
 	@Override
 	public String helpText() {
-		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public void setGame(Game game) {
+		this.encodeGame(game);
+		
 	}
 
 }

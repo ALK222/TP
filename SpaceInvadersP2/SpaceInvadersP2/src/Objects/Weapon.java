@@ -31,7 +31,11 @@ public abstract class Weapon extends GameObject{
 	
 	//METHODS
 	
-	public abstract void damage(GameObject target);
+
+	public boolean performAttack(GameObject other) {
+		return true;
+	}
+	
 	
 
 }

@@ -2,10 +2,9 @@ package utils;
 
 import interfaces.GamePrinter;
 import logic.Game;
-
 public enum PrinterTypes {
-	
-	/*BOARDPRINTER("boardprinter",
+
+	BOARDPRINTER("boardprinter",
 			"prints the game formatted as a board of dimension: ",
 			new BoardPrinter()),
 	STRINGIFIER("stringifier",
@@ -34,7 +33,7 @@ public enum PrinterTypes {
 	public GamePrinter getObject(Game game) {
 		printerObject.setGame(game);
 		return printerObject;
-	}*/
+	}
 
 
 }

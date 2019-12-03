@@ -26,6 +26,7 @@ public class CommandGenerator {
 		return show;
 	}
 	
+
 	public static Commands parseCommand(String[] commandWords) throws CommandParseException{
 		int i = 0;
 		boolean ok = false;
@@ -39,5 +40,7 @@ public class CommandGenerator {
 		}
 		return null;
 	}
+
+
 	
 }
