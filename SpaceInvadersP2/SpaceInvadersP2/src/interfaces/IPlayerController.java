@@ -3,7 +3,7 @@ package interfaces;
 public interface IPlayerController {
 	
 	// PLAYER ACTIONS	
-	public boolean move (int numCells);
+	public boolean move(String direction, int numCells );
 	public boolean shootLaser();
 	public boolean shockWave();
 	

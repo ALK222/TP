@@ -160,7 +160,13 @@ public class Game implements IPlayerController{
 
 
 	public boolean move(String direction, int numCells ) {
-		navi.move();
+		if(direction.toLowerCase() == "left") {
+			numCells *= -1;
+		}
+		if(navi.getY() + numCells > 0 && navi.getY() + numCells < 9) {
+			navi.move((char)numCells);
+			return true;
+		}
 
 		return false;
 	}
@@ -244,5 +250,6 @@ public class Game implements IPlayerController{
 	public void removeAmmo() {
 		ammo--;
 	}
+
 		
 }

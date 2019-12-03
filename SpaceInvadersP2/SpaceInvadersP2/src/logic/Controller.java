@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 import Commands.CommandGenerator;
 import Commands.Commands;
+import exceptions.CommandExecuteException;
 
 public class Controller implements IExecuteRandomActions{
 	
@@ -18,6 +19,7 @@ public class Controller implements IExecuteRandomActions{
 	private Scanner in;
 	private GamePrinter b;
 	private String prompt = "Command >";
+	private String unknownCommandMsg = "Unknown command, please put a valid command";
 	
 	//CONSTRUCTOR
 	
@@ -29,30 +31,21 @@ public class Controller implements IExecuteRandomActions{
 	
 	
 	public void run() {
-
-
+		System.out.println(b.toString(game));
 		while(!game.isFinished()){
-		  try{
-
-		
-
-			this.b = new BoardPrinter(game, 8, 9);
-			System.out.print(b.toString(game));
-			String[]  words = in.nextLine().toLowerCase().trim().split ("\\s+");
-			Commands command = CommandGenerator.parse(words);
-			if(command != null) {
-				if(command.execute(game))
-					System.out.println(game);
-				game.update();
+			System.out.print(prompt);
+			String[]  words = in.nextLine().trim().split ("\\s+");
+			try{
+				Commands command = CommandGenerator.parseCommand(words);
+				if(command != null) {
+					if(command.execute(game)) System.out.println(b.toString(game));
+				}
+				else
+					System.out.println(unknownCommandMsg);
 			}
-			else{
-				game.update();
-				//System.out.format(unknownCommandMsg);
-			} catch (CommandExecuteException || CommandParseException e) {
-				System.err.println(e.getMessage())}
-
+			catch(CommandParseException | CommandExecuteException ex) {
+				System.out.format((ex).getMessage() +"%n%n");
 			}
-			
 		}
 	}
 	

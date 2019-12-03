@@ -13,18 +13,18 @@ public class SaveCommand extends Commands{
 	}
 
 	
-	@Override
+	
 	public boolean execute(Game game) throws CommandExecuteException{
 		game.saveState(this.filename);
 		return true;
 	}
 
-	@Override
+	
 	public Commands parse(String[] commandWord) throws CommandParseException{
 
 		if(commandWord.length != 1) return null;
 		else if (commandWord[0].equalsIgnoreCase("reset") || commandWord[0].equalsIgnoreCase("r")) {
-			return new ResetCommand("Reset", "R", "", "Reset: Resets the program.");
+			return new SaveCommand("Save", "s", "", "Save: saves the state of the game.");
 		}
 		else {
 			return null;
