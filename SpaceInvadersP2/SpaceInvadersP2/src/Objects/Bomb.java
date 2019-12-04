@@ -8,8 +8,8 @@ public final class Bomb extends Weapon{
 	
 	//CONSTRUCTOR
 	
-	public Bomb(int startX, int startY, Game game, boolean alien, boolean active) {
-		super(startX, startY, game, alien, active);
+	public Bomb(int startX, int startY, Game game, boolean alien, boolean alive, boolean active) {
+		super(startX, startY, game, alien, active, active);
 
 	}
 

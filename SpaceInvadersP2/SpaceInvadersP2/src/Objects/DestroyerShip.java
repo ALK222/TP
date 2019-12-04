@@ -33,7 +33,7 @@ public final class DestroyerShip extends AlienShip{
 	
 	public void damage(int damage) {
 		this.setHp(getHp() - damage);
-		if(this.hp >= 0) {
+		if(this.hp <= 0) {
 			this.setAlive(false);
 			game.receivePoints(points);
 		}

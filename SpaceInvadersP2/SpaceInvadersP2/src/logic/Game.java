@@ -1,6 +1,11 @@
 package logic;
 
+import interfaces.GamePrinter;
 import interfaces.IPlayerController;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.String;
 import java.util.Random;
 
@@ -63,12 +68,12 @@ public class Game implements IPlayerController{
 	public void initGame () {
 		currentCycle = 0;
 		board = initializer.initialize(this, level);
-		laser = new Laser(0, 0, this, false, false);
+		laser = new Laser(0, 0, this, false, false, false);
 		addObject(laser);
 		navi = new UCMShip(7, 4, 3, 0, this, false, true, laser);
 		addObject(navi);
-		shock = new ShockWave(0, 0, this, false, false);
-		superM = new SuperMisille(0, 0, this, false, false);
+		shock = new ShockWave(0, 0, this, false, false, false);
+		superM = new SuperMisille(0, 0, this, false, false, false);
 		addObject(superM);
 		ammo = 0;
 	}
@@ -173,7 +178,7 @@ public class Game implements IPlayerController{
 
 
 	public boolean shootLaser() {
-		if(navi.getLaser().isAlive()) {
+		if(!navi.getLaser().isActive()) {
 			navi.shoot();
 			return true;
 		}
@@ -206,10 +211,7 @@ public class Game implements IPlayerController{
 	}
 
 	public String characterAtToString(int x, int y) {
-		if(board.getObjectInPosition(x, y) != null) {
-			return board.getObjectInPosition(x, y).toString();
-		}
-		return "";
+		return board.toString(x, y);
 	}
 	
 	public String stringify(int x, int y) {
@@ -233,22 +235,49 @@ public class Game implements IPlayerController{
 		board.update();
 	}
 	
-	public void useShockWave() {
-		board.shockWaveDamage();
+	public boolean useShockWave() {
+		if(this.shockWave()) {
+			
+			board.shockWaveDamage();
+			
+			this.shock.setActive(false);
+			
+			return true;
+		}
+		return false;
 	}
 	
 	
 	public boolean addAmmo() {
 		if(navi.getPoints() > 20) {
 			navi.setPoints(navi.getPoints() - 20);
-			ammo++;
+			++ammo;
 			return true;
 		}
 		return false;
 	}
 		
 	public void removeAmmo() {
-		ammo--;
+		--ammo;
+	}
+
+	public boolean shootSuperLaser() {
+		if(ammo > 0 && !this.superM.isActive()) {
+			superM.setX(navi.getX());
+			superM.setY(navi.getY());
+			superM.setActive(true);
+		}
+		return false;
+	}
+	
+	public void saveState(String filename) throws IOException{
+		GamePrinter s = new Stringifier(this);
+		String str = s.toString(this);
+		BufferedWriter writer = new BufferedWriter(new FileWriter(filename + ".dat", true));
+		writer.append(str);
+		     
+		writer.close();
+		
 	}
 
 		

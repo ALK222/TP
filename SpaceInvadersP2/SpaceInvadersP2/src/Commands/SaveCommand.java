@@ -1,7 +1,10 @@
 package Commands;
 
+import java.io.IOException;
+
 import exceptions.CommandExecuteException;
 import exceptions.CommandParseException;
+import logic.Controller;
 import logic.Game;
 
 public class SaveCommand extends Commands{
@@ -11,23 +14,32 @@ public class SaveCommand extends Commands{
 	public SaveCommand (String name, String shortcut, String details, String help) {
 		super(name, shortcut, details, help);
 	}
-
+	
+	public SaveCommand (String name, String shortcut, String details, String help, String filename) {
+		super(name, shortcut, details, help);
+		this.filename = filename;
+	}
 	
 	
 	public boolean execute(Game game) throws CommandExecuteException{
-		game.saveState(this.filename);
+		try {
+			game.saveState(this.filename);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return false;
 	}
 
 	
-	public Commands parse(String[] commandWord) throws CommandParseException{
+	public Commands parse(String[] commandWord){
 
-		if(commandWord.length != 1) return null;
+		if(commandWord.length != 2) return null;
 		else if (commandWord[0].equalsIgnoreCase("save") || commandWord[0].equalsIgnoreCase("s")) {
-			return new SaveCommand("Save", "s", "", "Save: saves the state of the game.");
+			return new SaveCommand("Save", "s", "", "Save: saves the state of the game.", commandWord[1]);
 		}
 		else {
 			return null;
 		}
 	}
+
 }

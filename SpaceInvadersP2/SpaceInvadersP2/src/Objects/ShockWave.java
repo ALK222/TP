@@ -4,8 +4,8 @@ import logic.Game;
 
 public class ShockWave extends Weapon{
 
-	public ShockWave(int startX, int startY, Game game, boolean alien, boolean alive) {
-		super(startX, startY, game, alien, alive);
+	public ShockWave(int startX, int startY, Game game, boolean alien, boolean alive, boolean active) {
+		super(startX, startY, game, alien, alive, active);
 	}
 	
 	public void damage(int damage) {

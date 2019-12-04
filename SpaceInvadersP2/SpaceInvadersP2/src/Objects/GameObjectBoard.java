@@ -58,7 +58,10 @@ public class GameObjectBoard {
 	}
 	
 	public String toString(int x, int y) {
-		return this.getObjectInPosition(x, y).toString();
+		if(this.getObjectInPosition(x, y) != null && this.getObjectInPosition(x, y).isAlive()) {
+			return this.getObjectInPosition(x, y).toString();
+		}
+		return "";
 	}
 
 	public final int aliensRemaining() {

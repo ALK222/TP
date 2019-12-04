@@ -10,8 +10,9 @@ public abstract class Weapon extends GameObject{
 	
 	//CONSTRUCTOR
 	
-	public Weapon(int startX, int startY, Game game, boolean alien , boolean alive) {
+	public Weapon(int startX, int startY, Game game, boolean alien , boolean alive, boolean active) {
 		super(startX, startY, game, alien , alive);
+		this.active = active;
 	}
 	
 	//SETTERS AND GETTERS

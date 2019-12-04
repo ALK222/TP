@@ -4,8 +4,8 @@ import logic.Game;
 
 public class SuperMisille extends Weapon{
 
-	public SuperMisille(int startX, int startY, Game game, boolean alien, boolean alive) {
-		super(startX, startY, game, alien, alive);
+	public SuperMisille(int startX, int startY, Game game, boolean alien, boolean alive, boolean active) {
+		super(startX, startY, game, alien, alive, active);
 	}
 
 	

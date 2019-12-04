@@ -56,7 +56,7 @@ public final class RegularShip extends AlienShip{
 
 	public void damage(int damage) {
 		this.setHp(this.getHp() - damage);
-		if(this.hp >= 0) {
+		if(this.hp <= 0) {
 			if(isExplosive()) {
 				System.out.print("Explosion!");
 				game.explosion(this.x, this.y);

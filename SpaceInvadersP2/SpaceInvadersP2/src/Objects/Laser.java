@@ -4,8 +4,8 @@ import logic.Game;
 
 public class Laser extends Weapon{
 
-	public Laser(int startX, int startY, Game game, boolean alien, boolean alive) {
-		super(startX, startY, game, alien, alive);
+	public Laser(int startX, int startY, Game game, boolean alien, boolean alive, boolean active) {
+		super(startX, startY, game, alien, alive, active);
 	}
 
 

@@ -24,4 +24,9 @@ public abstract class EnemyShip extends Ship{
 		this.damage(damage);
 		return true;
 	}
+	
+	public boolean receiveShockWaveAttack(int damage) {
+		this.damage(damage);
+		return true;
+	}
 }

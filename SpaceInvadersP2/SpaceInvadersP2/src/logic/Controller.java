@@ -6,6 +6,9 @@ import interfaces.IExecuteRandomActions;
 import utils.BoardPrinter;
 import utils.Stringifier;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 import Commands.CommandGenerator;
@@ -66,4 +69,5 @@ public class Controller implements IExecuteRandomActions{
 		}
 	}
 	
+
 }
