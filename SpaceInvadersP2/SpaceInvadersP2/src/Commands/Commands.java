@@ -26,7 +26,7 @@ public abstract class Commands {
 	
 	public abstract boolean execute(Game game) throws CommandExecuteException;
 	
-	public abstract Commands parse(String[] commandWord); 
+	public abstract Commands parse(String[] commandWord) throws CommandParseException;; 
 	
 	protected boolean matchCommandName(String name) {
 		return this.shortcut.equalsIgnoreCase(name) ||this.name.equalsIgnoreCase(name);

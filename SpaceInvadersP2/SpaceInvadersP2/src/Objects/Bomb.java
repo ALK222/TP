@@ -42,7 +42,10 @@ public final class Bomb extends Weapon{
 
 	
 	public String stringify() {
-		return "B ;" + this.getX() + ";" + this.getY();
+		if(this.isActive()) {
+			return "B ;" + this.getX() + ";" + this.getY();
+		}
+		return "";
 	}
 
 }

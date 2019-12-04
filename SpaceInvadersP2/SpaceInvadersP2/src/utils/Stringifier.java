@@ -13,12 +13,16 @@ public class Stringifier implements GamePrinter{
 	
 	private String encodeGame(Game game) {
 		String board = "";
-		for(int i = 0; i < game.DIM_X; i++) {
-			for(int j = 0; j < game.DIM_Y; j++) {
+		for(int i = 0; i < Game.DIM_X; i++) {
+			for(int j = 0; j < Game.DIM_Y; j++) {
 				board +=  game.stringify(i, j);
 			}
 		}
 		return board;
+	}
+	
+	public Stringifier() {
+		
 	}
 	
 	
