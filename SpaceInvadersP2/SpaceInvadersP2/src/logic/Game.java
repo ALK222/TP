@@ -214,7 +214,7 @@ public class Game implements IPlayerController{
 	
 	public String stringify(int x, int y) {
 		if(board.getObjectInPosition(x, y) != null) {
-			return board.getObjectInPosition(x, y).stringify();
+			return board.getObjectInPosition(x, y).stringify() + "\n";
 		}
 		return "";
 	}

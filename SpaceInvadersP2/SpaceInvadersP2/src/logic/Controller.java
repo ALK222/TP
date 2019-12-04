@@ -32,12 +32,11 @@ public class Controller implements IExecuteRandomActions{
 		this.in = new Scanner(System.in);
 		this.b = new BoardPrinter(game, 8, 9);
 		this.s = new Stringifier(game);
-		printerOption = 'b';
+		printerOption = 's';
 	}
 	
 	
 	public void run() {
-		printGame();
 		while(!game.isFinished()){
 			System.out.print(prompt);
 			String[]  words = in.nextLine().trim().split ("\\s+");

@@ -16,7 +16,6 @@ public class Stringifier implements GamePrinter{
 		for(int i = 0; i < game.DIM_X; i++) {
 			for(int j = 0; j < game.DIM_Y; j++) {
 				board +=  game.stringify(i, j);
-				board += "\n";
 			}
 		}
 		return board;
@@ -29,8 +28,9 @@ public class Stringifier implements GamePrinter{
 		stringify += "\n \n";
 		stringify += "C: ";
 		stringify += game.getCurrentCycle();
-		stringify += "L: ";
+		stringify += "\nL: ";
 		stringify += game.getLevel().toString();
+		stringify += "\n";
 		stringify += encodeGame(game);
 		return stringify;
 	}

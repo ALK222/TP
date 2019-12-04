@@ -11,7 +11,7 @@ public class ExitCommand extends Commands{
 	
 	public boolean execute(Game game) {
 		game.exit();
-		return true;
+		return false;
 	}
 
 	

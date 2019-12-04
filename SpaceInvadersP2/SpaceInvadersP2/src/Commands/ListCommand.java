@@ -12,8 +12,8 @@ public class ListCommand extends Commands{
 
 	
 	public boolean execute(Game game) {
-		game.infoToString();
-		return true;
+		System.out.println(game.infoToString());
+		return false;
 	}
 
 	

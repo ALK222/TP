@@ -10,7 +10,7 @@ public class ShockwaveCommand extends Commands{
 
 	
 	public boolean execute(Game game) {
-		game.enableShockWave();
+		game.useShockWave();;
 		return true;
 	}
 

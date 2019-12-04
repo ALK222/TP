@@ -12,13 +12,13 @@ public class MoveCommand extends Commands{
 		super(name, shortcut, details, help);
 	}
 
-	@Override
+	
 	public boolean execute(Game game) {
 
 		game.move(dir, vel);
 
 
-		return false;
+		return true;
 	}
 
 	@Override
