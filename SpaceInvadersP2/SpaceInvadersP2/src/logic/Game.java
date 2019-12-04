@@ -68,7 +68,7 @@ public class Game implements IPlayerController{
 	public void initGame () {
 		currentCycle = 0;
 		board = initializer.initialize(this, level);
-		laser = new Laser(0, 0, this, false, false, false);
+		laser = new Laser(0, 0, this, false, true, false);
 		addObject(laser);
 		navi = new UCMShip(7, 4, 3, 0, this, false, true, laser);
 		addObject(navi);

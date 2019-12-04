@@ -32,7 +32,7 @@ public class GameObjectBoard {
 	
 	public void update() {
 		for(int i = 0; i < getCurrentObjects(); ++i) {
-			if(!this.objects[i].isAlive() && this.objects[i].isAlien()) {
+			if(!this.objects[i].isAlive()) {
 				delete(i);
 			}
 		}

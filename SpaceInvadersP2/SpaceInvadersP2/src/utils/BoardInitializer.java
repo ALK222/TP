@@ -49,7 +49,7 @@ public class BoardInitializer {
 		}
 		
 		for(int i = 0; i < level.getNumDestroyerAliens(); i++) {
-			Bomb bomb = new Bomb(0, 0, game, true, false, false);
+			Bomb bomb = new Bomb(0, 0, game, true, true, false);
 			board.add(new DestroyerShip(x, y - i, 1, 10, game, true, true, bomb));
 			board.add(bomb);
 		}

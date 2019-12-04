@@ -9,12 +9,12 @@ public final class Bomb extends Weapon{
 	//CONSTRUCTOR
 	
 	public Bomb(int startX, int startY, Game game, boolean alien, boolean alive, boolean active) {
-		super(startX, startY, game, alien, active, active);
+		super(startX, startY, game, alien, alive, active);
 
 	}
 
 	public void damage(int damage) {
-		
+		this.setActive(false);
 		
 	}
 
@@ -27,7 +27,7 @@ public final class Bomb extends Weapon{
 	}
 
 	public void computerAction() {
-		if(this.getX() > 8 && this.getX() < 0) {
+		if(this.getX() > 8 || this.getX() < 0) {
 			setActive(false);
 		}
 		move('b');
@@ -36,7 +36,7 @@ public final class Bomb extends Weapon{
 
 	public void move(char dir) {
 		if(this.isActive()) {
-			this.setY(this.getX() + 1);
+			this.setX(this.getX() + 1);
 		}
 	}
 
