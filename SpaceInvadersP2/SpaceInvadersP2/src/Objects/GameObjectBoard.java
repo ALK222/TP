@@ -31,9 +31,21 @@ public class GameObjectBoard {
 	}
 	
 	public void update() {
+		detectDamage();
 		for(int i = 0; i < getCurrentObjects(); ++i) {
 			if(!this.objects[i].isAlive()) {
 				delete(i);
+			}
+		}
+	}
+	
+	
+	public void detectDamage() {
+		for(int i = 0; i < getCurrentObjects(); ++i) {
+			if(objects[i].getClass() == Weapon.class) {
+				if(getObjectInPosition(objects[i].getX(), objects[i].getY()) != null) {
+					objects[i].performAttack(getObjectInPosition(objects[i].getX(), objects[i].getY()));
+				}
 			}
 		}
 	}

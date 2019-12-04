@@ -35,6 +35,7 @@ public final class DestroyerShip extends AlienShip{
 		this.setHp(getHp() - damage);
 		if(this.hp <= 0) {
 			this.setAlive(false);
+			this.getLaser().setAlive(false);
 			game.receivePoints(points);
 		}
 		
