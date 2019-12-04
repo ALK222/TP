@@ -10,10 +10,10 @@ public class CommandGenerator {
 			new ResetCommand("Reset", "R","",""),
 			new ExitCommand("Exit","E","",""),
 			new UpdateCommand("Update","U","",""),
-			new MoveCommand("Move", "M","",""),
+			new MoveCommand(),
 			new ShockwaveCommand("ShockWave","W","",""),
 			new SaveCommand ("Save", "S", "", ""),
-			new ShootCommand("Shoot", "F", "", "")
+			new ShootCommand ()
 	};
 	
 	

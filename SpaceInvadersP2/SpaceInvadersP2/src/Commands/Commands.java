@@ -10,7 +10,7 @@ public abstract class Commands {
 	
 	protected final String name;
 	protected final String shortcut;
-	protected final String details;
+	private final String details;
 	private final String help;
 	
 	protected static final String incorrectNumArgsMsg = "Incorrect number of arguments";
@@ -26,7 +26,7 @@ public abstract class Commands {
 	
 	public abstract boolean execute(Game game) throws CommandExecuteException;
 	
-	public abstract Commands parse(String[] commandWord) throws CommandParseException;; 
+	public abstract Commands parse(String[] commandWord) throws CommandParseException;
 	
 	protected boolean matchCommandName(String name) {
 		return this.shortcut.equalsIgnoreCase(name) ||this.name.equalsIgnoreCase(name);
