@@ -33,9 +33,14 @@ public abstract class Weapon extends GameObject{
 	
 
 	public boolean performAttack(GameObject other) {
-		return true;
+		if(other.isAlien() != this.isAlien()) {
+			this.damage(this.getDamage());
+			other.damage(this.getDamage());
+			return true;
+		}
+		return false;
 	}
 	
-	
+
 
 }
