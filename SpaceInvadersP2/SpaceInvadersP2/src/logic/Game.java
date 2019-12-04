@@ -166,11 +166,11 @@ public class Game implements IPlayerController{
 
 	public boolean move(String direction, int numCells ) {
 		
-		if(direction.toLowerCase() == "left") {
+		if(direction.equals("right")) {
 			numCells *= -1;
 		}
 		if(navi.getY() + numCells > 0 && navi.getY() + numCells < 9) {
-			navi.move((char)numCells);
+			navi.move(numCells);
 			return true;
 		}
 		return false;

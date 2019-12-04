@@ -5,11 +5,13 @@ import logic.Game;
 
 public class MoveCommand extends Commands{
 	
-	String dir = null;
-	int vel = 0;
+	String dir;
+	int vel;
 
-	public MoveCommand() {
-		super("Move", "M", " ", " ");
+	public MoveCommand(String name, String shortcut, String details, String help, String dir, String speed) {
+		super(name, shortcut, details, help);
+		this.dir = dir;
+		this.vel = Integer.parseInt(speed);
 	}
 
 	
@@ -24,12 +26,11 @@ public class MoveCommand extends Commands{
 	public Commands parse(String[] commandWord) throws MoveParseException {
 		Commands result = null;
 		if(commandWord[0].equalsIgnoreCase(name) || commandWord[0].equalsIgnoreCase(shortcut)) {
-			if(commandWord.length > 3 ) {
+			if(commandWord.length == 3 ) {
 				if(commandWord[1].equals("right") || commandWord[1].equals("left")) {
-					dir = commandWord[1];
 					if(commandWord[2].equals("1") || commandWord[2].equals("2")) {
 						vel = Integer.parseInt(commandWord[2]);
-						result = new MoveCommand();
+						result = new MoveCommand(commandWord[0], "m", "", "", commandWord[1], commandWord[2]);
 					}
 					else {
 						throw new MoveParseException("Wrong speed number");

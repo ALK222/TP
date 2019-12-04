@@ -22,12 +22,14 @@ public class ShootCommand extends Commands{
 		if(commandWord[0].equalsIgnoreCase(name) || commandWord[0].equalsIgnoreCase(shortcut)) {
 			if(commandWord.length > 1 ) {
 				if(commandWord[1].equals("supermisil")) {
-					supermisile = commandWord[1];
 					result = new ShootCommand("Shoot", "B", "", "", commandWord[1]);
 				} else {
 					throw new CommandParseException("There was a problem with supermisil\n");
 				}
 			} 
+			else {
+				result = new ShootCommand("Shoot", "B", "", "", null);
+			}
 		}
 		return result; 
 		

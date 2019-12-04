@@ -27,13 +27,17 @@ public final class UCMShip extends Ship{
 		this.getLaser().computerAction();
 		
 	}
-
+	
 	@Override
 	public void move(char dir) {
-		// TODO Auto-generated method stub
+		this.setY(getY() - Character.getNumericValue(dir));  
 		
 	}
-
+	
+	public void move(int dir) {
+		this.setY(this.getY() - dir);
+	}
+	
 	public void damage(int damage) {
 		this.setHp(this.getHp() - damage);;
 		
