@@ -4,7 +4,7 @@ public interface IPlayerController {
 	
 	// PLAYER ACTIONS	
 	public boolean move(String direction, int numCells );
-	public boolean shootLaser();
+	public boolean shootLaser(String option);
 	public boolean shockWave();
 	
 	// CALLBACKS

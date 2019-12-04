@@ -4,15 +4,16 @@ import exceptions.CommandParseException;
 import logic.Game;
 
 public class ShootCommand extends Commands{
-	String supermisile = null;
+	String supermisile;
 
-	public ShootCommand() {
-		super("Shoot", "B", "", "");
+	public ShootCommand(String name, String shortcut, String details, String help, String supermisile) {
+		super(name, shortcut, details, help);
+		this.supermisile = supermisile;
 	}
 
 	
 	public boolean execute(Game game) {
-		game.shootLaser();
+		game.shootLaser(this.supermisile);
 		return false;
 	}
 
@@ -22,9 +23,9 @@ public class ShootCommand extends Commands{
 			if(commandWord.length > 1 ) {
 				if(commandWord[1].equals("supermisil")) {
 					supermisile = commandWord[1];
-					result = new ShootCommand();
+					result = new ShootCommand("Shoot", "B", "", "", commandWord[1]);
 				} else {
-					throw new CommandParseException("There was a problem with supermisil");
+					throw new CommandParseException("There was a problem with supermisil\n");
 				}
 			} 
 		}

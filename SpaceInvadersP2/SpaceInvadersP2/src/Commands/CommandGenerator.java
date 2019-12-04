@@ -12,8 +12,8 @@ public class CommandGenerator {
 			new UpdateCommand("Update","U","",""),
 			new MoveCommand(),
 			new ShockwaveCommand("ShockWave","W","",""),
-			new SaveCommand ("Save", "S", "", ""),
-			new ShootCommand ()
+			new SaveCommand ("Save", "S", "", "", ""),
+			new ShootCommand ("Shoot", "B", "", "", "")
 	};
 	
 	

@@ -1,8 +1,11 @@
 package logic;
 
+import interfaces.GamePrinter;
 import interfaces.IPlayerController;
 
 import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.String;
 import java.util.Random;
 
@@ -65,12 +68,12 @@ public class Game implements IPlayerController{
 	public void initGame () {
 		currentCycle = 0;
 		board = initializer.initialize(this, level);
-		laser = new Laser(0, 0, this, false, false);
+		laser = new Laser(0, 0, this, false, true, false);
 		addObject(laser);
 		navi = new UCMShip(7, 4, 3, 0, this, false, true, laser);
 		addObject(navi);
-		shock = new ShockWave(0, 0, this, false, false);
-		superM = new SuperMisille(0, 0, this, false, false);
+		shock = new ShockWave(0, 0, this, false, true, false);
+		superM = new SuperMisille(0, 0, this, false, true, false);
 		addObject(superM);
 		ammo = 0;
 	}
@@ -159,41 +162,38 @@ public class Game implements IPlayerController{
 		else return "This should not happen";
 	}
 
-//.....................................................................................
+
 
 	public boolean move(String direction, int numCells ) {
 		
 		if(direction.toLowerCase() == "left") {
 			numCells *= -1;
 		}
-		else if(direction.toLowerCase() == "right") {
-			
-		}
 		if(navi.getY() + numCells > 0 && navi.getY() + numCells < 9) {
 			navi.move((char)numCells);
 			return true;
 		}
-		else{
-			return false;
-		}
-		
+		return false;
 	}
 
-/*  por si me estoy muriendo, lo que iba a hacer:
- * el shootCommand llama a game.shootlaser
- * game.shootlaser llama a navi.shoot el cual crea el misil
- * navi devuelve el misil y game lo mete en el board
- * */
 	
-	public boolean shootLaser() {
-		boolean done = false;
-		if(navi.getLaser().isAlive()) {
-			navi.shoot();
-			board.add(navi.shoot());
+	public boolean shootLaser(String option) {
+		if(option == null) {
+			if(!navi.getLaser().isAlive()) {
+				navi.shoot();
 			
-			done= true;
+				return true;
+			}
 		}
-		return done;
+		else {
+			if(option == "supermisil") {
+				if(this.shootSuperLaser()) {
+					return true;
+				}
+			}
+		}
+		
+		return false;
 	}
 
 	public boolean shockWave() {
@@ -249,8 +249,16 @@ public class Game implements IPlayerController{
 		board.update();
 	}
 	
-	public void useShockWave() {
-		board.shockWaveDamage();
+	public boolean useShockWave() {
+		if(this.shockWave()) {
+			
+			board.shockWaveDamage();
+			
+			this.shock.setActive(false);
+			
+			return true;
+		}
+		return false;
 	}
 	
 	
@@ -265,6 +273,29 @@ public class Game implements IPlayerController{
 		
 	public void removeAmmo() {
 		ammo--;
+	}
+	
+	
+	public void saveState(String filename) throws IOException{
+		GamePrinter s = new Stringifier(this);
+		String str = s.toString(this);
+		BufferedWriter writer = new BufferedWriter(new FileWriter(filename + ".dat", true));
+		writer.append(str);
+		     
+		writer.close();
+		
+	}
+
+	
+	public boolean shootSuperLaser() {
+		if(ammo > 0 && !this.superM.isActive()) {
+			superM.setX(navi.getX());
+			superM.setY(navi.getY());
+			superM.setActive(true);
+			--ammo;
+			return true;
+		}
+		return false;
 	}
 	
 	
