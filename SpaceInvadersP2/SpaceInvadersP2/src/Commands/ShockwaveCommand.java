@@ -10,12 +10,8 @@ public class ShockwaveCommand extends Commands{
 
 	
 	public boolean execute(Game game) {
-		if(game.useShockWave()) {
-			System.out.println("\nShockwave used");
-			return true;
-		}
-		System.out.println("\nShockwave not available");
-		return false;
+		game.useShockWave();;
+		return true;
 	}
 
 	

@@ -1,7 +1,6 @@
 package Commands;
 
 import exceptions.CommandParseException;
-import exceptions.MoveParseException;
 import logic.Game;
 
 public class ShootCommand extends Commands{
@@ -13,7 +12,6 @@ public class ShootCommand extends Commands{
 
 	
 	public boolean execute(Game game) {
-
 		game.shootLaser();
 		return false;
 	}
