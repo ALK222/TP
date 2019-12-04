@@ -8,8 +8,8 @@ public class MoveCommand extends Commands{
 	String dir = null;
 	int vel = 0;
 
-	public MoveCommand(String name, String shortcut, String details, String help) {
-		super(name, shortcut, details, help);
+	public MoveCommand() {
+		super("Move", "M", " ", " ");
 	}
 
 	
@@ -29,6 +29,7 @@ public class MoveCommand extends Commands{
 					dir = commandWord[1];
 					if(commandWord[2].equals("1") || commandWord[2].equals("2")) {
 						vel = Integer.parseInt(commandWord[2]);
+						result = new MoveCommand();
 					}
 					else {
 						throw new MoveParseException("Wrong speed number");
