@@ -47,7 +47,7 @@ public final class DestroyerShip extends AlienShip{
 	}
 	
 	public String stringify() {
-		return "D" + this.getX() + ";" + this.getY() + ";" + this.getHp() +";"
+		return "D " + this.getX() + ";" + this.getY() + ";" + this.getHp() +";"
 				+ game.getCurrentCycle() % game.getLevel().getNumCyclesToMoveOneCell();
 	}
 

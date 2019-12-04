@@ -32,7 +32,7 @@ public class Controller implements IExecuteRandomActions{
 		this.in = new Scanner(System.in);
 		this.b = new BoardPrinter(game, 8, 9);
 		this.s = new Stringifier(game);
-		printerOption = 's';
+		printerOption = 'b';
 	}
 	
 	

@@ -36,7 +36,8 @@ public class SuperMisille extends Weapon{
 
 
 	public String stringify() {
-		return "S;" + this.getX() + ";" + this.getY();
+		if(isActive()) return "S " + this.getX() + ";" + this.getY();
+		return "";
 	}
 	
 }

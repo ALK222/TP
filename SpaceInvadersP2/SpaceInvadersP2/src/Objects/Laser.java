@@ -39,7 +39,7 @@ public class Laser extends Weapon{
 
 	public String stringify() {
 		if(this.isActive()) {
-			return "M" + this.getX() + ";" + this.getY();
+			return "M " + this.getX() + ";" + this.getY();
 		}
 		return "";
 	}

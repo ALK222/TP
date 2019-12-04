@@ -47,10 +47,10 @@ public final class RegularShip extends AlienShip{
 	}
 	public final String stringify() {
 		if(isExplosive()) {
-			return "E" + this.getX() + ";" + this.getY() + ";" + this.getHp() +";"
+			return "E " + this.getX() + ";" + this.getY() + ";" + this.getHp() +";"
 					+ game.getCurrentCycle() % game.getLevel().getNumCyclesToMoveOneCell();
 		}
-		return "R" + this.getX() + ";" + this.getY() + ";" + this.getHp() +";"
+		return "R " + this.getX() + ";" + this.getY() + ";" + this.getHp() +";"
 		+ game.getCurrentCycle() % game.getLevel().getNumCyclesToMoveOneCell();
 	}
 

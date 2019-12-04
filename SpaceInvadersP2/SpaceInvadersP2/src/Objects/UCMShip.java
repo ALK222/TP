@@ -51,7 +51,7 @@ public final class UCMShip extends Ship{
 	}
 	
 	public final String stringify() {
-		return "P;" + this.getX() + ";" + this.getY() + ";" + this.getHp() +";"
+		return "P " + this.getX() + ";" + this.getY() + ";" + this.getHp() +";"
 				+ points + game.shockWave() + ";" + game.getAmmo();
 	}
 
