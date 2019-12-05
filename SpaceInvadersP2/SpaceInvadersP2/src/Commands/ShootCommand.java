@@ -13,7 +13,9 @@ public class ShootCommand extends Commands{
 
 	
 	public boolean execute(Game game) {
-		game.shootLaser(this.supermisile);
+		if(game.shootLaser(this.supermisile)) {
+			return true;
+		}
 		return false;
 	}
 

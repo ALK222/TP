@@ -43,9 +43,11 @@ public final class Ovni extends EnemyShip{
 	}
 
 	public void damage(int damage) {
-		this.setAlive(false);
-		game.enableShockWave();
-		game.receivePoints(points);
+		if(isAlive()) {
+			this.setAlive(false);
+			game.enableShockWave();
+			game.receivePoints(points);
+		}
 		
 	}
 	

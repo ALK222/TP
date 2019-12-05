@@ -72,7 +72,7 @@ public class Game implements IPlayerController{
 		addObject(laser);
 		navi = new UCMShip(7, 4, 3, 0, this, false, true, laser);
 		addObject(navi);
-		shock = new ShockWave(0, 0, this, false, true, false);
+		shock = new ShockWave(0, 0, this, false, true, true);
 		superM = new SuperMisille(0, 0, this, false, true, false);
 		addObject(superM);
 		ammo = 0;
@@ -161,9 +161,9 @@ public class Game implements IPlayerController{
 		else if (doExit) return "Player exits the game";
 		else return "This should not happen";
 	}
-
-
-
+	
+	
+	
 	public boolean move(String direction, int numCells ) {
 		
 		if(direction.equals("right")) {
@@ -179,9 +179,8 @@ public class Game implements IPlayerController{
 	
 	public boolean shootLaser(String option) {
 		if(option == null) {
-			if(!navi.getLaser().isAlive()) {
+			if(!navi.getLaser().isActive()) {
 				navi.shoot();
-			
 				return true;
 			}
 		}

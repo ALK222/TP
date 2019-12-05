@@ -7,18 +7,20 @@ public abstract class Weapon extends GameObject{
 	//ATTRIBUTES
 	
 	private boolean active;
+	private int damage;
 	
 	//CONSTRUCTOR
 	
-	public Weapon(int startX, int startY, Game game, boolean alien , boolean alive, boolean active) {
+	public Weapon(int startX, int startY, Game game, boolean alien , boolean alive, boolean active, int damage) {
 		super(startX, startY, game, alien , alive);
 		this.active = active;
+		this.damage = damage;
 	}
 	
 	//SETTERS AND GETTERS
 	
 	public final int getDamage() {
-		return this.getDamage();
+		return this.damage;
 	}
 	
 	public final boolean isActive() {

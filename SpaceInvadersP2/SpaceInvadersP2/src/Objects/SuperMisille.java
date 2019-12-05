@@ -5,7 +5,7 @@ import logic.Game;
 public class SuperMisille extends Weapon{
 
 	public SuperMisille(int startX, int startY, Game game, boolean alien, boolean alive, boolean active) {
-		super(startX, startY, game, alien, alive, active);
+		super(startX, startY, game, alien, alive, active, 2);
 	}
 
 	
@@ -31,7 +31,9 @@ public class SuperMisille extends Weapon{
 	
 	public void damage(int damage) {
 		
-		
+		this.setActive(false);
+		this.setX(10);
+		this.setY(10);
 	}
 
 

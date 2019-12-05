@@ -20,11 +20,7 @@ public final class DestroyerShip extends AlienShip{
 	public void computerAction() {
 		if(IExecuteRandomActions.canGenerateRandomBomb(game)){
 			this.shoot();
-		}
-		if(this.getLaser().isActive()) {
-			this.getLaser().computerAction();
-		}
-		
+		}		
 	}
 	
 	public String toString() {

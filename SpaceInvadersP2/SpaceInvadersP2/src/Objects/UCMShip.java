@@ -24,13 +24,10 @@ public final class UCMShip extends Ship{
 	}
 
 	public void computerAction() {
-		this.getLaser().computerAction();
-		
 	}
 	
 	@Override
 	public void move(char dir) {
-		this.setY(getY() - Character.getNumericValue(dir));  
 		
 	}
 	
@@ -39,7 +36,7 @@ public final class UCMShip extends Ship{
 	}
 	
 	public void damage(int damage) {
-		this.setHp(this.getHp() - damage);;
+		this.setHp(this.getHp() - damage);
 		
 	}
 
@@ -51,7 +48,7 @@ public final class UCMShip extends Ship{
 		laser.setX(this.x);
 		laser.setY(this.y);
 		laser.setActive(true);
-		
+		laser.move('b');
 	}
 	
 	public final String stringify() {

@@ -31,24 +31,14 @@ public class GameObjectBoard {
 	}
 	
 	public void update() {
-		detectDamage();
+		detectDamageBomb();
 		for(int i = 0; i < getCurrentObjects(); ++i) {
-			if(!this.objects[i].isAlive()) {
+			if(!this.objects[i].isAlive() && this.objects[i].getClass() != Ovni.class) {
 				delete(i);
 			}
 		}
 	}
 	
-	
-	public void detectDamage() {
-		for(int i = 0; i < getCurrentObjects(); ++i) {
-			if(objects[i].getClass() == Weapon.class) {
-				if(getObjectInPosition(objects[i].getX(), objects[i].getY()) != null) {
-					objects[i].performAttack(getObjectInPosition(objects[i].getX(), objects[i].getY()));
-				}
-			}
-		}
-	}
 	
 	public void delete(int n) {
 		if(this.getCurrentObjects() > 1) {
@@ -90,8 +80,10 @@ public class GameObjectBoard {
 	
 	public final boolean haveLanded() {
 		for(int i = 0; i < currentObjects; i++) {
-			if(objects[i].isAlien() && objects[i].getX() >= 7) {
-				return true;
+			if(objects[i].getClass() != Bomb.class) {
+				if(objects[i].isAlien() && objects[i].getX() >= 7) {
+					return true;
+				}
 			}
 		}
 		return false;
@@ -132,7 +124,7 @@ public class GameObjectBoard {
 		}
 		else {
 			for (int i = 0; i < currentObjects; ++i) {
-				if(objects[0].getClass() == RegularShip.class || objects[0].getClass() == DestroyerShip.class) {
+				if(objects[0].getClass() == RegularShip.class || objects[0].getClass() == DestroyerShip.class) { //esta practica me dan ganas de matarme
 					objects[i].move('i');
 				}
 			}
@@ -145,5 +137,24 @@ public class GameObjectBoard {
 		}
 		
 	}
-
+	
+	
+	public void detectDamageBomb() {
+		for(int i = 0; i < getCurrentObjects(); i++) {
+			if(objects[i].getClass() == Bomb.class || objects[i].getClass() == Laser.class) {
+				searchTarget(objects[i]);
+			}
+		}
+	}
+	
+	public void searchTarget(GameObject other) {
+		for(int i = 0; i < getCurrentObjects(); ++i) {
+			if(other.isAlien() != objects[i].isAlien()) {
+				if(other.getX() == objects[i].getX() && other.getY() == objects[i].getY()) {
+					other.performAttack(objects[i]);
+				}
+			}
+		}
+	}
+	
 }

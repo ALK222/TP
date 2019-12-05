@@ -58,11 +58,11 @@ public class Controller implements IExecuteRandomActions{
 	
 	public void printGame() {
 		if(this.printerOption == 'b') {
-			b.setGame(game);
+			b = new BoardPrinter(this.game, 8, 9);
 			System.out.println(b.toString(game));
 		}
 		else {
-			s.setGame(game);
+			s = new Stringifier(game);
 			System.out.println(s.toString(game));
 		}
 	}

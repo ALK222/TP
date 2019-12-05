@@ -5,7 +5,7 @@ import logic.Game;
 public class Laser extends Weapon{
 
 	public Laser(int startX, int startY, Game game, boolean alien, boolean alive, boolean active) {
-		super(startX, startY, game, alien, alive, active);
+		super(startX, startY, game, alien, alive, active, 1);
 	}
 
 
@@ -17,9 +17,11 @@ public class Laser extends Weapon{
 	
 	public void computerAction() {
 		move('b');
-		if(0 < x && x < 8) {
-			game.enableMissile();
+		if(x < 0) {
+			this.setActive(false);
 		}
+		
+		
 	}
 
 	
@@ -34,6 +36,8 @@ public class Laser extends Weapon{
 	
 	public void damage(int damage) {
 		this.setActive(false);
+		this.setX(10);
+		this.setY(10);
 		
 	}
 
