@@ -41,9 +41,12 @@ public final class DestroyerShip extends AlienShip{
 	}
 	
 	public void shoot() {
-		this.getLaser().setActive(true);
-		this.getLaser().setX(this.getX());
-		this.getLaser().setY(this.getY());
+		if(!this.getLaser().isActive()) {
+			this.getLaser().setActive(true);
+			this.getLaser().setX(this.getX());
+			this.getLaser().setY(this.getY());
+		}
+
 	}
 
 	
