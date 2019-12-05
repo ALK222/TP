@@ -56,4 +56,5 @@ public final class UCMShip extends Ship{
 				+ points + game.shockWave() + ";" + game.getAmmo();
 	}
 
+	
 }

@@ -30,3 +30,4 @@ public abstract class EnemyShip extends Ship{
 		return true;
 	}
 }
+

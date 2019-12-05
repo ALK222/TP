@@ -20,7 +20,7 @@ public class Game implements IPlayerController{
 	private String seed;
 	private Level level;
 	private Random rand;
-
+	private char printerOption;
 	
 	private ShockWave shock;
 	private SuperMisille superM;
@@ -43,6 +43,7 @@ public class Game implements IPlayerController{
 		this.doExit = false;
 		initializer = new BoardInitializer();
 		initGame();
+		printerOption = 'b';
 	}
 	
 	public int getCurrentCycle() {
@@ -63,6 +64,14 @@ public class Game implements IPlayerController{
 	
 	public Random getRandom() {
 		return this.rand;
+	}
+	
+	public void setPrinterOption(char printerOption) {
+		this.printerOption = printerOption;
+	}
+	
+	public char getPrinterOption() {
+		return this.printerOption;
 	}
 	
 	public void initGame () {
@@ -123,6 +132,7 @@ public class Game implements IPlayerController{
 	
 	public void update() {
 		board.computerAction();
+		detectSuperDamage();
 		board.update();
 		if(currentCycle % this.getLevel().getNumCyclesToMoveOneCell() == 0 && currentCycle != 0) {
 			board.move();
@@ -261,14 +271,6 @@ public class Game implements IPlayerController{
 	}
 	
 	
-	public boolean addAmmo() {
-		if(navi.getPoints() > 20) {
-			navi.setPoints(navi.getPoints() - 20);
-			ammo++;
-			return true;
-		}
-		return false;
-	}
 		
 	public void removeAmmo() {
 		ammo--;
@@ -296,7 +298,19 @@ public class Game implements IPlayerController{
 		}
 		return false;
 	}
+
+	public boolean buy() {
+		if(navi.getPoints() >= 20) {
+			++ammo;
+			navi.setPoints(navi.getPoints() - 20);
+			return true;
+		}
+		return false;
+	}
 	
+	public void detectSuperDamage() {
+		board.searchTarget(superM);
+	}
 	
 		
 }

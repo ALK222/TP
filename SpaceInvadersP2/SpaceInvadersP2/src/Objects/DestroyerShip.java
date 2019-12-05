@@ -24,6 +24,9 @@ public final class DestroyerShip extends AlienShip{
 	}
 	
 	public String toString() {
+		if(!isAlive()) {
+			return "";
+		}
 		return "D[" + this.getHp() + "]";
 	}
 	
@@ -42,8 +45,12 @@ public final class DestroyerShip extends AlienShip{
 		this.getLaser().setX(this.getX());
 		this.getLaser().setY(this.getY());
 	}
+
 	
 	public String stringify() {
+		if(!isAlive()) {
+			return "";
+		}
 		return "D " + this.getX() + ";" + this.getY() + ";" + this.getHp() +";"
 				+ game.getCurrentCycle() % game.getLevel().getNumCyclesToMoveOneCell();
 	}

@@ -8,3 +8,4 @@ public interface GamePrinter {
 	public String helpText();
 	public void setGame(Game game);
 }
+

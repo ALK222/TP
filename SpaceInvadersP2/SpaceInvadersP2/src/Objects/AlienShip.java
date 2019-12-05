@@ -22,5 +22,5 @@ public  abstract class AlienShip extends EnemyShip{
 	public final boolean allDead() {
 		return hp < 0;
 	}
-	
+
 }

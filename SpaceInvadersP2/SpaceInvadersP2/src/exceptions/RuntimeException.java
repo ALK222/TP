@@ -8,3 +8,4 @@ public class RuntimeException extends Exception{
 		super(mesg);
 	}
 }
+

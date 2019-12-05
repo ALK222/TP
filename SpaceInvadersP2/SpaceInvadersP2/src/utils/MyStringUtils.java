@@ -15,4 +15,5 @@ public class MyStringUtils {
 		float end = start + length;
 		return out.substring((int)start, (int)end);
 	}
+	
 }

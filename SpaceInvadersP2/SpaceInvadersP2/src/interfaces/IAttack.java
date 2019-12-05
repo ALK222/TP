@@ -19,3 +19,4 @@ public interface IAttack {
 		return false;
 	}
 }
+

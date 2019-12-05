@@ -19,7 +19,7 @@ public class MoveCommand extends Commands{
 
 		game.move(dir, vel);
 
-
+		
 		return true;
 	}
 

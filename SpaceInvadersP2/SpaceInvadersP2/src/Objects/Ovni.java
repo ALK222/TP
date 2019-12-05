@@ -51,6 +51,7 @@ public final class Ovni extends EnemyShip{
 		
 	}
 	
+	
 	public final String stringify() {
 		if (isAlive()) return "O " + this.getX() + ";" + this.getY() + ";" + this.isAlive();
 		return "";

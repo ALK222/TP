@@ -83,6 +83,7 @@ public class BoardPrinter implements GamePrinter{
 	public void setGame(Game game) {
 		this.encodeGame(game);
 		
+
 	}
 
 }

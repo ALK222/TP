@@ -4,19 +4,18 @@ import exceptions.CommandExecuteException;
 import exceptions.CommandParseException;
 import logic.Game;
 
-public class StringifyCommand extends Commands{
-	public StringifyCommand(String name, String shortcut, String details2, String help) {
+public class BuyCommand extends Commands {
+
+	public BuyCommand(String name, String shortcut, String details2, String help) {
 		super(name, shortcut, details2, help);
 	}
 
 	
 	public boolean execute(Game game) throws CommandExecuteException {
-		if(game.getPrinterOption() == 'b') {
-			game.setPrinterOption('s');
+		if(game.buy()) {
+			return true;
 		}
-		else {
-			game.setPrinterOption('b');
-		}
+		System.out.println("No se pudo comprar el supermisil.\n");
 		return false;
 	}
 
@@ -26,11 +25,10 @@ public class StringifyCommand extends Commands{
 			System.out.print(Commands.incorrectNumArgsMsg);
 			return null;
 		}
-		else if (commandWord[0].equalsIgnoreCase("Stringify") || commandWord[0].equalsIgnoreCase("c")) {
-			return new StringifyCommand("Stringify", "C", "", "Stringify: changes the game perspective");
+		else if (commandWord[0].equalsIgnoreCase("Buy") || commandWord[0].equalsIgnoreCase("b")) {
+			return new BuyCommand("Buy", "B", "", "Buy: buys a supermisille.");
 		}
 		return null;
 	}
-
 
 }

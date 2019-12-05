@@ -13,7 +13,7 @@ public class ShockwaveCommand extends Commands{
 		game.useShockWave();;
 		return true;
 	}
-
+	
 	
 	public Commands parse(String[] commandWord) {
 		if(commandWord.length != 1) {

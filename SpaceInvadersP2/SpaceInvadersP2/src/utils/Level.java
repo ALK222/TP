@@ -67,4 +67,5 @@ public enum Level {
 	public double getTurnExplodeFrequency(){
 		return turnExplodeFrequency;
 	}
+	
 }

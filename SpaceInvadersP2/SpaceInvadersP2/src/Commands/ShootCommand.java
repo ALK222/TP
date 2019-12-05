@@ -18,7 +18,7 @@ public class ShootCommand extends Commands{
 		}
 		return false;
 	}
-
+	
 	public Commands parse(String[] commandWord) throws CommandParseException {
 		Commands result = null;
 		if(commandWord[0].equalsIgnoreCase(name) || commandWord[0].equalsIgnoreCase(shortcut)) {

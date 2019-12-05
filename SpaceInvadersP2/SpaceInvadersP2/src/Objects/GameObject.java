@@ -88,3 +88,4 @@ public abstract class GameObject implements IAttack{
 		public abstract String stringify();
 
 }
+

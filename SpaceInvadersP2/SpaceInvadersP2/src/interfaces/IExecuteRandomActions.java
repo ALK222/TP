@@ -17,3 +17,4 @@ public interface IExecuteRandomActions {
 		return game.getRandom().nextDouble() < game.getLevel().getTurnExplodeFrequency();
 	}
 }
+

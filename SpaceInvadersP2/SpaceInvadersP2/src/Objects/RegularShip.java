@@ -40,12 +40,18 @@ public final class RegularShip extends AlienShip{
 
 
 	public String toString() {
+		if(!isAlive()) {
+			return "";
+		}
 		if(isExplosive()) {
 			return "E[" + this.getHp() + "]";
 		}
 		return "R[" + this.getHp() +"]";
 	}
 	public final String stringify() {
+		if(!isAlive()) {
+			return "";
+		}
 		if(isExplosive()) {
 			return "E " + this.getX() + ";" + this.getY() + ";" + this.getHp() +";"
 					+ game.getCurrentCycle() % game.getLevel().getNumCyclesToMoveOneCell();
@@ -64,6 +70,7 @@ public final class RegularShip extends AlienShip{
 			this.setAlive(false);
 			game.receivePoints(points);
 		}
+		
 		
 	}
 

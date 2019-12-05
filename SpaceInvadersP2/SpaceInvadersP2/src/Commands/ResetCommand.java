@@ -13,7 +13,7 @@ public class ResetCommand extends Commands {
 		game.reset();
 		return true;
 	}
-
+	
 	
 	public Commands parse(String[] commandWord) {
 

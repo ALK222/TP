@@ -22,7 +22,6 @@ public class Controller implements IExecuteRandomActions{
 	private Scanner in;
 	private GamePrinter b;
 	private GamePrinter s;
-	private char printerOption;
 	private String prompt = "Command >";
 	private String unknownCommandMsg = "Unknown command, please put a valid command";
 	
@@ -33,7 +32,6 @@ public class Controller implements IExecuteRandomActions{
 		this.in = new Scanner(System.in);
 		this.b = new BoardPrinter(game, 8, 9);
 		this.s = new Stringifier(game);
-		printerOption = 'b';
 	}
 	
 	
@@ -57,7 +55,7 @@ public class Controller implements IExecuteRandomActions{
 	
 	
 	public void printGame() {
-		if(this.printerOption == 'b') {
+		if(game.getPrinterOption() == 'b') {
 			b = new BoardPrinter(this.game, 8, 9);
 			System.out.println(b.toString(game));
 		}

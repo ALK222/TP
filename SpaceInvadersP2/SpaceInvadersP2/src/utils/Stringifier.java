@@ -58,5 +58,6 @@ public class Stringifier implements GamePrinter{
 		// TODO Auto-generated method stub
 		
 	}
+	
 
 }

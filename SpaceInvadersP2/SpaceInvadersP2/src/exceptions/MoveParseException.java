@@ -11,4 +11,5 @@ public class MoveParseException extends CommandParseException {
 		super("move <right|left> <1|2>" + msg);
 	}
 	
+	
 }

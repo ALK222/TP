@@ -8,3 +8,4 @@ public class CommandParseException extends Exception{
 		super("Problem parse exception"+mesg);
 	}
 }
+

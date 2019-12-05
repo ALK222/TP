@@ -52,4 +52,5 @@ public abstract class Ship extends GameObject {
 	public void damage() {
 		this.setHp(this.hp - 1);
 	}
+	
 }
