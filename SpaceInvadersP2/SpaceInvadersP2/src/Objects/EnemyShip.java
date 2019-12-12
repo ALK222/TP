@@ -29,5 +29,12 @@ public abstract class EnemyShip extends Ship{
 		this.damage(damage);
 		return true;
 	}
+	
+	public boolean haveLanded() {
+		if(this.getX() >= 7) {
+			return true;
+		}
+		return false;
+	}
 }
 

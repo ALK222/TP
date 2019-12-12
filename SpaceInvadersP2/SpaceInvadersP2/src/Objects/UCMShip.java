@@ -55,6 +55,17 @@ public final class UCMShip extends Ship{
 		return "P " + this.getX() + ";" + this.getY() + ";" + this.getHp() +";"
 				+ points + game.shockWave() + ";" + game.getAmmo();
 	}
-
 	
+	public boolean haveLanded() {
+		return false;
+	}
+
+	public boolean checkBorder() {
+		return false;
+	}
+	
+	
+	public boolean canDelete() {
+		return false;
+	}
 }

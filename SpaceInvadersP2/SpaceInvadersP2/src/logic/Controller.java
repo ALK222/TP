@@ -42,7 +42,10 @@ public class Controller implements IExecuteRandomActions{
 			try{
 				Commands command = CommandGenerator.parseCommand(words);
 				if(command != null) {
-					if(command.execute(game)) printGame();
+					if(command.execute(game)) {
+						game.update();
+						printGame();
+					}
 				}
 				else
 					System.out.println(unknownCommandMsg);

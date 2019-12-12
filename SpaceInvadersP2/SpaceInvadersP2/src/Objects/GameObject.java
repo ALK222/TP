@@ -87,5 +87,17 @@ public abstract class GameObject implements IAttack{
 		
 		public abstract String stringify();
 
+
+		public abstract boolean haveLanded();
+
+
+		protected abstract boolean checkBorder();
+
+
+		protected abstract boolean canAttack();
+
+
+		protected abstract boolean canDelete();
+
 }
 

@@ -33,7 +33,7 @@ public class GameObjectBoard {
 	public void update() {
 		detectDamageBomb();
 		for(int i = 0; i < getCurrentObjects(); ++i) {
-			if(!this.objects[i].isAlive() && this.objects[i].getClass() != Ovni.class) {
+			if(!this.objects[i].isAlive() && this.objects[i].canDelete()) {
 				delete(i);
 			}
 		}
@@ -80,53 +80,35 @@ public class GameObjectBoard {
 	
 	public final boolean haveLanded() {
 		for(int i = 0; i < currentObjects; i++) {
-			if(objects[i].getClass() != Bomb.class) {
-				if(objects[i].isAlien() && objects[i].getX() >= 7) {
-					return true;
-				}
+			if(objects[i].haveLanded()) {
+				return true;
 			}
 		}
 		return false;
 	}
 	
 	public void move() {
-		int x = 0;
-		boolean moved = false;
-		while(x < 9 && !moved){
-			if(getObjectInPosition(x, 0) != null) {
-				if(getObjectInPosition(x, 0).getClass() == RegularShip.class || getObjectInPosition(x, 0).getClass() == DestroyerShip.class) {
-					for (int i = 0; i < currentObjects; ++i) {
-						if(objects[i].getClass() == RegularShip.class || objects[i].getClass() == DestroyerShip.class) {
-							objects[i].move('b');
-						}
-					}
-					moved = true;
-				}
+		boolean bajar = false;
+		int i = 0;
+		while(i < this.getCurrentObjects() && !bajar) {
+			if(objects[i].checkBorder()) {
+				bajar = true;
 			}
-			else if(getObjectInPosition(x, 8) != null) {
-				if(getObjectInPosition(x, 8).getClass() == RegularShip.class || getObjectInPosition(x, 8).getClass() == DestroyerShip.class) {
-					for (int i = 0; i < currentObjects; ++i) {
-						if(objects[i].getClass() == RegularShip.class || objects[i].getClass() == DestroyerShip.class) {
-							objects[i].move('b');
-						}
-					}
-					moved = true;
-				}
+			++i;
+		}
+		if(bajar) {
+			for(int j = 0; j < this.getCurrentObjects(); ++j) {
+				objects[j].move('b');
 			}
-			++x;
 		}
 		if(objects[0].getX() % 2 == 0) {
-			for (int i = 0; i < currentObjects; ++i) {
-				if(objects[i].getClass() == RegularShip.class || objects[i].getClass() == DestroyerShip.class) {
-					objects[i].move('d');
-				}
+			for(int j = 0; j <this.getCurrentObjects(); ++j) {
+				objects[j].move('d');
 			}
 		}
 		else {
-			for (int i = 0; i < currentObjects; ++i) {
-				if(objects[0].getClass() == RegularShip.class || objects[0].getClass() == DestroyerShip.class) { //esta practica me dan ganas de matarme
-					objects[i].move('i');
-				}
+			for(int j = 0; j <this.getCurrentObjects(); ++j) {
+				objects[j].move('i');
 			}
 		}
 	}
@@ -141,7 +123,7 @@ public class GameObjectBoard {
 	
 	public void detectDamageBomb() {
 		for(int i = 0; i < getCurrentObjects(); i++) {
-			if(objects[i].getClass() == Bomb.class || objects[i].getClass() == Laser.class) {
+			if(objects[i].canAttack()) {
 				searchTarget(objects[i]);
 			}
 		}

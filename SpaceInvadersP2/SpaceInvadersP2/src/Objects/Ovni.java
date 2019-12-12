@@ -56,4 +56,11 @@ public final class Ovni extends EnemyShip{
 		if (isAlive()) return "O " + this.getX() + ";" + this.getY() + ";" + this.isAlive();
 		return "";
 	}
+	
+	public boolean checkBorder() {
+		return false;
+	}
+	public boolean canDelete() {
+		return false;
+	}
 }

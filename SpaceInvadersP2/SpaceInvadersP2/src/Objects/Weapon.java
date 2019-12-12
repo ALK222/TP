@@ -44,7 +44,19 @@ public abstract class Weapon extends GameObject{
 		return false;
 	}
 	
+	public final boolean haveLanded() {
+		return false;
+	}
 	
+	public final boolean checkBorder() {
+		return false;
+	}
+	
+	public boolean canAttack() {
+		return true;
+	}
 
-
+	public boolean canDelete() {
+		return true;
+	}
 }
