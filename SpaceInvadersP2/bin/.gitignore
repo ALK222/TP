@@ -1,7 +1,5 @@
 /Commands/
+/exceptions/
+/interfaces/
 /logic/
 /main/
-/utils/
-/Objects/
-/interfaces/
-/exceptions/

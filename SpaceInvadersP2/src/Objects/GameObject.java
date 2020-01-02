@@ -1,4 +1,4 @@
-package Objects;
+package objects;
 
 import interfaces.IAttack;
 import logic.Game;

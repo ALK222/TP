@@ -6,7 +6,6 @@ import interfaces.IExecuteRandomActions;
 import utils.BoardPrinter;
 import utils.Stringifier;
 
-
 import java.util.Scanner;
 
 import Commands.CommandGenerator;

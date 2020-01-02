@@ -1,4 +1,4 @@
-package Objects;
+package objects;
 
 import logic.Game;
 import interfaces.IExecuteRandomActions;

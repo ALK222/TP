@@ -1,16 +1,21 @@
 package logic;
 
-import interfaces.GamePrinter;
-import interfaces.IPlayerController;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.String;
 import java.util.Random;
 
-import Objects.*;
-import utils.*;
+import interfaces.GamePrinter;
+import interfaces.IPlayerController;
+import objects.GameObject;
+import objects.GameObjectBoard;
+import objects.Laser;
+import objects.ShockWave;
+import objects.SuperMisille;
+import objects.UCMShip;
+import utils.BoardInitializer;
+import utils.Level;
+import utils.Stringifier;
 
 public class Game implements IPlayerController{
 	public final static int DIM_X = 9;
@@ -25,7 +30,7 @@ public class Game implements IPlayerController{
 	private ShockWave shock;
 	private SuperMisille superM;
 
-	GameObjectBoard board;
+	private GameObjectBoard board;
 
 	
 
