@@ -31,23 +31,22 @@ public class Controller{
 	
 	
 	public void run() {
-		/*while(!game.isFinished()){
-			System.out.print(prompt);
-			String[]  words = in.nextLine().trim().split ("\\s+");
-			try{
-				Commands command = CommandGenerator.parseCommand(words);
-				if(command != null) {
-					if(command.execute(game)) {
+		while(!game.isFinished()){
+			// System.out.print(prompt);
+			// String[]  words = in.nextLine().trim().split ("\\s+");
+			// try{
+			// 	Commands command = CommandGenerator.parseCommand(words);
+			// 	if(command != null) {
+			// 		if(command.execute(game)) {
 						game.update();
 						printGame();
 					}
-				}
-			}
-			catch(CommandParseException | CommandExecuteException ex) {
-				System.out.format((ex).getMessage() +"%n%n");
-			}
-		}*/
-		printGame();
+				// }
+			// }
+		// 	catch(CommandParseException | CommandExecuteException ex) {
+		// 		System.out.format((ex).getMessage() +"%n%n");
+		// 	}
+		// }
 	}
 	
 	

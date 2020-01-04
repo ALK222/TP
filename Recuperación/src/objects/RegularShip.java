@@ -19,7 +19,9 @@ public final class RegularShip extends AlienShip {
 
     @Override
     public void computerAction() {
-        // TODO Auto-generated method stub
+        if(this.canTurnExplosive(game)){
+            this.explosive = true;
+        }
 
     }
 
@@ -33,6 +35,10 @@ public final class RegularShip extends AlienShip {
 
     public void damage(int damage) {
         this.setHp(this.getHp() - damage);
+        if(this.getHp() < 0){
+            game.receivePoints(this.points);
+            game.explosiveDamage(this.getX(), this.getY());
+        }
     }
 
     public String stringify() {

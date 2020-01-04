@@ -17,23 +17,38 @@ public final class Laser extends Weapon {
     }
 
     public void computerAction() {
-        if(this.getX() >= 8){
-            setActive(false);
-            setX(10);
-            setY(10);
+        if(isActive()){
+            setX(getX() - 1);
+            game.detectDamage(this);
+            if(this.getX() < 0){
+                setActive(false);
+                setX(10);
+                setY(10);
+            }
         }
     }
 
     public void move(char dir) {
-        setX(getX() - 1);
-
     }
 
     public String toString() {
         if(isActive()){
-            return "|";
+            if(damage > 1){
+                return superLaserString();
+            }
+            else{
+                return laserString();
+            }
         }
         return "";
+    }
+
+    public String laserString(){
+        return "ºº";
+    }
+
+    public String superLaserString(){
+        return "^";
     }
 
     public void damage(int damage) {
@@ -44,9 +59,22 @@ public final class Laser extends Weapon {
 
     public String stringify() {
         if(isActive()){
-         return "S " + this.getX() + ";" + this.getY();
+            if(this.damage > 1){
+                return this.stringiSuper();
+            }
+            else{
+                return this.stringiLaser();
+            }
         }
 		return "";
+    }
+
+    public String stringiLaser(){
+        return "M " + this.getX() + ";" + this.getY();
+    }
+
+    public String stringiSuper(){
+        return "S " + this.getX() + ";" + this.getY();
     }
     
 }

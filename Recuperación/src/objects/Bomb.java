@@ -13,22 +13,24 @@ public final class Bomb extends Weapon {
     }
 
     public void computerAction() {
-        if(this.getX() > 8 || this.getX() < 0) {
-            setActive(false);
-            setX(10);
-            setY(10);
-		}
+        if(isActive()){
+            setX(getX() + 1);
+            if(this.getX() >= 8){
+                setActive(false);
+                setX(10);
+                setY(10);
+            }
+            game.detectDamage(this);
+        }
     }
 
     public void move(char dir) {
-        if(this.isActive()) {
-			this.setX(this.getX() + 1);
-		}
+
     }
 
     public String toString() {
         if(isActive()){
-            return "ºº";
+            return ".";
         }
         return "";
     }

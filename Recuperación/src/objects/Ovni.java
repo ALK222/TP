@@ -1,8 +1,9 @@
 package objects;
 
+import interfaces.IExecuteRandomActions;
 import logic.Game;
 
-public final class Ovni extends Ship {
+public final class Ovni extends Ship implements IExecuteRandomActions{
     
     // ATRIBUTTES
     
@@ -36,14 +37,23 @@ public final class Ovni extends Ship {
     }
 
     public void computerAction() {
+        if(!this.active){
+            if(this.canGenerateRandomOvni(game)){
+                this.setActive(true);
+                this.setX(8);
+                this.setX(0);
+            }
+        }
+        else{
+            this.setY(this.getY() - 1);
+        }
         if(this.getY() <= 0 || this.getY() >= 8){
             this.setActive(false);
         }
     }
 
     public void move(char dir) {
-        --this.y;
-
+        //not used
     }
 
     public String toString() {
@@ -55,7 +65,8 @@ public final class Ovni extends Ship {
 
     public void damage(int damage) {
         this.setActive(false);
-        this.game.enableShock();
+        this.game.enableShockWave();
+        this.game.receivePoints(this.points);
     }
 
     public String stringify() {
@@ -78,5 +89,10 @@ public final class Ovni extends Ship {
             return true;
         }
         return false;
+    }
+
+    public boolean reciveShockAttack(int damage){
+        this.damage(damage);
+        return true;
     }
 }

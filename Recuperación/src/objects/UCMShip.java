@@ -10,12 +10,13 @@ public final class UCMShip extends Ship {
 
     private Laser laser;
 
-    private SuperLaser superL;
+    private Laser superL;
 
     private boolean shockWave;
 
-    public UCMShip(int x, int y, Game game, Laser laser, SuperLaser superL) {
+    public UCMShip(int x, int y, Game game, Laser laser, Laser superL) {
         super(x, y, game, 0);
+        this.hp = 3;
         this.laser = laser;
         this.superL = superL;
         this.shockWave = false;
@@ -31,7 +32,7 @@ public final class UCMShip extends Ship {
         return this.laser;
     }
 
-    public SuperLaser getSuperL(){
+    public Laser getSuperL(){
         return this.superL;
     }
 
@@ -52,19 +53,19 @@ public final class UCMShip extends Ship {
     public boolean isOnBorder() {
         return false;
     }
-    @Override
     public void computerAction() {
-        //Me da a mi que no
+        this.getLaser().computerAction();
+        this.getSuperL().computerAction();
     }
 
     @Override
     public void move(char dir) {
+        //Not used
     }
 
-    @Override
     public String toString() {
         if(this.hp > 0){
-            return "^_^";
+            return "<"+ this.getHp() +">";
         }
         return "!xx!";
     }
@@ -88,6 +89,18 @@ public final class UCMShip extends Ship {
 
     public boolean canCount() {
         return false;
+    }
+
+    public void shoot(){
+        this.getLaser().setActive(true);
+        this.getLaser().setX(this.getX());
+        this.getLaser().setY(this.getY());
+    }
+
+    public void superShoot(){
+        this.getSuperL().setActive(true);
+        this.getSuperL().setX(this.getX());
+        this.getSuperL().setY(this.getY());
     }
 
 }

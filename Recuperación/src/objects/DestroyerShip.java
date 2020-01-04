@@ -24,8 +24,12 @@ public final class DestroyerShip extends AlienShip {
     //METHODS
 
     public void computerAction() {
-        // TODO Auto-generated method stub
-
+        if(!this.getBomb().isActive()){
+            if(this.canGenerateRandomBomb(game)){
+                this.shoot();
+            }
+        }
+        this.bomb.computerAction();
     }
 
     public String toString() {
@@ -35,7 +39,7 @@ public final class DestroyerShip extends AlienShip {
     public void damage(int damage) {
         this.setHp(this.getHp() - damage);
         if(canDelete()){
-            this.game.givePoints(this.getPoints());
+            this.game.receivePoints(this.getPoints());
             this.getBomb().setDelete(true);
         }        
     }
@@ -45,14 +49,18 @@ public final class DestroyerShip extends AlienShip {
 				+ game.getCurrentCycle() % game.getLevel().getNumCyclesToMoveOneCell();
     }
 
-    @Override
     public boolean canDelete() {
         return this.getHp() <= 0;
     }
 
-    @Override
     public boolean canCount() {
         return true;
+    }
+
+    public void shoot(){
+        this.getBomb().setActive(true);
+        this.getBomb().setX(this.getX());
+        this.getBomb().setY(this.getY());
     }
     
 }

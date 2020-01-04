@@ -1,8 +1,9 @@
 package objects;
 
+import interfaces.IExecuteRandomActions;
 import logic.Game;
 
-public abstract class AlienShip extends Ship {
+public abstract class AlienShip extends Ship implements IExecuteRandomActions{
 
     //ATRIBUTTES
 
@@ -48,5 +49,10 @@ public abstract class AlienShip extends Ship {
 		case 'd':this.setY(this.getY() + 1);
 			break;
 		}
-	}
+    }
+    
+    public boolean reciveShockAttack(int damage){
+        this.damage(damage);
+        return true;
+    }
 }

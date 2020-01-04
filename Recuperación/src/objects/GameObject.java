@@ -1,9 +1,10 @@
 package objects;
 
+import interfaces.IAttack;
 import logic.Game;
 
 
-public abstract class GameObject{
+public abstract class GameObject implements IAttack{
 
     //ATRIBUTTES
     protected Game game;
