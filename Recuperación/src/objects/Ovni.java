@@ -85,10 +85,7 @@ public final class Ovni extends Ship implements IExecuteRandomActions{
     }
 
     public boolean canCount() {
-        if(isActive()){
-            return true;
-        }
-        return false;
+        return isActive();
     }
 
     public boolean reciveShockAttack(int damage){
