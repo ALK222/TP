@@ -47,6 +47,8 @@ public final class Game implements IPlayerController{
 
     private int fila; //Line on where ships are
 
+    private char printerOption;//Options for the printer 'b' for board and 's' for string
+
     //CONSTRUCTORS
 
     public Game(Level level, String seed) {
@@ -83,14 +85,23 @@ public final class Game implements IPlayerController{
         return this.fila;
     }
 
+    public char getPrinterOption() {
+		return this.printerOption;
+    }
+    
+    public void setPrinterOption(char printerOption){
+        this.printerOption = printerOption;
+    }
+
     //METHODS
 
     //Init of the game, used to start and restart the game
     public void initGame(){
         this.ammo = 0;
-        this.fila = 0;
+        this.fila = 1;
         this.gameCycle = 0;
         doExit = false;
+        printerOption = 'b';
         this.board = initialize.initialize(this, level);
         this.laser = new Laser(10, 10, this, false, 1);
         this.board.add(laser);
@@ -218,7 +229,6 @@ public final class Game implements IPlayerController{
         }
         board.computerAction();//Shots are fired(if probability wants) and proyectiles move and do damage
         board.update();//Dead ships are removed
-        System.out.print(board.aliensRemaining());
         ++gameCycle;
 	}
 
@@ -226,4 +236,12 @@ public final class Game implements IPlayerController{
 	public void detectDamage(Weapon other) {
         board.detectDamage(other);
 	}
+
+	public String stringify(int i, int j) {
+        if(board.objectAt(i, j) != null){
+            return board.objectAt(i, j).stringify() + "\n";
+        }
+		return "";
+	}
+
 }
