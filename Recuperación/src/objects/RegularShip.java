@@ -17,7 +17,6 @@ public final class RegularShip extends AlienShip {
 
     //METHODS
 
-    @Override
     public void computerAction() {
         if(this.canTurnExplosive(game)){
             this.explosive = true;
@@ -25,7 +24,6 @@ public final class RegularShip extends AlienShip {
 
     }
 
-    @Override
     public String toString() {
         if(explosive){
             return "E[" + this.getHp() + "]";
@@ -35,7 +33,7 @@ public final class RegularShip extends AlienShip {
 
     public void damage(int damage) {
         this.setHp(this.getHp() - damage);
-        if(this.getHp() < 0){
+        if(canDelete()){
             game.receivePoints(this.points);
             game.explosiveDamage(this.getX(), this.getY());
         }
@@ -50,7 +48,6 @@ public final class RegularShip extends AlienShip {
 		+ game.getCurrentCycle() % game.getLevel().getNumCyclesToMoveOneCell();
     }
 
-    @Override
     public boolean canDelete() {
         return this.getHp() <= 0;
     }

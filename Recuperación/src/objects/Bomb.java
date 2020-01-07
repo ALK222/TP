@@ -3,6 +3,7 @@ package objects;
 import logic.Game;
 
 public final class Bomb extends Weapon {
+    
     public Bomb(int x, int y,boolean active, int damage, Game game) {
         super(x, y, game, active, damage);
     }
@@ -50,8 +51,8 @@ public final class Bomb extends Weapon {
 		return "";
     }
 
-    public boolean canDelete() {
-        return false;
+    public boolean canAttack(){
+        return true;
     }
 
 }

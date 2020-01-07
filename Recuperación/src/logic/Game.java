@@ -45,6 +45,8 @@ public final class Game implements IPlayerController{
 
     private BoardInitializer initialize = new BoardInitializer();//Creator of the board
 
+    private int fila; //Line on where ships are
+
     //CONSTRUCTORS
 
     public Game(Level level, String seed) {
@@ -73,11 +75,20 @@ public final class Game implements IPlayerController{
         return this.ammo;
     }
 
+    public void setFila(int fila){
+        this.fila = fila;
+    }
+
+    public int getFila(){
+        return this.fila;
+    }
+
     //METHODS
 
     //Init of the game, used to start and restart the game
     public void initGame(){
         this.ammo = 0;
+        this.fila = 0;
         this.gameCycle = 0;
         doExit = false;
         this.board = initialize.initialize(this, level);
@@ -190,22 +201,28 @@ public final class Game implements IPlayerController{
         return false;
     }
 
+    //Enable UCMShip missile
     public void enableMissile() {
-        navi.getLaser().setActive(true);
+        navi.getLaser().setActive(false);
     }
 
+    //Explosive ships damage
 	public void explosiveDamage(int x, int y) {
         board.explosiveDamage(x, y);
 	}
 
+    //Cycle update
 	public void update() {
-        board.computerAction();
         if(gameCycle % getLevel().getNumCyclesToMoveOneCell() == 0 && gameCycle != 0){
-            board.move();
+            this.setFila(board.move(this.getFila()));//Ships move
         }
+        board.computerAction();//Shots are fired(if probability wants) and proyectiles move and do damage
+        board.update();//Dead ships are removed
+        System.out.print(board.aliensRemaining());
         ++gameCycle;
 	}
 
+    //Collision detector for weapons
 	public void detectDamage(Weapon other) {
         board.detectDamage(other);
 	}

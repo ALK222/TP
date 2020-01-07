@@ -32,12 +32,13 @@ public final class GameObjectBoard{
         ++objectsOnBoard;
     }
 
-    public void move() {
+    public int move(int fila) {
 		boolean bajar = false;
 		int i = 0;
 		while(i < this.getObjectsOnBoard() && !bajar) {
 			if(board[i].isOnBorder()) {
-				bajar = true;
+                bajar = true;
+                fila += 1;
 			}
 			++i;
 		}
@@ -48,7 +49,7 @@ public final class GameObjectBoard{
                 }
 			}
 		}
-		if(board[0].getX() % 2 == 0) {
+		if(fila % 2 == 0) {
 			for(int j = 0; j <this.getObjectsOnBoard(); ++j) {
 				if(!board[j].canAttack()){
                     board[j].move('d');
@@ -61,7 +62,8 @@ public final class GameObjectBoard{
                     board[j].move('i');
                 }
 			}
-		}
+        }
+        return fila;
 	}
 
     public GameObject objectAtPosition(int x, int y){
@@ -94,7 +96,7 @@ public final class GameObjectBoard{
 	public int aliensRemaining() {
         int totalAliens = 0;
         for (int i = 0; i < objectsOnBoard; ++i){
-            if(board[i].isAlien() && !board[i].canAttack()){
+            if(board[i].canCount()){
                 ++totalAliens;
             }
         }
@@ -117,10 +119,13 @@ public final class GameObjectBoard{
     }
 
 	public void explosiveDamage(int x, int y) {
-        for(int i = x - 1; i < x + 1; ++i){
-            for(int j = y - 1;j < y + 1; ++j){
-                if(objectAt(i, j) != null) {
-					objectAt(i, j).damage(1);
+        x -= 1;
+        y -= 1;
+        int radius = 3;
+        for(int i = 0; i < radius; ++i){
+            for(int j = 0; j < radius; ++j){
+                if(objectAt(x + i, y + j) != null) {
+					objectAt(x + i, y + j).damage(1);
 				}
             }
         }
@@ -136,12 +141,11 @@ public final class GameObjectBoard{
 	}
 
 	public void update() {
-        computerAction();
-        for(int i = 0; i < getObjectsOnBoard(); ++i){
-            if(board[i].canDelete()){
-                delete(i);
-            }
-        }
+        for(int i = getObjectsOnBoard() - 1; i >= 0; --i) {
+			if(this.board[i].canDelete()) {
+				delete(i);
+			}
+		} 
     }
     
     public void detectDamage(Weapon other) {
@@ -154,10 +158,8 @@ public final class GameObjectBoard{
     }
 
     public void delete(int n) {
-		if(this.getObjectsOnBoard() > 1) {
-			for(int i = n; i < this.getObjectsOnBoard() - 1; ++i) {
-				board[i] = board[i + 1];
-			}
+		for(int i = n; i < this.getObjectsOnBoard(); ++i) {
+			board[i] = board[i + 1];
 		}
 		--this.objectsOnBoard; 
 	}

@@ -17,10 +17,14 @@ public class Controller{
 	//ATTRIBUTES
 	
 	private Game game;
+
 	private Scanner in;
-	private GamePrinter printer;
-	private String prompt = "Command >";
 	
+	private GamePrinter printer;
+
+	private String prompt = "Command >";
+
+
 	//CONSTRUCTOR
 	
 	public Controller(Game g) {
@@ -38,6 +42,7 @@ public class Controller{
 			// 	Commands command = CommandGenerator.parseCommand(words);
 			// 	if(command != null) {
 			// 		if(command.execute(game)) {
+						
 						game.update();
 						printGame();
 					}
