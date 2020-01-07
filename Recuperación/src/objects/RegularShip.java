@@ -34,8 +34,11 @@ public final class RegularShip extends AlienShip {
     public void damage(int damage) {
         this.setHp(this.getHp() - damage);
         if(canDelete()){
-            game.receivePoints(this.points);
-            game.explosiveDamage(this.getX(), this.getY());
+            if(explosive){
+                this.explosive = false;
+                game.explosiveDamage(x, y);
+            }
+            game.receivePoints(this.getPoints());
         }
     }
 

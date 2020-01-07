@@ -14,6 +14,7 @@ public class Main {
     else {
         final Game game = new Game(Level.parse(args[0]), args[1]);
         final Controller c = new Controller(game);
+        c.printGame();
 		c.run();
 		System.out.println(game.getWinnerMessage());
 		}

@@ -1,0 +1,40 @@
+package commands;
+
+import exceptions.CommandExecuteException;
+import exceptions.CommandParseException;
+import logic.Game;
+
+public class ShootCommand extends Command {
+	String supermisile;
+
+	public ShootCommand(String name, String shortcut, String details, String help, String supermisile) {
+		super(name, shortcut, details, help);
+		this.supermisile = supermisile;
+	}
+
+	public boolean execute(Game game) throws CommandExecuteException {
+		if(game.shootLaser(this.supermisile)) {
+			return true;
+		}
+		return false;
+	}
+	
+	public Command parse(String[] commandWord) throws CommandParseException {
+		if(!matchCommandName(commandWord[0])){
+			return null;
+		}
+		else if(commandWord.length != 1){
+			if(commandWord.length != 2){
+				throw new CommandParseException(Command.incorrectArgsMsg);
+			}
+		}
+		if(commandWord.length == 2 && commandWord[1].equals("supermisil")){
+			return new ShootCommand(name, shortcut, details, help, commandWord[1]);
+		}
+		else if(commandWord.length == 2 && !commandWord[1].equals("supermisil")){
+			throw new CommandParseException("Incorrect type of missil, type supermisil or leave it blank");
+		}
+		return new ShootCommand(name, shortcut, details, help, null);
+		
+	}
+}

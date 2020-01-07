@@ -24,6 +24,7 @@ public class Stringifier implements GamePrinter {
 	public String toString(Game game) {
 
 		String stringify = "— Space Invaders v2.0 —";
+		stringify += "\n" + "Seed: " + game.getSeed();
 		stringify += "\n \n";
 		stringify += "C: ";
 		stringify += game.getCurrentCycle();

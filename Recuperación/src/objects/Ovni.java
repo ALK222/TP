@@ -40,14 +40,14 @@ public final class Ovni extends Ship implements IExecuteRandomActions{
         if(!this.active){
             if(this.canGenerateRandomOvni(game)){
                 this.setActive(true);
-                this.setX(8);
                 this.setX(0);
+                this.setY(8);
             }
         }
         else{
             this.setY(this.getY() - 1);
         }
-        if(this.getY() <= 0 || this.getY() >= 8){
+        if(this.getY() < 0 || this.getY() > 8){
             this.setActive(false);
         }
     }
