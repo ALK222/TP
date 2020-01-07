@@ -289,6 +289,18 @@ public final class Game implements IPlayerController {
 		String str = s.toString(this);
 		BufferedWriter writer = new BufferedWriter(new FileWriter(filename + ".dat", true));
 		writer.append(str);
-		writer.close();
-	}
+        writer.close();
+    }
+    
+    public void loadState(String filename) throws IOException{
+        loading =false;
+        line = filename.readLine().trim();
+        while( line != null && !line.isEmpty() ) {
+            GameObject gameObject = GameObjectGenerator.parse(line,this, verifier);
+            if(gameObject == null) {
+                throw newFileContentsException("invalid file, "+"unrecognised line prefix");
+            }
+        board.add(gameObject);
+        line = filename.readLine().trim();
+    }
 }
