@@ -143,7 +143,8 @@ public final class Game implements IPlayerController {
         } else if (doExit) {
             return "Player exits the game";
         } else {
-            return "This should not happen";
+            receivePoints(100000000);
+            return "You found a bug, I'll give you 100000000 points";
         }
     }
 
@@ -292,15 +293,15 @@ public final class Game implements IPlayerController {
         writer.close();
     }
     
-    public void loadState(String filename) throws IOException{
-        loading =false;
-        line = filename.readLine().trim();
-        while( line != null && !line.isEmpty() ) {
-            GameObject gameObject = GameObjectGenerator.parse(line,this, verifier);
-            if(gameObject == null) {
-                throw newFileContentsException("invalid file, "+"unrecognised line prefix");
-            }
-        board.add(gameObject);
-        line = filename.readLine().trim();
-    }
+    // public void loadState(String filename) throws IOException{
+    //     boolean loading =false;
+    //     String line = filename.readLine().trim();
+    //     while(line != null && !line.isEmpty() ) {
+    //         GameObject gameObject = GameObjectGenerator.parse(line,this, verifier);
+    //         if(gameObject == null) {
+    //             throw newFileContentsException("invalid file, "+"unrecognised line prefix");
+    //         }
+    //     board.add(gameObject);
+    //     line = filename.readLine().trim();
+    // }
 }
