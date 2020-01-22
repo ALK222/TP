@@ -60,14 +60,6 @@ public abstract class Weapon extends GameObject {
         return true;
     }
 
-    public boolean isOnBorder(){
-        return false;
-    }
-
-    public boolean haveLanded(){
-        return false;
-    }
-
     public boolean canCount(){
         return false;
     }

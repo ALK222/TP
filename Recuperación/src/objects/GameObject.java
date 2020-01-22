@@ -1,10 +1,11 @@
 package objects;
 
 import interfaces.IAttack;
+import interfaces.IComunications;
 import logic.Game;
 
 
-public abstract class GameObject implements IAttack{
+public abstract class GameObject implements IAttack, IComunications{
 
     //ATRIBUTTES
     protected Game game;
@@ -55,10 +56,6 @@ public abstract class GameObject implements IAttack{
         return this.x == x && this.y == y;
     }
     
-    public abstract boolean isAlien();//True if object is alien, false if not
-    
-    public abstract boolean isOnBorder();//Only returns true if the object in the border is an alien ship
-    
     public abstract void computerAction();//Makes the computer acction each turn
     
     public abstract void move(char dir);//moves the object
@@ -69,11 +66,8 @@ public abstract class GameObject implements IAttack{
     
     public abstract String stringify();//String of the object with info
 
-    public abstract boolean haveLanded();//Checks if alien ships have landed
-
     public abstract boolean canAttack();//returns true on weapons, false on ships
 
     public abstract boolean canDelete();//ships can be deleted except for the ovni, weapons not
-
-    public abstract boolean canCount();//checks if it can be count for remaining aliens
+    
 }

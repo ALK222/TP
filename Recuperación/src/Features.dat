@@ -13,3 +13,6 @@ En este archivo explicaré algunas de las decisiones que he tomado en la prácti
 
     -No doy la posibilidad de que las armas hagan su computer action en la funcion computerAction de board para que lo hagan desde 
     la nave que haga sus disparos, para mantener mas control sobre cada arma.
+
+    -Se cambian algunas funciones de las naves y las armas a la interfaz IComunications para poder establecer valores deafult y no tener
+    que reescribir que, por ejemplo, check border solo puede ser true en las destroyer y las regular

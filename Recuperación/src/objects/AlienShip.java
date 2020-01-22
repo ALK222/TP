@@ -28,10 +28,6 @@ public abstract class AlienShip extends Ship implements IExecuteRandomActions{
 
     //METHODS
 
-    public boolean isAlien(){
-        return true;
-    }
-
     public boolean haveLanded(){
         return this.getX() >= 7;
     }

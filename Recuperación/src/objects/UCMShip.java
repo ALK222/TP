@@ -50,9 +50,7 @@ public final class UCMShip extends Ship {
         return false;
     }
 
-    public boolean isOnBorder() {
-        return false;
-    }
+
     public void computerAction() {
         this.getLaser().computerAction();
         this.getSuperL().computerAction();
@@ -76,12 +74,9 @@ public final class UCMShip extends Ship {
 
     public String stringify() {
         return "P " + this.getX() + ";" + this.getY() + ";" + this.hp +";"
-				+ points + this.getSockWave() + ";" + game.getAmmo();
+				+ points + ";" + this.getSockWave() + ";" + game.getAmmo();
     }
 
-    public boolean haveLanded() {
-        return false;
-    }
 
     public boolean canDelete() {
         return false;

@@ -3,15 +3,14 @@ package objects;
 import logic.Game;
 
 public final class Bomb extends Weapon {
+
+    //CONSTRUCTOR
     
     public Bomb(int x, int y,boolean active, int damage, Game game) {
         super(x, y, game, active, damage);
     }
 
-    
-    public boolean isAlien() {
-        return true;
-    }
+    //METHODS
 
     public void computerAction() {
         if(isActive()){

@@ -53,10 +53,6 @@ public final class DestroyerShip extends AlienShip {
         return this.getHp() <= 0;
     }
 
-    public boolean canCount() {
-        return true;
-    }
-
     public void shoot(){
         this.getBomb().setActive(true);
         this.getBomb().setX(this.getX());

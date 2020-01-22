@@ -28,14 +28,6 @@ public final class Ovni extends Ship implements IExecuteRandomActions{
 
     //METHODS
 
-    public boolean isAlien() {
-        return true;
-    }
-
-    public boolean isOnBorder() {
-        return false;
-    }
-
     public void computerAction() {
         if(!this.active){
             if(this.canGenerateRandomOvni(game)){
@@ -74,10 +66,6 @@ public final class Ovni extends Ship implements IExecuteRandomActions{
 			return "O[" + 1 + "]";
 		}
 		return "";
-    }
-
-    public boolean haveLanded() {
-        return false;
     }
 
     public boolean canDelete() {
