@@ -21,21 +21,25 @@ public abstract class AlienShip extends Ship implements IExecuteRandomActions{
     public void setHp(int hp){
         this.hp = hp;
     }
-
+    
     public int getHp(){
         return this.hp;
     }
 
     //METHODS
-
+    @Override
     public boolean haveLanded(){
         return this.getX() >= 7;
     }
 
+
+    @Override
     public boolean isOnBorder(){
         return this.getY() <= 0  || this.getY() >= 8;
     }
 
+
+    @Override
     public void move(char dir) {
 		switch (dir) {
 		case 'b':this.setX(this.getX() + 1);
@@ -47,8 +51,4 @@ public abstract class AlienShip extends Ship implements IExecuteRandomActions{
 		}
     }
     
-    public boolean reciveShockAttack(int damage){
-        this.damage(damage);
-        return true;
-    }
 }

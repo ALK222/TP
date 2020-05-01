@@ -11,26 +11,19 @@ public final class Laser extends Weapon {
     }
 
     //METHODS
-
+    @Override
     public boolean isAlien() {
         return false;
     }
-
+    @Override
     public void computerAction() {
-        if(isActive()){
             setX(getX() - 1);
             game.detectDamage(this);
-            if(this.getX() < 0){
-                setActive(false);
-                setX(10);
-                setY(10);
-            }
-        }
     }
-
+    @Override
     public void move(char dir) {
     }
-
+    @Override
     public String toString() {
         if(isActive()){
             if(damage > 1){
@@ -50,13 +43,12 @@ public final class Laser extends Weapon {
     public String superLaserString(){
         return "^";
     }
-
+    @Override
     public void damage(int damage) {
-        this.setActive(false);
-		this.setX(10);
-        this.setY(10);
+        if(this.damage == 1)  game.enableMissile(this);
+        else game.enableSuperMissile(this);
     }
-
+    @Override
     public String stringify() {
         if(isActive()){
             if(this.damage > 1){

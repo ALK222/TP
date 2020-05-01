@@ -27,7 +27,7 @@ public final class Ovni extends Ship implements IExecuteRandomActions{
     }
 
     //METHODS
-
+    @Override
     public void computerAction() {
         if(!this.active){
             if(this.canGenerateRandomOvni(game)){
@@ -43,40 +43,40 @@ public final class Ovni extends Ship implements IExecuteRandomActions{
             this.setActive(false);
         }
     }
-
+    @Override
     public void move(char dir) {
         //not used
     }
-
+    @Override
     public String toString() {
         if(this.isActive()){
             return "O[" + 1 + "]";
         }
         return "";
     }
-
+    @Override
     public void damage(int damage) {
         this.setActive(false);
         this.game.enableShockWave();
         this.game.receivePoints(this.points);
     }
-
+    @Override
     public String stringify() {
 		if(isActive()) {
 			return "O[" + 1 + "]";
 		}
 		return "";
     }
-
+    @Override
     public boolean canDelete() {
         return false;
     }
-
+    @Override
     public boolean canCount() {
         return isActive();
     }
 
-    public boolean reciveShockAttack(int damage){
+    public boolean receiveShockWaveAttack(int damage){
         this.damage(damage);
         return true;
     }

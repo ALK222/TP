@@ -25,6 +25,20 @@ public final class GameObjectBoard{
         return this.objectsOnBoard;
     }
 
+    public int getIndex(GameObject ob){
+        boolean found = false;
+        int index = 0;
+        while (!found && index < board.length){
+            if(this.board[index].equals(ob)){
+                return index;
+            }
+            else{
+                ++index;
+            }
+        }
+        return -1;
+    }
+
     //METHODS
 
     public void add(GameObject newObject){ //ADDS OBJECTS TO THE BOARD
@@ -133,10 +147,7 @@ public final class GameObjectBoard{
 
 	public void computerAction() {
         for(int i = 0; i < getObjectsOnBoard(); ++i){
-            if(!board[i].canAttack()){
-               board[i].computerAction(); 
-            }
-            
+               board[i].computerAction();             
         }
 	}
 
@@ -149,12 +160,18 @@ public final class GameObjectBoard{
     }
     
     public void detectDamage(Weapon other) {
-        for(int i = 0; i < getObjectsOnBoard(); ++i){
-            if(other.isAlien() != board[i].isAlien() && board[i].isIn(other.getX(), other.getY())){
-                other.damage(1);
-                board[i].damage(other.getDamage());
-            }
-        }        
+        int damage = other.getDamage();
+        if(other != null){
+            for(int i = 0; i < getObjectsOnBoard(); ++i){
+                if(other != null){
+                    if(other.isAlien() != board[i].isAlien() && board[i].isIn(other.getX(), other.getY())){
+                        board[i].damage(damage);
+                        other.damage(1);
+                    }
+                }
+                
+            }   
+        }
     }
 
     public void delete(int n) {

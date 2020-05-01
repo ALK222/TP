@@ -52,8 +52,14 @@ public final class UCMShip extends Ship {
 
 
     public void computerAction() {
-        this.getLaser().computerAction();
-        this.getSuperL().computerAction();
+        if(getLaser() != null && getLaser().getX() <= 0){
+            game.enableMissile(this.getLaser());
+            this.laser = null;
+        } 
+        if(getSuperL() != null && getSuperL().getX() <= 0){
+            game.enableSuperMissile(this.getSuperL());
+            this.laser = null;
+        }
     }
 
     @Override
@@ -86,16 +92,13 @@ public final class UCMShip extends Ship {
         return false;
     }
 
-    public void shoot(){
-        this.getLaser().setActive(true);
-        this.getLaser().setX(this.getX());
-        this.getLaser().setY(this.getY());
-    }
+	public void setSuperLaser(Laser sl) {
+        this.superL = sl;
+	}
 
-    public void superShoot(){
-        this.getSuperL().setActive(true);
-        this.getSuperL().setX(this.getX());
-        this.getSuperL().setY(this.getY());
-    }
+	public void setLaser(Laser laser2) {
+        this.laser = laser2;
+	}
+
 
 }

@@ -11,19 +11,12 @@ public final class Bomb extends Weapon {
     }
 
     //METHODS
-
+    @Override
     public void computerAction() {
-        if(isActive()){
-            setX(getX() + 1);
-            if(this.getX() >= 8){
-                setActive(false);
-                setX(10);
-                setY(10);
-            }
-            game.detectDamage(this);
-        }
+        setX(getX() + 1);
+        game.detectDamage(this);
     }
-
+    @Override
     public void move(char dir) {
 
     }
@@ -34,22 +27,18 @@ public final class Bomb extends Weapon {
         }
         return "";
     }
-
+    @Override
     public void damage(int damage) {
-        this.setActive(false);
-		this.setX(10);
-		this.setY(10);
-		
-
+        game.disableBomb(this);
     }
-
+    @Override
     public String stringify() {
         if(this.isActive()) {
 			return "B ;" + this.getX() + ";" + this.getY();
 		}
 		return "";
     }
-
+    @Override
     public boolean canAttack(){
         return true;
     }

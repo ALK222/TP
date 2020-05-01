@@ -21,42 +21,50 @@ public final class DestroyerShip extends AlienShip {
         return this.bomb;
     }
 
-    //METHODS
-
-    public void computerAction() {
-        if(!this.getBomb().isActive()){
-            if(this.canGenerateRandomBomb(game)){
-                this.shoot();
-            }
-        }
-        this.bomb.computerAction();
+    public void setBomb(Bomb bob){
+        this.bomb = bob;
     }
 
+    //METHODS
+    @Override
+    public void computerAction() {
+        if(this.getBomb() == null){
+            if(this.canGenerateRandomBomb(game)){
+                game.alienShoot(this);
+            }
+        }
+        else{
+            if(this.bomb.getX() >= 8){
+                 game.disableBomb(this.getBomb());
+                 this.bomb = null;
+            }
+        }
+        
+    }
+    @Override
     public String toString() {
         return "D[" + this.getHp() + "]";
     }
-
+    @Override
     public void damage(int damage) {
         this.setHp(this.getHp() - damage);
         if(canDelete()){
             this.game.receivePoints(this.getPoints());
-            this.getBomb().setDelete(true);
         }        
     }
-
+    @Override
     public String stringify() {
         return "D " + this.getX() + ";" + this.getY() + ";" + this.getHp() +";"
 				+ game.getCurrentCycle() % game.getLevel().getNumCyclesToMoveOneCell();
     }
-
+    @Override
     public boolean canDelete() {
         return this.getHp() <= 0;
     }
-
-    public void shoot(){
-        this.getBomb().setActive(true);
-        this.getBomb().setX(this.getX());
-        this.getBomb().setY(this.getY());
+    
+    public boolean receiveShockWaveAttack(int damage){
+        this.damage(damage);
+        return true;
     }
     
 }

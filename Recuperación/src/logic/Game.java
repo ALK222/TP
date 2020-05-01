@@ -43,10 +43,6 @@ public final class Game implements IPlayerController {
 
     private GameObjectBoard board;// "Board" for the game
 
-    private Laser laser;
-
-    private Laser superLaser;
-
     private UCMShip navi;// Our fellow ship
 
     private BoardInitializer initialize = new BoardInitializer();// Creator of the board
@@ -61,7 +57,7 @@ public final class Game implements IPlayerController {
         this.level = level;
         this.seed = seed;
         this.rand = new Random(Long.parseLong(seed));
-        this.shockWave = false;
+        this.shockWave = true;
         initGame();
     }
 
@@ -117,12 +113,8 @@ public final class Game implements IPlayerController {
         doExit = false;
         printerOption = 'b';
         this.board = initialize.initialize(this, level);
-        this.laser = new Laser(10, 10, this, false, 1);
-        this.board.add(laser);
-        this.superLaser = new Laser(10, 10, this, false, 2);
-        this.board.add(superLaser);
-        this.navi = new UCMShip(DIM_Y - 1, (DIM_X / 2), this, laser, superLaser);
-        this.board.add(navi);
+        this.navi = new UCMShip(DIM_Y - 1, (DIM_X / 2), this, null, null);
+        board.add(navi);        
     }
 
     // returns the symbol of a character at position (x,y) if it exists, if not,
@@ -204,30 +196,50 @@ public final class Game implements IPlayerController {
     // Shoot laser or superLaser
     public boolean shootLaser(String option) throws CommandExecuteException {
         if(option != null){
-            if(navi.getSuperL().isActive()){
+            if(navi.getSuperL() != null){
                 throw new CommandExecuteException("Super Missile is active");
             }
             else if(this.getAmmo() <= 0){
                 throw new CommandExecuteException("No ammo available");
             }
             else{
-                navi.superShoot();
+                this.naviSuperShoot();
             }
         }
         else{
-            if(navi.getLaser().isActive()){
+            if(navi.getLaser() != null){
                 throw new CommandExecuteException("Misile is active");
             }
             else{
-                navi.shoot();
+                this.naviShoot();
             }
         }
         return true;
     }
 
+    private void naviShoot() {
+        navi.setLaser(new Laser(navi.getX(), navi.getY(), this, true, 1));
+        this.board.add(navi.getLaser());  
+    }
+
+    private void naviSuperShoot() {
+        navi.setSuperLaser(new Laser(navi.getX(), navi.getY(), this, true, 2));
+        this.board.add(navi.getSuperL());        
+    }
+
     // Enable UCMShip missile
-    public void enableMissile() {
-        navi.getLaser().setActive(false);
+    public void enableMissile(Laser laser) {
+        int i = board.getIndex(laser);
+        if (i != -1) board.delete(i);
+        laser = null;
+        navi.setLaser(null);
+    }
+
+    public void enableSuperMissile(Laser laser){
+        int i = board.getIndex(laser);
+        if (i != -1) board.delete(i);
+        laser = null;
+        navi.setSuperLaser(null);
     }
 
     // Explosive ships damage
@@ -292,16 +304,15 @@ public final class Game implements IPlayerController {
 		writer.append(str);
         writer.close();
     }
-    
-    // public void loadState(String filename) throws IOException{
-    //     boolean loading =false;
-    //     String line = filename.readLine().trim();
-    //     while(line != null && !line.isEmpty() ) {
-    //         GameObject gameObject = GameObjectGenerator.parse(line,this, verifier);
-    //         if(gameObject == null) {
-    //             throw newFileContentsException("invalid file, "+"unrecognised line prefix");
-    //         }
-    //     board.add(gameObject);
-    //     line = filename.readLine().trim();
-    // }
+
+	public void alienShoot(DestroyerShip ds) {
+        ds.setBomb(new Bomb(ds.getX(), ds.getY(), true, 1, this));
+        board.add(ds.getBomb());
+	}
+
+	public void disableBomb(Bomb bomb) {
+        int i = board.getIndex(bomb);
+        if (i != -1) board.delete(i);
+        bomb = null;
+	}
 }

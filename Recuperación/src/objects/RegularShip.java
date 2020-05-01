@@ -59,4 +59,8 @@ public final class RegularShip extends AlienShip {
         return this.getHp() > 0;
     }
 
+    public boolean receiveShockWaveAttack(int damage){
+        this.damage(damage);
+        return true;
+    }
 }
