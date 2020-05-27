@@ -25,7 +25,7 @@ public final class GameObjectBoard{
         return this.objectsOnBoard;
     }
 
-    public int getIndex(GameObject ob){
+    private int getIndex(GameObject ob){
         boolean found = false;
         int index = 0;
         while (!found && index < board.length){
@@ -80,27 +80,9 @@ public final class GameObjectBoard{
         return fila;
 	}
 
-    public GameObject objectAtPosition(int x, int y){
-        boolean found = false;
-        int i = 0;
-        while(i < objectsOnBoard && !found){
-            if(board[i].isIn(x, y)){
-                found = true;
-                --i;
-            }
-            ++i;
-        }
-
-        if(found){
-            return board[i];
-        }
-
-        return null;
-    }
-
 	public boolean haveLanded() {
         for(int i = 0; i < objectsOnBoard; ++i){
-            if(board[i].haveLanded() && board[i].isAlien()){
+            if(board[i].haveLanded()){
                 return true;
             }
         }
@@ -123,7 +105,7 @@ public final class GameObjectBoard{
         }
 	}
 
-    public GameObject objectAt(int x, int y){
+    private GameObject objectAt(int x, int y){
         for(int i = 0; i < objectsOnBoard; ++i){
             if(board[i].isIn(x, y)){
                 return board[i];
@@ -164,7 +146,7 @@ public final class GameObjectBoard{
         if(other != null){
             for(int i = 0; i < getObjectsOnBoard(); ++i){
                 if(other != null){
-                    if(other.isAlien() != board[i].isAlien() && board[i].isIn(other.getX(), other.getY())){
+                    if(board[i].isIn(other.getX(), other.getY()) && other.performAttack(board[i])){
                         board[i].damage(damage);
                         other.damage(1);
                     }
@@ -179,6 +161,21 @@ public final class GameObjectBoard{
 			board[i] = board[i + 1];
 		}
 		--this.objectsOnBoard; 
+	}
+
+	public String toString(int x, int y) {
+        return (objectAt(x, y) == null) ? " " :objectAt(x, y).toString() ;
+	}
+
+	public void delete(GameObject o) {
+       int n =  this.getIndex(o);
+       if(n > -1){
+           delete(n);
+       }
+	}
+
+	public String stringify(int i, int j) {
+		return (objectAt(i, j).equals(null)) ? "" : objectAt(i, j).stringify();
 	}
 
 

@@ -3,7 +3,7 @@ package objects;
 import interfaces.IExecuteRandomActions;
 import logic.Game;
 
-public final class Ovni extends Ship implements IExecuteRandomActions{
+public final class Ovni extends EnemyShip implements IExecuteRandomActions{
     
     // ATRIBUTTES
     

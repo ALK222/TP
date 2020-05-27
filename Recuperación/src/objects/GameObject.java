@@ -69,5 +69,6 @@ public abstract class GameObject implements IAttack, IComunications{
     public abstract boolean canAttack();//returns true on weapons, false on ships
 
     public abstract boolean canDelete();//ships can be deleted except for the ovni, weapons not
+
     
 }

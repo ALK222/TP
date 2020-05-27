@@ -120,10 +120,7 @@ public final class Game implements IPlayerController {
     // returns the symbol of a character at position (x,y) if it exists, if not,
     // returns ""
     public String characterAtToString(int x, int y) {
-        if (board.objectAtPosition(x, y) != null) {
-            return board.objectAtPosition(x, y).toString();
-        }
-        return "";
+        return board.toString(x, y);
     }
 
     // Message shown at the end of the game
@@ -229,15 +226,13 @@ public final class Game implements IPlayerController {
 
     // Enable UCMShip missile
     public void enableMissile(Laser laser) {
-        int i = board.getIndex(laser);
-        if (i != -1) board.delete(i);
+        board.delete(laser);
         laser = null;
         navi.setLaser(null);
     }
 
     public void enableSuperMissile(Laser laser){
-        int i = board.getIndex(laser);
-        if (i != -1) board.delete(i);
+        board.delete(laser);
         laser = null;
         navi.setSuperLaser(null);
     }
@@ -263,10 +258,7 @@ public final class Game implements IPlayerController {
     }
 
     public String stringify(int i, int j) {
-        if (board.objectAt(i, j) != null) {
-            return board.objectAt(i, j).stringify() + "\n";
-        }
-        return "";
+        return board.stringify(i, j);
     }
 
     public boolean buy() {
@@ -311,8 +303,7 @@ public final class Game implements IPlayerController {
 	}
 
 	public void disableBomb(Bomb bomb) {
-        int i = board.getIndex(bomb);
-        if (i != -1) board.delete(i);
+        board.delete(bomb);
         bomb = null;
 	}
 }

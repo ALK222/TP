@@ -46,11 +46,6 @@ public final class UCMShip extends Ship {
 
     //METHODS
 
-    public boolean isAlien() {
-        return false;
-    }
-
-
     public void computerAction() {
         if(getLaser() != null && getLaser().getX() <= 0){
             game.enableMissile(this.getLaser());

@@ -43,4 +43,12 @@ public final class Bomb extends Weapon {
         return true;
     }
 
+    public boolean performAttack(GameObject other) {
+		return other.receiveBombAttack(this.damage);
+	}
+
+	public boolean receiveMissileAttack(int damage) {
+		return true;
+	}
+
 }

@@ -12,10 +12,6 @@ public final class Laser extends Weapon {
 
     //METHODS
     @Override
-    public boolean isAlien() {
-        return false;
-    }
-    @Override
     public void computerAction() {
             setX(getX() - 1);
             game.detectDamage(this);
@@ -67,6 +63,14 @@ public final class Laser extends Weapon {
 
     public String stringiSuper(){
         return "S " + this.getX() + ";" + this.getY();
+    }
+
+    public boolean performAttack(GameObject other){
+        return other.receiveMissileAttack(this.damage);
+    }
+
+    public boolean receiveBombAttack(int damage){
+        return true;
     }
     
 }
