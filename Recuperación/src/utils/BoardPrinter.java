@@ -15,7 +15,6 @@ public class BoardPrinter implements GamePrinter {
 		encodeGame(game);
 	}
 
-
 	public void encodeGame(Game game) {
 		board = new String[numRows][numCols];
 		for (int i = 0; i < numRows; i++) {
@@ -50,5 +49,4 @@ public class BoardPrinter implements GamePrinter {
 		return str.toString();
 	}
 
-	
 }

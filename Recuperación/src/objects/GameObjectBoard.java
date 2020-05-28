@@ -1,182 +1,179 @@
 package objects;
 
-public final class GameObjectBoard{
+public final class GameObjectBoard {
     /*
-    
-            The space, where al ships and weapons are
-    
-    */
+     * 
+     * The space, where al ships and weapons are
+     * 
+     */
 
-    //ATRIBUTTES
+    // ATRIBUTTES
 
     private GameObject[] board;
     private int objectsOnBoard;
 
-    //CONSTRUCTOR
+    // CONSTRUCTOR
 
-    public GameObjectBoard(int width, int heigth){
-        this.board = new GameObject[width*heigth];
+    public GameObjectBoard(int width, int heigth) {
+        this.board = new GameObject[width * heigth];
         this.objectsOnBoard = 0;
     }
 
-    //GETTERS AND SETTERS
+    // GETTERS AND SETTERS
 
-    public int getObjectsOnBoard(){
+    public int getObjectsOnBoard() {
         return this.objectsOnBoard;
     }
 
-    private int getIndex(GameObject ob){
+    private int getIndex(GameObject ob) {
         boolean found = false;
         int index = 0;
-        while (!found && index < board.length){
-            if(this.board[index].equals(ob)){
+        while (!found && index < board.length) {
+            if (this.board[index].equals(ob)) {
                 return index;
-            }
-            else{
+            } else {
                 ++index;
             }
         }
         return -1;
     }
 
-    //METHODS
+    // METHODS
 
-    public void add(GameObject newObject){ //ADDS OBJECTS TO THE BOARD
+    public void add(GameObject newObject) { // ADDS OBJECTS TO THE BOARD
         board[objectsOnBoard] = newObject;
         ++objectsOnBoard;
     }
 
     public int move(int fila) {
-		boolean bajar = false;
-		int i = 0;
-		while(i < this.getObjectsOnBoard() && !bajar) {
-			if(board[i].isOnBorder()) {
+        boolean bajar = false;
+        int i = 0;
+        while (i < this.getObjectsOnBoard() && !bajar) {
+            if (board[i].isOnBorder()) {
                 bajar = true;
                 fila += 1;
-			}
-			++i;
-		}
-		if(bajar) {
-			for(int j = 0; j < this.getObjectsOnBoard(); ++j) {
-				if(!board[j].canAttack()){
+            }
+            ++i;
+        }
+        if (bajar) {
+            for (int j = 0; j < this.getObjectsOnBoard(); ++j) {
+                if (!board[j].canAttack()) {
                     board[j].move('b');
                 }
-			}
-		}
-		if(fila % 2 == 0) {
-			for(int j = 0; j <this.getObjectsOnBoard(); ++j) {
-				if(!board[j].canAttack()){
+            }
+        }
+        if (fila % 2 == 0) {
+            for (int j = 0; j < this.getObjectsOnBoard(); ++j) {
+                if (!board[j].canAttack()) {
                     board[j].move('d');
                 }
-			}
-		}
-		else {
-			for(int j = 0; j <this.getObjectsOnBoard(); ++j) {
-				if(!board[j].canAttack()){
+            }
+        } else {
+            for (int j = 0; j < this.getObjectsOnBoard(); ++j) {
+                if (!board[j].canAttack()) {
                     board[j].move('i');
                 }
-			}
+            }
         }
         return fila;
-	}
+    }
 
-	public boolean haveLanded() {
-        for(int i = 0; i < objectsOnBoard; ++i){
-            if(board[i].haveLanded()){
+    public boolean haveLanded() {
+        for (int i = 0; i < objectsOnBoard; ++i) {
+            if (board[i].haveLanded()) {
                 return true;
             }
         }
-		return false;
-	}
+        return false;
+    }
 
-	public int aliensRemaining() {
+    public int aliensRemaining() {
         int totalAliens = 0;
-        for (int i = 0; i < objectsOnBoard; ++i){
-            if(board[i].canCount()){
+        for (int i = 0; i < objectsOnBoard; ++i) {
+            if (board[i].canCount()) {
                 ++totalAliens;
             }
         }
-		return totalAliens;
-	}
+        return totalAliens;
+    }
 
-	public void shockDamage() {
-        for(int i = 0; i < objectsOnBoard; ++i){
+    public void shockDamage() {
+        for (int i = 0; i < objectsOnBoard; ++i) {
             board[i].receiveShockWaveAttack(1);
         }
-	}
+    }
 
-    private GameObject objectAt(int x, int y){
-        for(int i = 0; i < objectsOnBoard; ++i){
-            if(board[i].isIn(x, y)){
+    private GameObject objectAt(int x, int y) {
+        for (int i = 0; i < objectsOnBoard; ++i) {
+            if (board[i].isIn(x, y)) {
                 return board[i];
             }
         }
         return null;
     }
 
-	public void explosiveDamage(int x, int y) {
+    public void explosiveDamage(int x, int y) {
         x -= 1;
         y -= 1;
         int radius = 3;
-        for(int i = 0; i < radius; ++i){
-            for(int j = 0; j < radius; ++j){
-                if(objectAt(x + i, y + j) != null) {
-					objectAt(x + i, y + j).damage(1);
-				}
+        for (int i = 0; i < radius; ++i) {
+            for (int j = 0; j < radius; ++j) {
+                if (objectAt(x + i, y + j) != null) {
+                    objectAt(x + i, y + j).damage(1);
+                }
             }
         }
-	}
-
-	public void computerAction() {
-        for(int i = 0; i < getObjectsOnBoard(); ++i){
-               board[i].computerAction();             
-        }
-	}
-
-	public void update() {
-        for(int i = getObjectsOnBoard() - 1; i >= 0; --i) {
-			if(this.board[i].canDelete()) {
-				delete(i);
-			}
-		} 
     }
-    
+
+    public void computerAction() {
+        for (int i = 0; i < getObjectsOnBoard(); ++i) {
+            board[i].computerAction();
+        }
+    }
+
+    public void update() {
+        for (int i = getObjectsOnBoard() - 1; i >= 0; --i) {
+            if (this.board[i].canDelete()) {
+                delete(i);
+            }
+        }
+    }
+
     public void detectDamage(Weapon other) {
         int damage = other.getDamage();
-        if(other != null){
-            for(int i = 0; i < getObjectsOnBoard(); ++i){
-                if(other != null){
-                    if(board[i].isIn(other.getX(), other.getY()) && other.performAttack(board[i])){
+        if (other != null) {
+            for (int i = 0; i < getObjectsOnBoard(); ++i) {
+                if (other != null) {
+                    if (board[i].isIn(other.getX(), other.getY()) && other.performAttack(board[i])) {
                         board[i].damage(damage);
                         other.damage(1);
                     }
                 }
-                
-            }   
+
+            }
         }
     }
 
     public void delete(int n) {
-		for(int i = n; i < this.getObjectsOnBoard(); ++i) {
-			board[i] = board[i + 1];
-		}
-		--this.objectsOnBoard; 
-	}
+        for (int i = n; i < this.getObjectsOnBoard(); ++i) {
+            board[i] = board[i + 1];
+        }
+        --this.objectsOnBoard;
+    }
 
-	public String toString(int x, int y) {
-        return (objectAt(x, y) == null) ? " " :objectAt(x, y).toString() ;
-	}
+    public String toString(int x, int y) {
+        return (objectAt(x, y) == null) ? " " : objectAt(x, y).toString();
+    }
 
-	public void delete(GameObject o) {
-       int n =  this.getIndex(o);
-       if(n > -1){
-           delete(n);
-       }
-	}
+    public void delete(GameObject o) {
+        int n = this.getIndex(o);
+        if (n > -1) {
+            delete(n);
+        }
+    }
 
-	public String stringify(int i, int j) {
-		return (objectAt(i, j).equals(null)) ? "" : objectAt(i, j).stringify();
-	}
-
+    public String stringify(int i, int j) {
+        return (objectAt(i, j).equals(null)) ? "" : objectAt(i, j).stringify();
+    }
 
 }

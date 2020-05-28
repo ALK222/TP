@@ -4,7 +4,7 @@ import logic.Game;
 
 public final class UCMShip extends Ship {
 
-    //ATRIBUTTES
+    // ATRIBUTTES
 
     private int hp;
 
@@ -22,36 +22,36 @@ public final class UCMShip extends Ship {
         this.shockWave = false;
     }
 
-    //SETTERS AND GETTERS
+    // SETTERS AND GETTERS
 
-    public int getHp(){
+    public int getHp() {
         return this.hp;
     }
 
-    public Laser getLaser(){
+    public Laser getLaser() {
         return this.laser;
     }
 
-    public Laser getSuperL(){
+    public Laser getSuperL() {
         return this.superL;
     }
 
-    public void setSockWave(boolean shockWave){
+    public void setSockWave(boolean shockWave) {
         this.shockWave = shockWave;
     }
 
-    public boolean getSockWave(){
+    public boolean getSockWave() {
         return this.shockWave;
     }
 
-    //METHODS
+    // METHODS
 
     public void computerAction() {
-        if(getLaser() != null && getLaser().getX() <= 0){
+        if (getLaser() != null && getLaser().getX() <= 0) {
             game.enableMissile(this.getLaser());
             this.laser = null;
-        } 
-        if(getSuperL() != null && getSuperL().getX() <= 0){
+        }
+        if (getSuperL() != null && getSuperL().getX() <= 0) {
             game.enableSuperMissile(this.getSuperL());
             this.laser = null;
         }
@@ -59,12 +59,12 @@ public final class UCMShip extends Ship {
 
     @Override
     public void move(char dir) {
-        //Not used
+        // Not used
     }
 
     public String toString() {
-        if(this.hp > 0){
-            return "<"+ this.getHp() +">";
+        if (this.hp > 0) {
+            return "<" + this.getHp() + ">";
         }
         return "!xx!";
     }
@@ -74,10 +74,9 @@ public final class UCMShip extends Ship {
     }
 
     public String stringify() {
-        return "P " + this.getX() + ";" + this.getY() + ";" + this.hp +";"
-				+ points + ";" + this.getSockWave() + ";" + game.getAmmo();
+        return "P " + this.getX() + ";" + this.getY() + ";" + this.hp + ";" + points + ";" + this.getSockWave() + ";"
+                + game.getAmmo();
     }
-
 
     public boolean canDelete() {
         return false;
@@ -87,13 +86,12 @@ public final class UCMShip extends Ship {
         return false;
     }
 
-	public void setSuperLaser(Laser sl) {
+    public void setSuperLaser(Laser sl) {
         this.superL = sl;
-	}
+    }
 
-	public void setLaser(Laser laser2) {
+    public void setLaser(Laser laser2) {
         this.laser = laser2;
-	}
-
+    }
 
 }

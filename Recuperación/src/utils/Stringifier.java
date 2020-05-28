@@ -5,9 +5,9 @@ import logic.Game;
 
 public class Stringifier implements GamePrinter {
 
-    final String space = " ";
-    
-    private String board = "";
+	final String space = " ";
+
+	private String board = "";
 
 	public Stringifier(Game game) {
 		encodeGame(game);
@@ -16,7 +16,7 @@ public class Stringifier implements GamePrinter {
 	public void encodeGame(Game game) {
 		for (int i = 0; i < Game.DIM_X; i++) {
 			for (int j = 0; j < Game.DIM_Y; j++) {
-                board += game.stringify(i, j);
+				board += game.stringify(i, j);
 			}
 		}
 	}

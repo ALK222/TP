@@ -9,7 +9,7 @@ import logic.Game;
 
 public abstract class Command {
 
-    //ATRIBUTTES
+    // ATRIBUTTES
 
     protected final String name;
 
@@ -23,24 +23,23 @@ public abstract class Command {
 
     protected static final String incorrectArgsMsg = "Incorrect argument format";
 
-    public Command(String name, String shorcut, String details, String help){
+    public Command(String name, String shorcut, String details, String help) {
         this.name = name;
         this.shortcut = shorcut;
         this.details = details;
         this.help = help;
     }
 
-    public boolean matchCommandName(String name){
+    public boolean matchCommandName(String name) {
         return this.shortcut.equalsIgnoreCase(name) || this.name.equalsIgnoreCase(name);
     }
 
-    public String helpText(){
+    public String helpText() {
         return details + "(" + shortcut + ") : " + help + "\n";
     }
 
     public abstract boolean execute(Game game) throws CommandExecuteException, IOException;
-	
-	public abstract Command parse(String[] commandWord) throws CommandParseException, CommandMovementException;
 
+    public abstract Command parse(String[] commandWord) throws CommandParseException, CommandMovementException;
 
 }

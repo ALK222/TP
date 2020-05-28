@@ -37,39 +37,33 @@ public class Controller {
 	}
 
 	public void run() {
-		while(!game.isFinished()){
+		while (!game.isFinished()) {
 			System.out.print(prompt);
-			String[]  words = in.nextLine().trim().split ("\\s+");
-			try{
+			String[] words = in.nextLine().trim().split("\\s+");
+			try {
 				Command command = CommandGenerator.parseCommand(words);
-				if(command != null) {
-					if(command.execute(game)) {
+				if (command != null) {
+					if (command.execute(game)) {
 						game.update();
 						printGame();
-					}
-					else if(words[0].charAt(0) == 'r'){
+					} else if (words[0].charAt(0) == 'r') {
 						printGame();
 					}
 				}
-			}
-			catch(CommandParseException | CommandExecuteException | IOException | CommandMovementException ex) {
-				System.out.format((ex).getMessage() +"%n%n");
+			} catch (CommandParseException | CommandExecuteException | IOException | CommandMovementException ex) {
+				System.out.format((ex).getMessage() + "%n%n");
 			}
 		}
 	}
-	
-	
+
 	public void printGame() {
-		if(game.getPrinterOption() == 'b') {
+		if (game.getPrinterOption() == 'b') {
 			this.printer = new BoardPrinter(this.game, 8, 9);
 			System.out.println(printer.toString(game));
-		}
-		else {
+		} else {
 			this.printer = new Stringifier(game);
 			System.out.println(printer.toString(game));
 		}
 	}
-	
 
 }
-

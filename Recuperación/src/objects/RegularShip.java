@@ -8,24 +8,24 @@ public final class RegularShip extends AlienShip {
 
     private boolean explosive;
 
-    //CONSTRUCTOR
+    // CONSTRUCTOR
 
     public RegularShip(int x, int y, Game game, int hp, boolean explosive) {
         super(x, y, game, hp, 5);
         this.explosive = explosive;
     }
 
-    //METHODS
+    // METHODS
 
     public void computerAction() {
-        if(this.canTurnExplosive(game)){
+        if (this.canTurnExplosive(game)) {
             this.explosive = true;
         }
 
     }
 
     public String toString() {
-        if(explosive){
+        if (explosive) {
             return "E[" + this.getHp() + "]";
         }
         return "R[" + this.getHp() + "]";
@@ -33,8 +33,8 @@ public final class RegularShip extends AlienShip {
 
     public void damage(int damage) {
         this.setHp(this.getHp() - damage);
-        if(canDelete()){
-            if(explosive){
+        if (canDelete()) {
+            if (explosive) {
                 this.explosive = false;
                 game.explosiveDamage(x, y);
             }
@@ -43,23 +43,23 @@ public final class RegularShip extends AlienShip {
     }
 
     public String stringify() {
-        if(explosive) {
-			return "E " + this.getX() + ";" + this.getY() + ";" + this.getHp() +";"
-					+ game.getCurrentCycle() % game.getLevel().getNumCyclesToMoveOneCell();
-		}
-		return "R " + this.getX() + ";" + this.getY() + ";" + this.getHp() +";"
-		+ game.getCurrentCycle() % game.getLevel().getNumCyclesToMoveOneCell();
+        if (explosive) {
+            return "E " + this.getX() + ";" + this.getY() + ";" + this.getHp() + ";"
+                    + game.getCurrentCycle() % game.getLevel().getNumCyclesToMoveOneCell();
+        }
+        return "R " + this.getX() + ";" + this.getY() + ";" + this.getHp() + ";"
+                + game.getCurrentCycle() % game.getLevel().getNumCyclesToMoveOneCell();
     }
 
     public boolean canDelete() {
         return this.getHp() <= 0;
     }
 
-    public boolean canCount(){
+    public boolean canCount() {
         return this.getHp() > 0;
     }
 
-    public boolean receiveShockWaveAttack(int damage){
+    public boolean receiveShockWaveAttack(int damage) {
         this.damage(damage);
         return true;
     }

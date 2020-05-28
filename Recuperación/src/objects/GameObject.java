@@ -4,17 +4,16 @@ import interfaces.IAttack;
 import interfaces.IComunications;
 import logic.Game;
 
+public abstract class GameObject implements IAttack, IComunications {
 
-public abstract class GameObject implements IAttack, IComunications{
-
-    //ATRIBUTTES
+    // ATRIBUTTES
     protected Game game;
     protected int x;
     protected int y;
 
-    //CONSTRUCTORS
+    // CONSTRUCTORS
 
-    public GameObject(final Game game, final int x, final int y){
+    public GameObject(final Game game, final int x, final int y) {
         this.game = game;
         this.x = x;
         this.y = y;
@@ -46,29 +45,28 @@ public abstract class GameObject implements IAttack, IComunications{
     }
 
     public void setGame(final Game game) {
-        //Used in loader
+        // Used in loader
         this.game = game;
     }
 
-    //METHODS
+    // METHODS
 
-    public boolean isIn(int x, int y){
+    public boolean isIn(int x, int y) {
         return this.x == x && this.y == y;
     }
-    
-    public abstract void computerAction();//Makes the computer acction each turn
-    
-    public abstract void move(char dir);//moves the object
-    
-    public abstract String toString();//returns the symbol of the object
-    
+
+    public abstract void computerAction();// Makes the computer acction each turn
+
+    public abstract void move(char dir);// moves the object
+
+    public abstract String toString();// returns the symbol of the object
+
     public abstract void damage(int damage);//
-    
-    public abstract String stringify();//String of the object with info
 
-    public abstract boolean canAttack();//returns true on weapons, false on ships
+    public abstract String stringify();// String of the object with info
 
-    public abstract boolean canDelete();//ships can be deleted except for the ovni, weapons not
+    public abstract boolean canAttack();// returns true on weapons, false on ships
 
-    
+    public abstract boolean canDelete();// ships can be deleted except for the ovni, weapons not
+
 }

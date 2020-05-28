@@ -14,15 +14,13 @@ public final class ExitCommand extends Command {
         return false;
     }
 
-    
     public Command parse(String[] commandWord) throws CommandParseException {
-        if(!matchCommandName(commandWord[0])){
+        if (!matchCommandName(commandWord[0])) {
             return null;
-        }
-        else if (commandWord.length != 1) {
+        } else if (commandWord.length != 1) {
             throw new CommandParseException(Command.incorrectNumArgsMsg);
         }
         return new ExitCommand(name, shortcut, details, help);
     }
-    
+
 }

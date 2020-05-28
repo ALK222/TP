@@ -4,73 +4,77 @@ import logic.Game;
 
 public final class Laser extends Weapon {
 
-    //CONSTRUCTOR
+    // CONSTRUCTOR
 
     public Laser(int x, int y, Game game, boolean active, int damage) {
         super(x, y, game, active, damage);
     }
 
-    //METHODS
+    // METHODS
     @Override
     public void computerAction() {
-            setX(getX() - 1);
-            game.detectDamage(this);
+        setX(getX() - 1);
+        game.detectDamage(this);
     }
+
     @Override
     public void move(char dir) {
     }
+
     @Override
     public String toString() {
-        if(isActive()){
-            if(damage > 1){
+        if (isActive()) {
+            if (damage > 1) {
                 return superLaserString();
-            }
-            else{
+            } else {
                 return laserString();
             }
         }
         return "";
     }
 
-    public String laserString(){
+    public String laserString() {
         return "ºº";
     }
 
-    public String superLaserString(){
+    public String superLaserString() {
         return "^";
     }
+
     @Override
     public void damage(int damage) {
-        if(this.damage == 1)  game.enableMissile(this);
-        else game.enableSuperMissile(this);
+        if (this.damage == 1)
+            game.enableMissile(this);
+        else
+            game.enableSuperMissile(this);
     }
+
     @Override
     public String stringify() {
-        if(isActive()){
-            if(this.damage > 1){
+        if (isActive()) {
+            if (this.damage > 1) {
                 return this.stringiSuper();
-            }
-            else{
+            } else {
                 return this.stringiLaser();
             }
         }
-		return "";
+        return "";
     }
 
-    public String stringiLaser(){
+    public String stringiLaser() {
         return "M " + this.getX() + ";" + this.getY();
     }
 
-    public String stringiSuper(){
+    public String stringiSuper() {
         return "S " + this.getX() + ";" + this.getY();
     }
 
-    public boolean performAttack(GameObject other){
+    public boolean performAttack(GameObject other) {
         return other.receiveMissileAttack(this.damage);
     }
 
-    public boolean receiveBombAttack(int damage){
+    public boolean receiveBombAttack(int damage) {
         return true;
     }
-    
+
 }

@@ -99,7 +99,7 @@ public final class Game implements IPlayerController {
         this.doExit = exit;
     }
 
-    public String getSeed(){
+    public String getSeed() {
         return this.seed;
     }
 
@@ -114,7 +114,7 @@ public final class Game implements IPlayerController {
         printerOption = 'b';
         this.board = initialize.initialize(this, level);
         this.navi = new UCMShip(DIM_Y - 1, (DIM_X / 2), this, null, null);
-        board.add(navi);        
+        board.add(navi);
     }
 
     // returns the symbol of a character at position (x,y) if it exists, if not,
@@ -192,22 +192,18 @@ public final class Game implements IPlayerController {
 
     // Shoot laser or superLaser
     public boolean shootLaser(String option) throws CommandExecuteException {
-        if(option != null){
-            if(navi.getSuperL() != null){
+        if (option != null) {
+            if (navi.getSuperL() != null) {
                 throw new CommandExecuteException("Super Missile is active");
-            }
-            else if(this.getAmmo() <= 0){
+            } else if (this.getAmmo() <= 0) {
                 throw new CommandExecuteException("No ammo available");
-            }
-            else{
+            } else {
                 this.naviSuperShoot();
             }
-        }
-        else{
-            if(navi.getLaser() != null){
+        } else {
+            if (navi.getLaser() != null) {
                 throw new CommandExecuteException("Misile is active");
-            }
-            else{
+            } else {
                 this.naviShoot();
             }
         }
@@ -216,12 +212,12 @@ public final class Game implements IPlayerController {
 
     private void naviShoot() {
         navi.setLaser(new Laser(navi.getX(), navi.getY(), this, true, 1));
-        this.board.add(navi.getLaser());  
+        this.board.add(navi.getLaser());
     }
 
     private void naviSuperShoot() {
         navi.setSuperLaser(new Laser(navi.getX(), navi.getY(), this, true, 2));
-        this.board.add(navi.getSuperL());        
+        this.board.add(navi.getSuperL());
     }
 
     // Enable UCMShip missile
@@ -231,7 +227,7 @@ public final class Game implements IPlayerController {
         navi.setLaser(null);
     }
 
-    public void enableSuperMissile(Laser laser){
+    public void enableSuperMissile(Laser laser) {
         board.delete(laser);
         laser = null;
         navi.setSuperLaser(null);
@@ -290,20 +286,20 @@ public final class Game implements IPlayerController {
     }
 
     public void saveState(String filename) throws IOException {
-		GamePrinter s = new Stringifier(this);
-		String str = s.toString(this);
-		BufferedWriter writer = new BufferedWriter(new FileWriter(filename + ".dat", true));
-		writer.append(str);
+        GamePrinter s = new Stringifier(this);
+        String str = s.toString(this);
+        BufferedWriter writer = new BufferedWriter(new FileWriter(filename + ".dat", true));
+        writer.append(str);
         writer.close();
     }
 
-	public void alienShoot(DestroyerShip ds) {
+    public void alienShoot(DestroyerShip ds) {
         ds.setBomb(new Bomb(ds.getX(), ds.getY(), true, 1, this));
         board.add(ds.getBomb());
-	}
+    }
 
-	public void disableBomb(Bomb bomb) {
+    public void disableBomb(Bomb bomb) {
         board.delete(bomb);
         bomb = null;
-	}
+    }
 }
