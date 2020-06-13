@@ -5,9 +5,21 @@ import logic.Game;
 
 public class ListCommand extends Command {
 
+	private static String _name = "List";
+
+	private static String _shortcut = "L";
+
+	private static String _details = "Shows information about the current game";
+
+	private static String _help = "Shows information about the current game";
+
 	// CONSTRUCTOR
 	public ListCommand(String name, String shortcut, String details, String help) {
 		super(name, shortcut, details, help);
+	}
+
+	public ListCommand() {
+		super(_name, _shortcut, _details, _help);
 	}
 
 	public boolean execute(Game game) {

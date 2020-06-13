@@ -5,8 +5,17 @@ import logic.Game;
 
 public class UpdateCommand extends Command {
 
+	private static String _name = "Update";
+	private static String _shortcut = "U";
+	private static String _details = "Updates the game one (1) cycle";
+	private static String _help = "Leaving the command completely blank will have the same effect";
+
 	public UpdateCommand(String name, String shortcut, String details, String help) {
 		super(name, shortcut, details, help);
+	}
+
+	public UpdateCommand() {
+		super(_name, _shortcut, _details, _help);
 	}
 
 	public boolean execute(Game game) {

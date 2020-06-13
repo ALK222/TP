@@ -6,8 +6,17 @@ import logic.Game;
 
 public class BuyCommand extends Command {
 
+	private static String _name = "Buy";
+	private static String _shortcut = "B";
+	private static String _details = "Buys a supermisille";
+	private static String _help = "A supermisille costs 20 points. Kill enemy ships to earn points";
+
 	public BuyCommand(String name, String shortcut, String details, String help) {
 		super(name, shortcut, details, help);
+	}
+
+	public BuyCommand() {
+		super(_name, _shortcut, _details, _help);
 	}
 
 	public boolean execute(Game game) throws CommandExecuteException {

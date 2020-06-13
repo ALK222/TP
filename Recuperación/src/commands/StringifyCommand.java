@@ -4,8 +4,18 @@ import exceptions.CommandParseException;
 import logic.Game;
 
 public class StringifyCommand extends Command {
+
+	private static String _name = "Stringify";
+	private static String _shortcut = "C";
+	private static String _details = "Changes the game perspective";
+	private static String _help = "This mode sucks";
+
 	public StringifyCommand(String name, String shortcut, String details2, String help) {
 		super(name, shortcut, details2, help);
+	}
+
+	public StringifyCommand() {
+		super(_name, _shortcut, _details, _help);
 	}
 
 	public boolean execute(Game game) {

@@ -173,7 +173,7 @@ public final class GameObjectBoard {
     }
 
     public String stringify(int i, int j) {
-        return (objectAt(i, j).equals(null)) ? "" : objectAt(i, j).stringify();
+        return (objectAt(i, j) == null) ? "" : objectAt(i, j).stringify();
     }
 
 }

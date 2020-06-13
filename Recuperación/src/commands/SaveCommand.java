@@ -7,11 +7,20 @@ import logic.Game;
 
 public class SaveCommand extends Command {
 
+	private static String _name = "Save";
+	private static String _shortcut = "S";
+	private static String _details = "Saves the current state of the game";
+	private static String _help = "You must introduce a filename in order to save the game";
+
 	private String filename;
 
 	public SaveCommand(String name, String shortcut, String details, String help, String filename) {
 		super(name, shortcut, details, help);
 		this.filename = filename;
+	}
+
+	public SaveCommand() {
+		super(_name, _shortcut, _details, _help);
 	}
 
 	public boolean execute(Game game) throws IOException {

@@ -5,8 +5,20 @@ import logic.Game;
 
 public final class ExitCommand extends Command {
 
+    private static String _name = "Exit";
+
+    private static String _shortcut = "E";
+
+    private static String _details = "Exits the game";
+
+    private static String _help = "Exits the game";
+
     public ExitCommand(String name, String shortcut, String details, String help) {
         super(name, shortcut, details, help);
+    }
+
+    public ExitCommand() {
+        super(_name, _shortcut, _details, _help);
     }
 
     public boolean execute(Game game) {

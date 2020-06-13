@@ -5,11 +5,20 @@ import exceptions.CommandParseException;
 import logic.Game;
 
 public class ShootCommand extends Command {
-	String supermisile;
+
+	private static String _name = "Shoot";
+	private static String _shortcut = "F";
+	private static String _details = "Shots a laser";
+	private static String _help = "shots a laser, if you put supermisil in the command shoots a supermisille";
+	private String supermisile;
 
 	public ShootCommand(String name, String shortcut, String details, String help, String supermisile) {
 		super(name, shortcut, details, help);
 		this.supermisile = supermisile;
+	}
+
+	public ShootCommand() {
+		super(_name, _shortcut, _details, _help);
 	}
 
 	public boolean execute(Game game) throws CommandExecuteException {

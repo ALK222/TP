@@ -7,6 +7,11 @@ import logic.Game;
 
 public class MoveCommand extends Command {
 
+	private static String _name = "Move";
+	private static String _shortcut = "m";
+	private static String _details = "Moves the ship";
+	private static String _help = "Introduce first the direction and then the speed";
+
 	String dir;
 	int vel;
 
@@ -14,6 +19,10 @@ public class MoveCommand extends Command {
 		super(name, shortcut, details, help);
 		this.dir = dir;
 		this.vel = Integer.parseInt(speed);
+	}
+
+	public MoveCommand() {
+		super(_name, _shortcut, _details, _help);
 	}
 
 	public boolean execute(Game game) throws CommandExecuteException {

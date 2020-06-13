@@ -7,19 +7,9 @@ public class CommandGenerator {
 
 	private static Command[] availableCommands = {
 			// List of all commands
-			new ListCommand("List", "L", "", "shows information of the game"),
-			new HelpCommand("Help", "H", "", " shows help"), new ResetCommand("Reset", "R", "", "resets the game"),
-			new ExitCommand("Exit", "E", "", "exits the game"),
-			new UpdateCommand("Update", "U", "",
-					"updates the game, leaving the command completely blank will have the same effect"),
-			new MoveCommand("Move", "m", "", "moves the ship", "", "0"),
-			new ShockwaveCommand("ShockWave", "W", "",
-					"deals 1 damage to all ships on the board and destroys enemy bullets"),
-			new SaveCommand("Save", "S", "", "saves the current state of the game", ""),
-			new ShootCommand("Shoot", "F", "",
-					"shots a laser, if you put supermisil in the command shoots a supermisille", ""),
-			new BuyCommand("Buy", "B", "", "Buy: buys a supermisille for 20 points"),
-			new StringifyCommand("Stringify", "C", "", "Stringify: changes the game perspective") };
+			new ListCommand(), new HelpCommand(), new ResetCommand(), new ExitCommand(), new UpdateCommand(),
+			new MoveCommand(), new ShockwaveCommand(), new SaveCommand(), new ShootCommand(), new BuyCommand(),
+			new StringifyCommand() };
 
 	public static String commandHelp() {
 		// shows al commands
