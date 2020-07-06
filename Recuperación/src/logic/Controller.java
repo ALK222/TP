@@ -33,7 +33,7 @@ public class Controller {
 	public Controller(Game g) {
 		this.game = g;
 		this.in = new Scanner(System.in);
-		this.printer = new BoardPrinter(game, 8, 9);
+		this.printer = new BoardPrinter(game, Game.DIM_Y, Game.DIM_X);
 	}
 
 	public void run() {
@@ -58,7 +58,7 @@ public class Controller {
 
 	public void printGame() {
 		if (game.getPrinterOption() == 'b') {
-			this.printer = new BoardPrinter(this.game, 8, 9);
+			this.printer = new BoardPrinter(this.game, Game.DIM_Y, Game.DIM_X);
 			System.out.println(printer.toString(game));
 		} else {
 			this.printer = new Stringifier(game);

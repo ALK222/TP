@@ -22,10 +22,12 @@ public class ShootCommand extends Command {
 	}
 
 	public boolean execute(Game game) throws CommandExecuteException {
-		if (game.shootLaser(this.supermisile)) {
-			return true;
+		try {
+			game.shootLaser(this.supermisile);
+		} catch (Exception e) {
+			throw e;
 		}
-		return false;
+		return true;
 	}
 
 	public Command parse(String[] commandWord) throws CommandParseException {

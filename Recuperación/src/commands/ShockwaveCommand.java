@@ -20,8 +20,10 @@ public class ShockwaveCommand extends Command {
 	}
 
 	public boolean execute(Game game) throws CommandExecuteException {
-		if (!game.shockWave()) {
-			throw new CommandExecuteException("Shockwave not available");
+		try {
+			game.shockWave();
+		} catch (Exception e) {
+			throw e;
 		}
 		return true;
 	}

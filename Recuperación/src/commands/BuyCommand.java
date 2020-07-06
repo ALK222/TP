@@ -20,8 +20,10 @@ public class BuyCommand extends Command {
 	}
 
 	public boolean execute(Game game) throws CommandExecuteException {
-		if (!game.buy()) {
-			throw new CommandExecuteException("Not enought points to buy a super missile");
+		try {
+			game.buy();
+		} catch (Exception e) {
+			throw e;
 		}
 		return false;
 	}

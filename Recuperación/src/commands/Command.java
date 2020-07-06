@@ -38,7 +38,7 @@ public abstract class Command {
         return details + "(" + shortcut + ") : " + help + "\n";
     }
 
-    public abstract boolean execute(Game game) throws CommandExecuteException, IOException;
+    public abstract boolean execute(Game game) throws CommandExecuteException, IOException, CommandMovementException;
 
     public abstract Command parse(String[] commandWord) throws CommandParseException, CommandMovementException;
 

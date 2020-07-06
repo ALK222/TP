@@ -1,16 +1,17 @@
 package interfaces;
 
 import exceptions.CommandExecuteException;
+import exceptions.CommandMovementException;
 import objects.Laser;
 
 public interface IPlayerController {
 
 	// PLAYER ACTIONS
-	public boolean move(String direction, int numCells);
+	public void move(String direction, int numCells) throws CommandMovementException;
 
-	public boolean shootLaser(String option) throws CommandExecuteException;
+	public void shootLaser(String option) throws CommandExecuteException;
 
-	public boolean shockWave();
+	public void shockWave() throws CommandExecuteException;
 
 	// CALLBACKS
 	public void receivePoints(int points);

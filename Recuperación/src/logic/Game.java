@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.Random;
 
 import exceptions.CommandExecuteException;
+import exceptions.CommandMovementException;
 import interfaces.GamePrinter;
 import interfaces.IPlayerController;
 import objects.*;
@@ -57,7 +58,7 @@ public final class Game implements IPlayerController {
         this.level = level;
         this.seed = seed;
         this.rand = new Random(Long.parseLong(seed));
-        this.shockWave = true;
+        this.shockWave = false;
         initGame();
     }
 
@@ -169,29 +170,35 @@ public final class Game implements IPlayerController {
     }
 
     // ShockWave Damage
-    public boolean shockWave() {
+    public void shockWave() throws CommandExecuteException {
         if (this.shockWave) {
             board.shockDamage();
             this.shockWave = false;
-            return true;
+        } else {
+            throw new CommandExecuteException("Shockwave is not ready");
         }
-        return false;
     }
 
     // Movement of the player ship
-    public boolean move(String direction, int numCells) {
+    public void move(String direction, int numCells) throws CommandMovementException {
+        int speed = 0;
         if (direction.charAt(0) == 'l') {
-            numCells = numCells * -1;
+            speed = numCells * -1;
         }
-        if (navi.getY() + numCells > 0 || navi.getY() + numCells < 8) {
-            navi.setY(navi.getY() + numCells);
-            return true;
+        if (numCells > 0 && numCells <= 2) {
+            if (navi.getY() + numCells > 0 || navi.getY() + numCells < 8) {
+                navi.setY(navi.getY() + speed);
+            } else {
+                throw new CommandMovementException("I can not go there");
+            }
+        } else {
+            throw new CommandMovementException("Incorrect speed, please check the value");
         }
-        return false;
+
     }
 
     // Shoot laser or superLaser
-    public boolean shootLaser(String option) throws CommandExecuteException {
+    public void shootLaser(String option) throws CommandExecuteException {
         if (option != null) {
             if (navi.getSuperL() != null) {
                 throw new CommandExecuteException("Super Missile is active");
@@ -207,7 +214,6 @@ public final class Game implements IPlayerController {
                 this.naviShoot();
             }
         }
-        return true;
     }
 
     private void naviShoot() {
@@ -257,13 +263,13 @@ public final class Game implements IPlayerController {
         return board.stringify(i, j);
     }
 
-    public boolean buy() {
+    public void buy() throws CommandExecuteException {
         if (navi.getPoints() >= 20) {
             ++this.ammo;
             navi.setPoints(navi.getPoints() - 20);
-            return true;
+        } else {
+            throw new CommandExecuteException("Not enought points to buy a super missile");
         }
-        return false;
     }
 
     public String infoToString() {

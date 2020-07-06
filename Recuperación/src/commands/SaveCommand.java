@@ -24,7 +24,11 @@ public class SaveCommand extends Command {
 	}
 
 	public boolean execute(Game game) throws IOException {
-		game.saveState(filename);
+		try {
+			game.saveState(filename);
+		} catch (Exception e) {
+			throw e;
+		}
 		return false;
 	}
 

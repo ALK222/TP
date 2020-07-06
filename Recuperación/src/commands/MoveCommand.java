@@ -1,6 +1,5 @@
 package commands;
 
-import exceptions.CommandExecuteException;
 import exceptions.CommandMovementException;
 import exceptions.CommandParseException;
 import logic.Game;
@@ -25,10 +24,12 @@ public class MoveCommand extends Command {
 		super(_name, _shortcut, _details, _help);
 	}
 
-	public boolean execute(Game game) throws CommandExecuteException {
+	public boolean execute(Game game) throws CommandMovementException {
 
-		if (!game.move(dir, vel)) {
-			throw new CommandExecuteException("Navi can't reach that place");
+		try {
+			game.move(dir, vel);
+		} catch (Exception e) {
+			throw e;
 		}
 		return true;
 	}
@@ -38,10 +39,6 @@ public class MoveCommand extends Command {
 			return null;
 		} else if (commandWord.length != 3) {
 			throw new CommandParseException(Command.incorrectNumArgsMsg);
-		} else if (!commandWord[1].equals("1")) {
-			if (!commandWord[1].equals("2")) {
-				throw new CommandMovementException("I don't understand that speed");
-			}
 		} else if (!commandWord[2].equalsIgnoreCase("left") && !commandWord[2].equalsIgnoreCase("right")) {
 			throw new CommandMovementException("I don't understand that direction");
 		}
