@@ -181,8 +181,7 @@ public final class Game implements IPlayerController {
 
     // Movement of the player ship
     public void move(String direction, int numCells) throws CommandMovementException {
-        if (numCells < 1 && numCells > 2) {
-
+        if (numCells < 1 && numCells > 2) {// (Not looking for exact values so maximun steps can be increased)
             throw new CommandMovementException("Incorrect speed, please check the value");
         }
         if (direction.charAt(0) == 'l') {
