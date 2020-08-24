@@ -94,4 +94,8 @@ public final class UCMShip extends Ship {
         this.laser = laser2;
     }
 
+    public boolean receiveBombAttack(int damage) {
+        return true;
+    }
+
 }

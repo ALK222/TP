@@ -9,7 +9,12 @@ import exceptions.CommandExecuteException;
 import exceptions.CommandMovementException;
 import interfaces.GamePrinter;
 import interfaces.IPlayerController;
-import objects.*;
+import objects.Bomb;
+import objects.DestroyerShip;
+import objects.GameObjectBoard;
+import objects.Laser;
+import objects.UCMShip;
+import objects.Weapon;
 import utils.BoardInitializer;
 import utils.Level;
 import utils.Stringifier;
@@ -298,7 +303,11 @@ public final class Game implements IPlayerController {
     }
 
     public void alienShoot(DestroyerShip ds) {
-        ds.setBomb(new Bomb(ds.getX(), ds.getY(), true, 1, this));
+        if (board.supNear(ds.getX(), ds.getY())) {
+            ds.setBomb(new Bomb(ds.getX(), ds.getY(), true, 2, this));
+        } else {
+            ds.setBomb(new Bomb(ds.getX(), ds.getY(), true, 1, this));
+        }
         board.add(ds.getBomb());
     }
 

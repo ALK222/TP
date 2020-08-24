@@ -1,7 +1,11 @@
 package utils;
 
 import logic.Game;
-import objects.*;
+import objects.DestroyerShip;
+import objects.GameObjectBoard;
+import objects.Ovni;
+import objects.RegularShip;
+import objects.SupportShip;
 
 public final class BoardInitializer {
 
@@ -41,6 +45,7 @@ public final class BoardInitializer {
         int x = 1 + level.getNumRowsOfRegularAliens();
         int y = 5;
         if (level.getNumDestroyerAliens() > 2) {
+            board.add(new SupportShip(x, y + 2, game, 3));
             ++y;
         }
         for (int i = 0; i < level.getNumDestroyerAliens(); ++i) {
