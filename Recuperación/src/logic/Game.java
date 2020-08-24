@@ -315,4 +315,8 @@ public final class Game implements IPlayerController {
         board.delete(bomb);
         bomb = null;
     }
+
+    public boolean objectNearSat(int x, int y) {
+        return !board.isEmpty(x, y);
+    }
 }

@@ -190,4 +190,8 @@ public final class GameObjectBoard {
         return false;
     }
 
+    public boolean isEmpty(int x, int y) {
+        return objectAt(x, y) == null;
+    }
+
 }

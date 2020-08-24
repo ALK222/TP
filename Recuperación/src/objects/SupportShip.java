@@ -20,7 +20,10 @@ public class SupportShip extends AlienShip {
 
     @Override
     public void damage(int damage) {
-        // Peacefull boi
+        this.setHp(this.getHp() - damage);
+        if (canDelete()) {
+            game.receivePoints(this.getPoints());
+        }
     }
 
     @Override

@@ -1,6 +1,6 @@
 package interfaces;
 
-import logic.*;
+import logic.Game;
 
 public interface IExecuteRandomActions {
 
@@ -14,5 +14,9 @@ public interface IExecuteRandomActions {
 
 	default boolean canTurnExplosive(Game game) {
 		return game.getRand().nextDouble() < game.getLevel().getTurnExplodeFrequency();
+	}
+
+	default boolean generateSup(Game game) {
+		return game.getRand().nextDouble() < game.getLevel().getSuppFrequency();
 	}
 }
