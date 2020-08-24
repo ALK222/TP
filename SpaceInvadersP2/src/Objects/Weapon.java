@@ -2,61 +2,64 @@ package objects;
 
 import logic.Game;
 
-public abstract class Weapon extends GameObject{
-	
-	//ATTRIBUTES
-	
-	private boolean active;
-	private int damage;
-	
-	//CONSTRUCTOR
-	
-	public Weapon(int startX, int startY, Game game, boolean alien , boolean alive, boolean active, int damage) {
-		super(startX, startY, game, alien , alive);
-		this.active = active;
-		this.damage = damage;
-	}
-	
-	//SETTERS AND GETTERS
-	
-	public final int getDamage() {
-		return this.damage;
-	}
-	
-	public final boolean isActive() {
-		return this.active;
-	}
-	
-	
-	public final void setActive(boolean active) {
-		this.active = active;
-	}
-	
-	//METHODS
-	
+public abstract class Weapon extends GameObject {
 
-	public boolean performAttack(GameObject other) {
-		if(other.isAlien() != this.isAlien()) {
-			this.damage(this.getDamage());
-			other.damage(this.getDamage());
-			return true;
-		}
-		return false;
-	}
-	
-	public final boolean haveLanded() {
-		return false;
-	}
-	
-	public final boolean checkBorder() {
-		return false;
-	}
-	
-	public boolean canAttack() {
-		return true;
-	}
+    /*
+     * 
+     * Blueprint for all weapons in this game
+     * 
+     */
 
-	public boolean canDelete() {
-		return true;
-	}
+    // ATRIBUTTES
+
+    protected int damage;
+
+    protected boolean active;
+
+    protected boolean delete;
+
+    // CONSTRUCTOR
+
+    public Weapon(int x, int y, Game game, boolean active, int damage) {
+        super(game, x, y);
+        this.damage = damage;
+        this.active = active;
+        this.delete = false;
+    }
+
+    // SETTERS AND GETTERS
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
+    public int getDamage() {
+        return this.damage;
+    }
+
+    public boolean isActive() {
+        return this.active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public boolean canDelete() {
+        return delete;
+    }
+
+    public void setDelete(boolean delete) {
+        this.delete = delete;
+    }
+
+    // METHODS
+
+    public boolean canAttack() {
+        return true;
+    }
+
+    public boolean canCount() {
+        return false;
+    }
 }

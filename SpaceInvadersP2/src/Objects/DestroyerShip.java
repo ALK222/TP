@@ -1,64 +1,73 @@
 package objects;
 
-import interfaces.IExecuteRandomActions;
 import logic.Game;
 
-public final class DestroyerShip extends AlienShip{
-	//ATTRIBUTES
-	private Bomb bomb;
-	
-	//CONSTRUCTOR
-	public DestroyerShip(int startX, int startY, int hp, int points, Game game, boolean alien, boolean alive, Bomb bomb){
-		super(startX, startY, hp, points, game, alien, alive);
-		this.bomb = bomb;
-	}
-	public final Bomb getLaser() {
-		return this.bomb;
-	}
+public final class DestroyerShip extends AlienShip {
 
-	
-	public void computerAction() {
-		if(IExecuteRandomActions.canGenerateRandomBomb(game)){
-			this.shoot();
-		}		
-	}
-	
-	public String toString() {
-		if(!isAlive()) {
-			return "";
-		}
-		return "D[" + this.getHp() + "]";
-	}
-	
-	public void damage(int damage) {
-		this.setHp(getHp() - damage);
-		if(this.hp <= 0) {
-			this.setAlive(false);
-			this.getLaser().setAlive(false);
-			game.receivePoints(points);
-		}
-		
-	}
-	
-	public void shoot() {
-		if(!this.getLaser().isActive()) {
-			this.getLaser().setActive(true);
-			this.getLaser().setX(this.getX());
-			this.getLaser().setY(this.getY());
-		}
+    // ATRIBUTTES
 
-	}
+    private Bomb bomb;
 
-	
-	public String stringify() {
-		if(!isAlive()) {
-			return "";
-		}
-		return "D " + this.getX() + ";" + this.getY() + ";" + this.getHp() +";"
-				+ game.getCurrentCycle() % game.getLevel().getNumCyclesToMoveOneCell();
-	}
+    // CONSTRUCTOR
 
-	
-	
-	
+    public DestroyerShip(int x, int y, Game game, int hp, Bomb bomb) {
+        super(x, y, game, hp, 10);
+        this.bomb = bomb;
+    }
+
+    // GETTERS AND SETTERS
+
+    public Bomb getBomb() {
+        return this.bomb;
+    }
+
+    public void setBomb(Bomb bob) {
+        this.bomb = bob;
+    }
+
+    // METHODS
+    @Override
+    public void computerAction() {
+        if (this.getBomb() == null) {
+            if (this.canGenerateRandomBomb(game)) {
+                game.alienShoot(this);
+            }
+        } else {
+            if (this.bomb.getX() >= 8) {
+                game.disableBomb(this.getBomb());
+                this.bomb = null;
+            }
+        }
+
+    }
+
+    @Override
+    public String toString() {
+        return "D[" + this.getHp() + "]";
+    }
+
+    @Override
+    public void damage(int damage) {
+        this.setHp(this.getHp() - damage);
+        if (canDelete()) {
+            this.game.receivePoints(this.getPoints());
+        }
+    }
+
+    @Override
+    public String stringify() {
+        return "D " + this.getX() + ";" + this.getY() + ";" + this.getHp() + ";"
+                + game.getCurrentCycle() % game.getLevel().getNumCyclesToMoveOneCell();
+    }
+
+    @Override
+    public boolean canDelete() {
+        return this.getHp() <= 0;
+    }
+
+    public boolean receiveShockWaveAttack(int damage) {
+        this.damage(damage);
+        return true;
+    }
+
 }

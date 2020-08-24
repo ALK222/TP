@@ -1,31 +1,38 @@
-package Commands;
+package commands;
 
+import exceptions.CommandParseException;
 import logic.Game;
 
-public class ExitCommand extends Commands{
+public final class ExitCommand extends Command {
 
-	public ExitCommand(String name, String shortcut, String details, String help) {
-		super(name, shortcut, details, help);
-	}
+    private static String _name = "Exit";
 
-	
-	public boolean execute(Game game) {
-		game.exit();
-		return false;
-	}
+    private static String _shortcut = "E";
 
-	
-	public Commands parse(String[] commandWords) {
-		if(commandWords.length != 1) {
-			System.out.print(Commands.incorrectNumArgsMsg);
-			return null;
-		}
-		else if (commandWords[0].equalsIgnoreCase("exit") || commandWords[0].equalsIgnoreCase("e")) {
-			return new ExitCommand("Exit", "E", "", "Exit: Ends the program.");
-		}
-		else {
-			return null;
-		}
-	}
+    private static String _details = "Exits the game";
+
+    private static String _help = "Exits the game";
+
+    public ExitCommand(String name, String shortcut, String details, String help) {
+        super(name, shortcut, details, help);
+    }
+
+    public ExitCommand() {
+        super(_name, _shortcut, _details, _help);
+    }
+
+    public boolean execute(Game game) {
+        game.setExit(true);
+        return false;
+    }
+
+    public Command parse(String[] commandWord) throws CommandParseException {
+        if (!matchCommandName(commandWord[0])) {
+            return null;
+        } else if (commandWord.length != 1) {
+            throw new CommandParseException(Command.incorrectNumArgsMsg);
+        }
+        return new ExitCommand(name, shortcut, details, help);
+    }
 
 }

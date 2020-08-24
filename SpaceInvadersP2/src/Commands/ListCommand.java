@@ -1,33 +1,39 @@
-package Commands;
+package commands;
 
+import exceptions.CommandParseException;
 import logic.Game;
 
-public class ListCommand extends Commands{
+public class ListCommand extends Command {
 
-	
-	//CONSTRUCTOR
-	public ListCommand (String name, String shortcut, String details, String help) {
+	private static String _name = "List";
+
+	private static String _shortcut = "L";
+
+	private static String _details = "Shows information about the current game";
+
+	private static String _help = "Shows information about the current game";
+
+	// CONSTRUCTOR
+	public ListCommand(String name, String shortcut, String details, String help) {
 		super(name, shortcut, details, help);
 	}
 
-	
+	public ListCommand() {
+		super(_name, _shortcut, _details, _help);
+	}
+
 	public boolean execute(Game game) {
 		System.out.println(game.infoToString());
 		return false;
 	}
 
-	
-	public Commands parse(String[] commandWord) {
-		if(commandWord.length != 1) {
-			System.out.print(Commands.incorrectNumArgsMsg);
+	public Command parse(String[] commandWord) throws CommandParseException {
+		if (!matchCommandName(commandWord[0])) {
 			return null;
+		} else if (commandWord.length != 1) {
+			throw new CommandParseException(Command.incorrectNumArgsMsg);
 		}
-		else if (commandWord[0].equalsIgnoreCase("list") || commandWord[0].equalsIgnoreCase("l")) {
-			return new ListCommand("List", "L", "", "Game List:");
-		}
-		else {
-			return null;
-		}
+		return new ListCommand(name, shortcut, details, help);
 	}
-	
+
 }

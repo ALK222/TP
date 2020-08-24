@@ -1,24 +1,20 @@
 package main;
 
-import logic.Controller;
-import logic.Game;
+import logic.*;
 import utils.Level;
 
 public class Main {
-	
-	public static void main(String[] args) {
-		if(args.length != 2) {
-			System.out.print("error");
-		}
-		else {
-			
-			Game game = new Game(Level.parse(args[0]), args[1]);
-			Controller c = new Controller(game);
-			c.printGame();
-			c.run();
-			System.out.println(game.getWinnerMessage());
-		}
-		
-		
-	}
+    char[] dir = new char[2];
+
+    public static void main(final String[] args) {
+        if (args.length != 2) {
+            System.out.print("Error, wrong number of arguments");
+        } else {
+            final Game game = new Game(Level.parse(args[0]), args[1]);
+            final Controller c = new Controller(game);
+            c.printGame();
+            c.run();
+            System.out.println(game.getWinnerMessage());
+        }
+    }
 }

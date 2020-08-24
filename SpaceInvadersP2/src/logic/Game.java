@@ -5,317 +5,305 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
 
+import exceptions.CommandExecuteException;
+import exceptions.CommandMovementException;
 import interfaces.GamePrinter;
 import interfaces.IPlayerController;
-import objects.GameObject;
-import objects.GameObjectBoard;
-import objects.Laser;
-import objects.ShockWave;
-import objects.SuperMisille;
-import objects.UCMShip;
+import objects.*;
 import utils.BoardInitializer;
 import utils.Level;
 import utils.Stringifier;
 
-public class Game implements IPlayerController{
-	public final static int DIM_X = 9;
-	public final static int DIM_Y = 8;
+public final class Game implements IPlayerController {
 
-	private int currentCycle;
-	private String seed;
-	private Level level;
-	private Random rand;
-	private char printerOption;
-	
-	private ShockWave shock;
-	private SuperMisille superM;
+    /*
+     * 
+     * Logic of the Game
+     * 
+     */
 
-	private GameObjectBoard board;
+    // ATRIBUTTES
 
-	
+    public final static int DIM_X = 9;
+    // Size of the board
+    public final static int DIM_Y = 8;
 
-	private UCMShip navi;
-	private Laser laser;
-	private int ammo;
-	
-	private boolean doExit;
-	private BoardInitializer initializer;
-	
-	public Game (Level level, String seed){
-		this.seed = seed;
-		this.level = level;
-		this.rand = new Random(Long.parseLong(seed));
-		this.doExit = false;
-		initializer = new BoardInitializer();
-		initGame();
-		printerOption = 'b';
-	}
-	
-	public int getCurrentCycle() {
-		return currentCycle;
-	}
+    private int gameCycle;// Cycles of the game to control ship movement
 
-	public void setCurrentCycle(int currentCycle) {
-		this.currentCycle = currentCycle;
-	}
+    private int ammo;// Ammo for the supermisille
 
-	public int getAmmo() {
-		return ammo;
-	}
+    private String seed;// Seed of the random
 
-	public void setAmmo(int ammo) {
-		this.ammo = ammo;
-	}
-	
-	public Random getRandom() {
-		return this.rand;
-	}
-	
-	public void setPrinterOption(char printerOption) {
-		this.printerOption = printerOption;
-	}
-	
-	public char getPrinterOption() {
-		return this.printerOption;
-	}
-	
-	public void initGame () {
-		currentCycle = 0;
-		board = initializer.initialize(this, level);
-		laser = new Laser(0, 0, this, false, true, false);
-		addObject(laser);
-		navi = new UCMShip(7, 4, 3, 0, this, false, true, laser);
-		addObject(navi);
-		shock = new ShockWave(0, 0, this, false, true, false);
-		superM = new SuperMisille(0, 0, this, false, true, false);
-		addObject(superM);
-		ammo = 0;
-	}
-	
-	public boolean isDoExit() {
-		return this.doExit;
-	}
-	
-	public void setDoExit(boolean doExit) {
-		this.doExit = doExit;
-	}
-	
-	public String getSeed() {
-		return seed;
-	}
-	
-	public Level getLevel() {
-		return level;
-	}
-	
-	public void reset() {
-		initGame();
-	}
+    private Level level;// Level of difficulty
 
-	public void addObject(GameObject object) {
-		board.add(object);
-	}
-	
-	public String positionToString(int x, int y ) {
-		return board.toString(x, y);
-	}
+    private Random rand;// Random of the game
 
-	public boolean isFinished() {
-		return playerWin() || aliensWin() || doExit;
-	}
-	
-	public boolean aliensWin() {
-		return !navi.isAlive() || board.haveLanded();
-	}
-	
-	private boolean playerWin () {
-		if(board.aliensRemaining() <= 0) {
-			return true;
-		}
-		return false;
-	}
-	
-	public void update() {
-		board.computerAction();
-		detectSuperDamage();
-		board.update();
-		if(currentCycle % this.getLevel().getNumCyclesToMoveOneCell() == 0 && currentCycle != 0) {
-			board.move();
-		}
-		currentCycle += 1;
-	}
-	
-	
-	public void exit() {
-		doExit = true;
-	}
-	
-	public String infoToString(){
-	
-		String info = "Life: " + this.navi.getHp() + "\n";
-		info += "Number of cycles: " + this.currentCycle + "\n";
-		info += "Points: " + this.navi.getPoints() + "\n";
-		info += "Remaining Aliens: " + this.board.aliensRemaining() + "\n"; //contar en gameObject board cuantos aliens quedan
-		info += "Shockwave: ";
-		if(this.shockWave()) { // checks if shockwave is active or not
-			info += "YES" + "\n";
-		}
-		else {
-			info += "NO" + "\n";
-		}
-		info += "Ammo: ";
-		for(int i = 0; i < ammo; ++i) {
-			info += "|";
-		}
-		return info; 
-	}
-	
-	public String getWinnerMessage () {
-		if (playerWin()) return "Player win!";
-		else if (aliensWin()) return "Aliens win!";
-		else if (doExit) return "Player exits the game";
-		else return "This should not happen";
-	}
-	
-	
-	
-	public boolean move(String direction, int numCells ) {
-		
-		if(direction.equals("right")) {
-			numCells *= -1;
-		}
-		if(navi.getY() + numCells > 0 && navi.getY() + numCells < 9) {
-			navi.move(numCells);
-			return true;
-		}
-		return false;
-	}
+    private boolean doExit;// Player wants to exit?
 
-	
-	public boolean shootLaser(String option) {
-		if(option == null) {
-			if(!navi.getLaser().isActive()) {
-				navi.shoot();
-				return true;
-			}
-		}
-		else {
-			if(option == "supermisil") {
-				if(this.shootSuperLaser()) {
-					return true;
-				}
-			}
-		}
-		
-		return false;
-	}
+    private boolean shockWave;// Can I use shock?
 
-	public boolean shockWave() {
-		if(shock.isActive()) {
-			return true;
-		}
-		return false;
-	}
+    private GameObjectBoard board;// "Board" for the game
 
+    private UCMShip navi;// Our fellow ship
 
-	public void receivePoints(int points) {
-		navi.setPoints(navi.getPoints() + points);
-		
-	}
+    private BoardInitializer initialize = new BoardInitializer();// Creator of the board
 
+    private int fila; // Line on where ships are
 
-	public void enableShockWave() {
-		this.shock.setActive(true);
-		
-	}
+    private char printerOption;// Options for the printer 'b' for board and 's' for string
 
+    // CONSTRUCTORS
 
-	public void enableMissile() {
-		navi.getLaser().setActive(false);
-		
-	}
+    public Game(Level level, String seed) {
+        this.level = level;
+        this.seed = seed;
+        this.rand = new Random(Long.parseLong(seed));
+        this.shockWave = false;
+        initGame();
+    }
 
-	public String characterAtToString(int x, int y) {
-		if(board.getObjectInPosition(x, y) != null) {
-			return board.getObjectInPosition(x, y).toString();
-		}
-		return "";
-	}
-	
-	public String stringify(int x, int y) {
-		if(board.getObjectInPosition(x, y) != null) {
-			return board.getObjectInPosition(x, y).stringify() + "\n";
-		}
-		return "";
-	}
-	
-	public void explosion(int x, int y) {
-		x -= 1;
-		y -= 1;
-		int radio = 3;
-		for(int i = 0; i < radio; ++i) {
-			for(int j = 0; j < radio; ++j) {
-				if(board.getObjectInPosition(x + i, y +j) != null) {
-					board.getObjectInPosition(x + i, y +j).damage(1);
-				}
-			}
-		}
-		board.update();
-	}
-	
-	public boolean useShockWave() {
-		if(this.shockWave()) {
-			
-			board.shockWaveDamage();
-			
-			this.shock.setActive(false);
-			
-			return true;
-		}
-		return false;
-	}
-	
-	
-		
-	public void removeAmmo() {
-		ammo--;
-	}
-	
-	
-	public void saveState(String filename) throws IOException{
-		GamePrinter s = new Stringifier(this);
-		String str = s.toString(this);
-		BufferedWriter writer = new BufferedWriter(new FileWriter(filename + ".dat", true));
-		writer.append(str);
-		     
-		writer.close();
-		
-	}
+    // GETTERS AND SETTERS
 
-	
-	public boolean shootSuperLaser() {
-		if(ammo > 0 && !this.superM.isActive()) {
-			superM.setX(navi.getX());
-			superM.setY(navi.getY());
-			superM.setActive(true);
-			--ammo;
-			return true;
-		}
-		return false;
-	}
+    public int getCurrentCycle() {
+        return gameCycle;
+    }
 
-	public boolean buy() {
-		if(navi.getPoints() >= 20) {
-			++ammo;
-			navi.setPoints(navi.getPoints() - 20);
-			return true;
-		}
-		return false;
-	}
-	
-	public void detectSuperDamage() {
-		board.searchTarget(superM);
-	}
-	
-		
+    public Level getLevel() {
+        return level;
+    }
+
+    public Random getRand() {
+        return this.rand;
+    }
+
+    public int getAmmo() {
+        return this.ammo;
+    }
+
+    public void setFila(int fila) {
+        this.fila = fila;
+    }
+
+    public int getFila() {
+        return this.fila;
+    }
+
+    public char getPrinterOption() {
+        return this.printerOption;
+    }
+
+    public void setPrinterOption(char printerOption) {
+        this.printerOption = printerOption;
+    }
+
+    public void setExit(boolean exit) {
+        this.doExit = exit;
+    }
+
+    public String getSeed() {
+        return this.seed;
+    }
+
+    // METHODS
+
+    // Init of the game, used to start and restart the game
+    public void initGame() {
+        this.ammo = 0;
+        this.fila = 1;
+        this.gameCycle = 0;
+        doExit = false;
+        printerOption = 'b';
+        this.board = initialize.initialize(this, level);
+        this.navi = new UCMShip(DIM_Y - 1, (DIM_X / 2), this, null, null);
+        board.add(navi);
+    }
+
+    // returns the symbol of a character at position (x,y) if it exists, if not,
+    // returns ""
+    public String characterAtToString(int x, int y) {
+        return board.toString(x, y);
+    }
+
+    // Message shown at the end of the game
+    public String getWinnerMessage() {
+        if (playerWin()) {
+            return "Player win!";
+        } else if (aliensWin()) {
+            return "Aliens win!";
+        } else if (doExit) {
+            return "Player exits the game";
+        } else {
+            receivePoints(100000000);
+            return "You found a bug, I'll give you 100000000 points";
+        }
+    }
+
+    // Checks if the aliens are in the bottom line or if the player has die
+    private boolean aliensWin() {
+        if (board.haveLanded() || navi.getHp() <= 0) {
+            return true;
+        }
+        return false;
+    }
+
+    // Checks if all aliens are dead
+    private boolean playerWin() {
+        if (board.aliensRemaining() <= 0) {
+            return true;
+        }
+        return false;
+    }
+
+    // Checks if the game is over
+    public boolean isFinished() {
+        return playerWin() || aliensWin() || doExit;
+    }
+
+    // Awards points to the player
+    public void receivePoints(int points) {
+        navi.setPoints(navi.getPoints() + points);
+    }
+
+    // ShockWave enabler
+    public void enableShockWave() {
+        this.shockWave = true;
+    }
+
+    // ShockWave Damage
+    public void shockWave() throws CommandExecuteException {
+        if (this.shockWave) {
+            board.shockDamage();
+            this.shockWave = false;
+        } else {
+            throw new CommandExecuteException("Shockwave is not ready");
+        }
+    }
+
+    // Movement of the player ship
+    public void move(String direction, int numCells) throws CommandMovementException {
+        if (numCells < 1 && numCells > 2) {// (Not looking for exact values so maximun steps can be increased)
+            throw new CommandMovementException("Incorrect speed, please check the value");
+        }
+        if (direction.charAt(0) == 'l') {
+            numCells = numCells * -1;
+        }
+        if (navi.getY() + numCells > 0 || navi.getY() + numCells < 8) {
+            navi.setY(navi.getY() + numCells);
+        } else {
+            throw new CommandMovementException("I can not go there");
+        }
+
+    }
+
+    // Shoot laser or superLaser
+    public void shootLaser(String option) throws CommandExecuteException {
+        if (option != null) {
+            if (navi.getSuperL() != null) {
+                throw new CommandExecuteException("Super Missile is active");
+            } else if (this.getAmmo() <= 0) {
+                throw new CommandExecuteException("No ammo available");
+            } else {
+                this.naviSuperShoot();
+            }
+        } else {
+            if (navi.getLaser() != null) {
+                throw new CommandExecuteException("Misile is active");
+            } else {
+                this.naviShoot();
+            }
+        }
+    }
+
+    private void naviShoot() {
+        navi.setLaser(new Laser(navi.getX(), navi.getY(), this, true, 1));
+        this.board.add(navi.getLaser());
+    }
+
+    private void naviSuperShoot() {
+        navi.setSuperLaser(new Laser(navi.getX(), navi.getY(), this, true, 2));
+        this.board.add(navi.getSuperL());
+    }
+
+    // Enable UCMShip missile
+    public void enableMissile(Laser laser) {
+        board.delete(laser);
+        laser = null;
+        navi.setLaser(null);
+    }
+
+    public void enableSuperMissile(Laser laser) {
+        board.delete(laser);
+        laser = null;
+        navi.setSuperLaser(null);
+    }
+
+    // Explosive ships damage
+    public void explosiveDamage(int x, int y) {
+        board.explosiveDamage(x, y);
+    }
+
+    // Cycle update
+    public void update() {
+        if (gameCycle % getLevel().getNumCyclesToMoveOneCell() == 0 && gameCycle != 0) {
+            this.setFila(board.move(this.getFila()));// Ships move
+        }
+        board.computerAction();// Shots are fired(if probability wants) and proyectiles move and do damage
+        board.update();// Dead ships are removed
+        ++gameCycle;
+    }
+
+    // Collision detector for weapons
+    public void detectDamage(Weapon other) {
+        board.detectDamage(other);
+    }
+
+    public String stringify(int i, int j) {
+        return board.stringify(i, j);
+    }
+
+    public void buy() throws CommandExecuteException {
+        if (navi.getPoints() >= 20) {
+            ++this.ammo;
+            navi.setPoints(navi.getPoints() - 20);
+        } else {
+            throw new CommandExecuteException("Not enought points to buy a super missile");
+        }
+    }
+
+    public String infoToString() {
+        String info = "Life: " + this.navi.getHp() + "\n";
+        info += "Number of cycles: " + this.gameCycle + "\n";
+        info += "Points: " + this.navi.getPoints() + "\n";
+        info += "Remaining Aliens: " + this.board.aliensRemaining() + "\n"; // contar en gameObject board cuantos aliens
+                                                                            // quedan
+        info += "Shockwave: ";
+        if (this.shockWave) { // checks if shockwave is active or not
+            info += "YES" + "\n";
+        } else {
+            info += "NO" + "\n";
+        }
+        info += "Ammo: ";
+        for (int i = 0; i < ammo; ++i) {
+            info += "|";
+        }
+        return info;
+    }
+
+    public void saveState(String filename) throws IOException {
+        GamePrinter s = new Stringifier(this);
+        String str = s.toString(this);
+        BufferedWriter writer = new BufferedWriter(new FileWriter(filename + ".dat", true));
+        writer.append(str);
+        writer.close();
+    }
+
+    public void alienShoot(DestroyerShip ds) {
+        ds.setBomb(new Bomb(ds.getX(), ds.getY(), true, 1, this));
+        board.add(ds.getBomb());
+    }
+
+    public void disableBomb(Bomb bomb) {
+        board.delete(bomb);
+        bomb = null;
+    }
 }

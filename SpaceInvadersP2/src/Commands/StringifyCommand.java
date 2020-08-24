@@ -1,36 +1,39 @@
-package Commands;
+package commands;
 
-import exceptions.CommandExecuteException;
 import exceptions.CommandParseException;
 import logic.Game;
 
-public class StringifyCommand extends Commands{
+public class StringifyCommand extends Command {
+
+	private static String _name = "Stringify";
+	private static String _shortcut = "C";
+	private static String _details = "Changes the game perspective";
+	private static String _help = "This mode sucks";
+
 	public StringifyCommand(String name, String shortcut, String details2, String help) {
 		super(name, shortcut, details2, help);
 	}
 
-	
-	public boolean execute(Game game) throws CommandExecuteException {
-		if(game.getPrinterOption() == 'b') {
+	public StringifyCommand() {
+		super(_name, _shortcut, _details, _help);
+	}
+
+	public boolean execute(Game game) {
+		if (game.getPrinterOption() == 'b') {
 			game.setPrinterOption('s');
-		}
-		else {
+		} else {
 			game.setPrinterOption('b');
 		}
 		return false;
 	}
 
-	
-	public Commands parse(String[] commandWord) throws CommandParseException {
-		if(commandWord.length != 1) {
-			System.out.print(Commands.incorrectNumArgsMsg);
+	public Command parse(String[] commandWord) throws CommandParseException {
+		if (!matchCommandName(commandWord[0])) {
 			return null;
+		} else if (commandWord.length != 1) {
+			throw new CommandParseException(Command.incorrectNumArgsMsg);
 		}
-		else if (commandWord[0].equalsIgnoreCase("Stringify") || commandWord[0].equalsIgnoreCase("c")) {
-			return new StringifyCommand("Stringify", "C", "", "Stringify: changes the game perspective");
-		}
-		return null;
+		return new StringifyCommand(name, shortcut, details, help);
 	}
-
 
 }

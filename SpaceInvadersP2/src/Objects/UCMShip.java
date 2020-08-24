@@ -2,70 +2,96 @@ package objects;
 
 import logic.Game;
 
-public final class UCMShip extends Ship{
-	//ATTRIBUTES
-	private Laser laser;
-	
-	//CONSTRUCTOR
-	public UCMShip(int startX, int startY, int hp, int points, Game game, boolean alien, boolean alive, Laser laser) {
-		super(startX, startY, hp, points, game, alien, alive);
-		this.laser = laser;
-	}
-	
-	public String toString() {
-		if(isAlive()) {
-			return "^_^";
-		}
-		return "!xx!";
-	}
-	
-	public boolean isAlive() {
-		return this.hp > 0;
-	}
+public final class UCMShip extends Ship {
 
-	public void computerAction() {
-	}
-	
-	@Override
-	public void move(char dir) {
-		
-	}
-	
-	public void move(int dir) {
-		this.setY(this.getY() - dir);
-	}
-	
-	public void damage(int damage) {
-		this.setHp(this.getHp() - damage);
-		
-	}
+    // ATRIBUTTES
 
-	public Laser getLaser() {
-		return this.laser;
-	}
+    private int hp;
 
-	public void shoot() {
-		laser.setX(this.x);
-		laser.setY(this.y);
-		laser.setActive(true);
-		laser.move('b');
-	}
-	
-	public final String stringify() {
-		return "P " + this.getX() + ";" + this.getY() + ";" + this.getHp() +";"
-				+ points + game.shockWave() + ";" + game.getAmmo();
-	}
-	
-	public boolean haveLanded() {
-		return false;
-	}
+    private Laser laser;
 
-	public boolean checkBorder() {
-		return false;
-	}
-	
-	
-	public boolean canDelete() {
-		return false;
-	}
+    private Laser superL;
+
+    private boolean shockWave;
+
+    public UCMShip(int x, int y, Game game, Laser laser, Laser superL) {
+        super(x, y, game, 0);
+        this.hp = 3;
+        this.laser = laser;
+        this.superL = superL;
+        this.shockWave = false;
+    }
+
+    // SETTERS AND GETTERS
+
+    public int getHp() {
+        return this.hp;
+    }
+
+    public Laser getLaser() {
+        return this.laser;
+    }
+
+    public Laser getSuperL() {
+        return this.superL;
+    }
+
+    public void setSockWave(boolean shockWave) {
+        this.shockWave = shockWave;
+    }
+
+    public boolean getSockWave() {
+        return this.shockWave;
+    }
+
+    // METHODS
+
+    public void computerAction() {
+        if (getLaser() != null && getLaser().getX() <= 0) {
+            game.enableMissile(this.getLaser());
+            this.laser = null;
+        }
+        if (getSuperL() != null && getSuperL().getX() <= 0) {
+            game.enableSuperMissile(this.getSuperL());
+            this.laser = null;
+        }
+    }
+
+    @Override
+    public void move(char dir) {
+        // Not used
+    }
+
+    public String toString() {
+        if (this.hp > 0) {
+            return "<" + this.getHp() + ">";
+        }
+        return "!xx!";
+    }
+
+    public void damage(int damage) {
+        this.hp -= damage;
+    }
+
+    public String stringify() {
+        return "P " + this.getX() + ";" + this.getY() + ";" + this.hp + ";" + points + ";" + this.getSockWave() + ";"
+                + game.getAmmo();
+    }
+
+    public boolean canDelete() {
+        return false;
+    }
+
+    public boolean canCount() {
+        return false;
+    }
+
+    public void setSuperLaser(Laser sl) {
+        this.superL = sl;
+    }
+
+    public void setLaser(Laser laser2) {
+        this.laser = laser2;
+    }
+
 }

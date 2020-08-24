@@ -1,39 +1,49 @@
-package Commands;
+package commands;
 
+import exceptions.CommandExecuteException;
 import exceptions.CommandParseException;
 import logic.Game;
 
-public class ShootCommand extends Commands{
-	String supermisile;
+public class ShootCommand extends Command {
+
+	private static String _name = "Shoot";
+	private static String _shortcut = "F";
+	private static String _details = "Shots a laser";
+	private static String _help = "shots a laser, if you put supermisil in the command shoots a supermisille";
+	private String supermisile;
 
 	public ShootCommand(String name, String shortcut, String details, String help, String supermisile) {
 		super(name, shortcut, details, help);
 		this.supermisile = supermisile;
 	}
 
-	
-	public boolean execute(Game game) {
-		if(game.shootLaser(this.supermisile)) {
-			return true;
-		}
-		return false;
+	public ShootCommand() {
+		super(_name, _shortcut, _details, _help);
 	}
-	
-	public Commands parse(String[] commandWord) throws CommandParseException {
-		Commands result = null;
-		if(commandWord[0].equalsIgnoreCase(name) || commandWord[0].equalsIgnoreCase(shortcut)) {
-			if(commandWord.length > 1 ) {
-				if(commandWord[1].equals("supermisil")) {
-					result = new ShootCommand("Shoot", "B", "", "", commandWord[1]);
-				} else {
-					throw new CommandParseException("There was a problem with supermisil\n");
-				}
-			} 
-			else {
-				result = new ShootCommand("Shoot", "B", "", "", null);
+
+	public boolean execute(Game game) throws CommandExecuteException {
+		try {
+			game.shootLaser(this.supermisile);
+		} catch (Exception e) {
+			throw e;
+		}
+		return true;
+	}
+
+	public Command parse(String[] commandWord) throws CommandParseException {
+		if (!matchCommandName(commandWord[0])) {
+			return null;
+		} else if (commandWord.length != 1) {
+			if (commandWord.length != 2) {
+				throw new CommandParseException(Command.incorrectArgsMsg);
 			}
 		}
-		return result; 
-		
+		if (commandWord.length == 2 && commandWord[1].equals("supermisil")) {
+			return new ShootCommand(name, shortcut, details, help, commandWord[1]);
+		} else if (commandWord.length == 2 && !commandWord[1].equals("supermisil")) {
+			throw new CommandParseException("Incorrect type of missil, type supermisil or leave it blank");
+		}
+		return new ShootCommand(name, shortcut, details, help, null);
+
 	}
 }

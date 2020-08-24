@@ -2,60 +2,79 @@ package objects;
 
 import logic.Game;
 
-public class Laser extends Weapon{
+public final class Laser extends Weapon {
 
-	public Laser(int startX, int startY, Game game, boolean alien, boolean alive, boolean active) {
-		super(startX, startY, game, alien, alive, active, 1);
-	}
+    // CONSTRUCTOR
 
+    public Laser(int x, int y, Game game, boolean active, int damage) {
+        super(x, y, game, active, damage);
+    }
 
-	public void move(char dir) {
-		this.setX(getX() - 1);
-		
-	}
+    // METHODS
+    @Override
+    public void computerAction() {
+        setX(getX() - 1);
+        game.detectDamage(this);
+    }
 
-	
-	public void computerAction() {
-		move('b');
-		if(x < 0) {
-			this.setActive(false);
-		}
-		
-		
-	}
+    @Override
+    public void move(char dir) {
+    }
 
-	
-	public String toString() {
-		if(isActive()) {
-			return "oo";
-		}
-		return "";
-	}
+    @Override
+    public String toString() {
+        if (isActive()) {
+            if (damage > 1) {
+                return superLaserString();
+            } else {
+                return laserString();
+            }
+        }
+        return "";
+    }
 
+    public String laserString() {
+        return "ºº";
+    }
 
-	
-	public void damage(int damage) {
-		this.setActive(false);
-		this.setX(10);
-		this.setY(10);
-		
-	}
+    public String superLaserString() {
+        return "^";
+    }
 
-	public String stringify() {
-		if(this.isActive()) {
-			return "M " + this.getX() + ";" + this.getY();
-		}
-		return "";
-	}
-	
+    @Override
+    public void damage(int damage) {
+        if (this.damage == 1)
+            game.enableMissile(this);
+        else
+            game.enableSuperMissile(this);
+    }
 
+    @Override
+    public String stringify() {
+        if (isActive()) {
+            if (this.damage > 1) {
+                return this.stringiSuper();
+            } else {
+                return this.stringiLaser();
+            }
+        }
+        return "";
+    }
 
-	
+    public String stringiLaser() {
+        return "M " + this.getX() + ";" + this.getY();
+    }
 
+    public String stringiSuper() {
+        return "S " + this.getX() + ";" + this.getY();
+    }
 
-	
+    public boolean performAttack(GameObject other) {
+        return other.receiveMissileAttack(this.damage);
+    }
 
+    public boolean receiveBombAttack(int damage) {
+        return true;
+    }
 
-
-	
 }

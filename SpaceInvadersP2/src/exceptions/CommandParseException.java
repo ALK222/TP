@@ -1,11 +1,11 @@
 package exceptions;
 
-@SuppressWarnings("serial")
+public class CommandParseException extends Exception {
 
-public class CommandParseException extends Exception{
-	
-	public CommandParseException(String mesg) {
-		super("Problem parse exception"+mesg);
-	}
+    private static final long serialVersionUID = 2L;
+
+    public CommandParseException(String msg) {
+        super("Parse problem: " + msg);
+    }
+
 }
-

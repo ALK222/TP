@@ -1,31 +1,34 @@
-package Commands;
+package commands;
 
+import exceptions.CommandParseException;
 import logic.Game;
 
-public class ResetCommand extends Commands {
-	
-	public ResetCommand (String name, String shortcut, String details, String help) {
+public class ResetCommand extends Command {
+
+	private static String _name = "Reset";
+	private static String _shortcut = "R";
+	private static String _details = "";
+	private static String _help = "resets the game";
+
+	public ResetCommand(String name, String shortcut, String details, String help) {
 		super(name, shortcut, details, help);
 	}
 
-	
-	public boolean execute(Game game) {
-		game.reset();
-		return true;
+	public ResetCommand() {
+		super(_name, _shortcut, _details, _help);
 	}
-	
-	
-	public Commands parse(String[] commandWord) {
 
-		if(commandWord.length != 1) {
-			System.out.print(Commands.incorrectNumArgsMsg);
+	public boolean execute(Game game) {
+		game.initGame();
+		return false;
+	}
+
+	public Command parse(String[] commandWord) throws CommandParseException {
+		if (!matchCommandName(commandWord[0])) {
 			return null;
+		} else if (commandWord.length != 1) {
+			throw new CommandParseException(Command.incorrectNumArgsMsg);
 		}
-		else if (commandWord[0].equalsIgnoreCase("reset") || commandWord[0].equalsIgnoreCase("r")) {
-			return new ResetCommand("Reset", "R", "", "Reset: Resets the program.");
-		}
-		else {
-			return null;
-		}
+		return new ResetCommand(name, shortcut, details, help);
 	}
 }

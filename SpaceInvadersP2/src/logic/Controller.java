@@ -1,71 +1,69 @@
 package logic;
 
-
-import interfaces.GamePrinter;
-import interfaces.IExecuteRandomActions;
-import utils.BoardPrinter;
-import utils.Stringifier;
-
+import java.io.IOException;
 import java.util.Scanner;
 
-import Commands.CommandGenerator;
-import Commands.Commands;
-import exceptions.CommandExecuteException;
-import exceptions.CommandParseException;
+import commands.Command;
+import commands.CommandGenerator;
+import exceptions.*;
+import utils.BoardPrinter;
+import utils.Stringifier;
+import interfaces.GamePrinter;;
 
-public class Controller implements IExecuteRandomActions{
-	
-	//ATTRIBUTES
-	
+public class Controller {
+
+	/*
+	 * 
+	 * Logic behind the game
+	 * 
+	 */
+
+	// ATTRIBUTES
+
 	private Game game;
+
 	private Scanner in;
-	private GamePrinter b;
-	private GamePrinter s;
+
+	private GamePrinter printer;
+
 	private String prompt = "Command >";
-	private String unknownCommandMsg = "Unknown command, please put a valid command";
-	
-	//CONSTRUCTOR
-	
+
+	// CONSTRUCTOR
+
 	public Controller(Game g) {
 		this.game = g;
 		this.in = new Scanner(System.in);
-		this.b = new BoardPrinter(game, 8, 9);
-		this.s = new Stringifier(game);
+		this.printer = new BoardPrinter(game, Game.DIM_Y, Game.DIM_X);
 	}
-	
-	
+
 	public void run() {
-		while(!game.isFinished()){
+		while (!game.isFinished()) {
 			System.out.print(prompt);
-			String[]  words = in.nextLine().trim().split ("\\s+");
-			try{
-				Commands command = CommandGenerator.parseCommand(words);
-				if(command != null) {
-					if(command.execute(game)) {
+			String[] words = in.nextLine().trim().split("\\s+");
+			try {
+				Command command = CommandGenerator.parseCommand(words);
+				if (command != null) {
+					if (command.execute(game)) {
 						game.update();
+						printGame();
+					} else if (words[0].charAt(0) == 'r') {
 						printGame();
 					}
 				}
-				else
-					System.out.println(unknownCommandMsg);
-			}
-			catch(CommandParseException | CommandExecuteException ex) {
-				System.out.format((ex).getMessage() +"%n%n");
+			} catch (CommandParseException | CommandExecuteException | IOException | CommandMovementException ex) {
+				System.out.format((ex).getMessage() + "%n%n");
 			}
 		}
 	}
-	
-	
+
 	public void printGame() {
-		if(game.getPrinterOption() == 'b') {
-			b = new BoardPrinter(this.game, 8, 9);
-			System.out.println(b.toString(game));
-		}
-		else {
-			s = new Stringifier(game);
-			System.out.println(s.toString(game));
+		if (game.getPrinterOption() == 'b') {
+			this.printer = new BoardPrinter(this.game, Game.DIM_Y, Game.DIM_X);
+			System.out.println(printer.toString(game));
+		} else {
+			this.printer = new Stringifier(game);
+			System.out.println(printer.toString(game));
 		}
 	}
-	
 
 }

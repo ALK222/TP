@@ -1,34 +1,40 @@
-package Commands;
+package commands;
 
 import exceptions.CommandExecuteException;
 import exceptions.CommandParseException;
 import logic.Game;
 
-public class BuyCommand extends Commands {
+public class BuyCommand extends Command {
 
-	public BuyCommand(String name, String shortcut, String details2, String help) {
-		super(name, shortcut, details2, help);
+	private static String _name = "Buy";
+	private static String _shortcut = "B";
+	private static String _details = "Buys a supermisille";
+	private static String _help = "A supermisille costs 20 points. Kill enemy ships to earn points";
+
+	public BuyCommand(String name, String shortcut, String details, String help) {
+		super(name, shortcut, details, help);
 	}
 
-	
+	public BuyCommand() {
+		super(_name, _shortcut, _details, _help);
+	}
+
 	public boolean execute(Game game) throws CommandExecuteException {
-		if(game.buy()) {
-			return true;
+		try {
+			game.buy();
+		} catch (Exception e) {
+			throw e;
 		}
-		System.out.println("No se pudo comprar el supermisil.\n");
 		return false;
 	}
 
-	
-	public Commands parse(String[] commandWord) throws CommandParseException {
-		if(commandWord.length != 1) {
-			System.out.print(Commands.incorrectNumArgsMsg);
+	public Command parse(String[] commandWord) throws CommandParseException {
+		if (!matchCommandName(commandWord[0])) {
 			return null;
+		} else if (commandWord.length != 1) {
+			throw new CommandParseException(Command.incorrectNumArgsMsg);
 		}
-		else if (commandWord[0].equalsIgnoreCase("Buy") || commandWord[0].equalsIgnoreCase("b")) {
-			return new BuyCommand("Buy", "B", "", "Buy: buys a supermisille.");
-		}
-		return null;
+		return new BuyCommand(name, shortcut, details, help);
 	}
 
 }

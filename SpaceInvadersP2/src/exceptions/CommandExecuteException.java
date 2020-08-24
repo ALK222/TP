@@ -1,10 +1,11 @@
 package exceptions;
 
-@SuppressWarnings("serial")
+public class CommandExecuteException extends Exception {
 
-public class CommandExecuteException extends Exception{
-	public CommandExecuteException(String mesg) {
-		super("Execution Command Failed" + mesg);
-	}
+    private static final long serialVersionUID = 2L;
+
+    public CommandExecuteException(String msg) {
+        super("Execute problem: " + msg);
+    }
+
 }
-

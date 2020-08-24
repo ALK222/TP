@@ -1,33 +1,55 @@
 package objects;
 
+import interfaces.IExecuteRandomActions;
 import logic.Game;
 
-public  abstract class AlienShip extends EnemyShip{
-	/*
-	 * 
-	 * 		Alien Mothership, the beggining of all aliens
-	 * 
-	 * */
-	
-	//CONSTRUCTOR
-	
-	public AlienShip(int startX, int startY, int hp, int points, Game game, boolean alien, boolean alive) {
-		super(startX, startY, hp, points, game, alien, alive);
-	}
+public abstract class AlienShip extends EnemyShip implements IExecuteRandomActions {
 
-	public final boolean allDead() {
-		return hp < 0;
-	}
-	
-	public boolean checkBorder() {
-		if(this.getY() <= 0 || this.getY() >= 8) {
-			return true;
-		}
-		return false;
-	}
-	
-	public boolean canDelete() {
-		return true;
-	}
+    // ATRIBUTTES
+
+    private int hp;
+
+    // CONSTRUCTOR
+
+    public AlienShip(int x, int y, Game game, int hp, int points) {
+        super(x, y, game, points);
+        this.hp = hp;
+    }
+
+    // SETTERS AND GETTERS
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public int getHp() {
+        return this.hp;
+    }
+
+    // METHODS
+    @Override
+    public boolean haveLanded() {
+        return this.getX() >= 7;
+    }
+
+    @Override
+    public boolean isOnBorder() {
+        return this.getY() <= 0 || this.getY() >= 8;
+    }
+
+    @Override
+    public void move(char dir) {
+        switch (dir) {
+            case 'b':
+                this.setX(this.getX() + 1);
+                break;
+            case 'i':
+                this.setY(this.getY() - 1);
+                break;
+            case 'd':
+                this.setY(this.getY() + 1);
+                break;
+        }
+    }
 
 }

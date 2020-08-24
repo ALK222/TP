@@ -1,103 +1,72 @@
 package objects;
 
 import interfaces.IAttack;
+import interfaces.IComunications;
 import logic.Game;
 
-/* Class "GameObject":
- * 			
- * 			Defines common attributes and methods for both ships and projectiles
- * 
- * */
+public abstract class GameObject implements IAttack, IComunications {
 
-public abstract class GameObject implements IAttack{
-	
-	
-		//ATTRIBUTES
-	
-		protected Game game;
-		protected int x;
-		protected int y;
-		protected boolean alien;
-		protected boolean alive;
-		
-		
-		//CONSTRUCTOR
-		
-		public GameObject(int startX, int startY, Game game, boolean alien, boolean alive) {
-			this.game = game;
-			this.x = startX;
-			this.y = startY;
-			this.alien = alien;
-			this.alive = alive;
-		}
-		
-		
-		//SETTERS AND GETTERS
-		
-		public boolean isAlien() {
-			return alien;
-		}
+    // ATRIBUTTES
+    protected Game game;
+    protected int x;
+    protected int y;
 
+    // CONSTRUCTORS
 
-		public void setAlien(boolean alien) {
-			this.alien = alien;
-		}
+    public GameObject(final Game game, final int x, final int y) {
+        this.game = game;
+        this.x = x;
+        this.y = y;
+    }
 
+    public GameObject() {
+        // Void constructor for the loader
+        this.game = null;
+        this.x = 0;
+        this.y = 0;
+    }
 
-		public boolean isAlive() {
-			return alive;
-		}
+    // GETTERS AND SETTERS
 
-		public void setAlive(boolean alive) {
-			this.alive = alive;
-		}
+    public int getX() {
+        return this.x;
+    }
 
+    public void setX(final int x) {
+        this.x = x;
+    }
 
-		public final void setX(int x) {
-			this.x = x;
-		}
-		
-		public final void setY(int y) {
-			this.y = y;
-		}
-		
-		public final int getX() {
-			return this.x;
-		}
-		
-		public final int getY() {
-			return this.y;
-		}
+    public int getY() {
+        return this.y;
+    }
 
-		
-		//METHODS
-		
-		public final boolean isIn(int x, int y) {
-			return this.x == x && this.y == y;
-		}
-		
+    public void setY(final int y) {
+        this.y = y;
+    }
 
-		public abstract void computerAction();
-		
-		public abstract void move(char dir);
-		
-		public abstract String toString();
-		
-		public abstract void damage(int damage);
-		
-		public abstract String stringify();
+    public void setGame(final Game game) {
+        // Used in loader
+        this.game = game;
+    }
 
+    // METHODS
 
-		public abstract boolean haveLanded();
+    public boolean isIn(int x, int y) {
+        return this.x == x && this.y == y;
+    }
 
+    public abstract void computerAction();// Makes the computer acction each turn
 
-		protected abstract boolean checkBorder();
+    public abstract void move(char dir);// moves the object
 
+    public abstract String toString();// returns the symbol of the object
 
-		protected abstract boolean canAttack();
+    public abstract void damage(int damage);//
 
+    public abstract String stringify();// String of the object with info
 
-		protected abstract boolean canDelete();
+    public abstract boolean canAttack();// returns true on weapons, false on ships
+
+    public abstract boolean canDelete();// ships can be deleted except for the ovni, weapons not
 
 }
-

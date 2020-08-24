@@ -1,10 +1,16 @@
-package Commands;
+package commands;
 
-import exceptions.MoveParseException;
+import exceptions.CommandMovementException;
+import exceptions.CommandParseException;
 import logic.Game;
 
-public class MoveCommand extends Commands{
-	
+public class MoveCommand extends Command {
+
+	private static String _name = "Move";
+	private static String _shortcut = "m";
+	private static String _details = "Moves the ship";
+	private static String _help = "Introduce first the direction and then the speed";
+
 	String dir;
 	int vel;
 
@@ -14,36 +20,29 @@ public class MoveCommand extends Commands{
 		this.vel = Integer.parseInt(speed);
 	}
 
-	
-	public boolean execute(Game game) {
+	public MoveCommand() {
+		super(_name, _shortcut, _details, _help);
+	}
 
-		game.move(dir, vel);
+	public boolean execute(Game game) throws CommandMovementException {
 
-		
+		try {
+			game.move(dir, vel);
+		} catch (Exception e) {
+			throw e;
+		}
 		return true;
 	}
 
-	public Commands parse(String[] commandWord) throws MoveParseException {
-		Commands result = null;
-		if(commandWord[0].equalsIgnoreCase(name) || commandWord[0].equalsIgnoreCase(shortcut)) {
-			if(commandWord.length == 3 ) {
-				if(commandWord[1].equals("right") || commandWord[1].equals("left")) {
-					if(commandWord[2].equals("1") || commandWord[2].equals("2")) {
-						vel = Integer.parseInt(commandWord[2]);
-						result = new MoveCommand(commandWord[0], "m", "", "", commandWord[1], commandWord[2]);
-					}
-					else {
-						throw new MoveParseException("Wrong speed number");
-					}
-				} else {
-					throw new MoveParseException("Direction not right");
-				}
-			} else {
-				throw new MoveParseException("More arguments are needed");
-			}
-		} 
-		
-		return result;
+	public Command parse(String[] commandWord) throws CommandParseException, CommandMovementException {
+		if (!matchCommandName(commandWord[0])) {
+			return null;
+		} else if (commandWord.length != 3) {
+			throw new CommandParseException(Command.incorrectNumArgsMsg);
+		} else if (!commandWord[2].equalsIgnoreCase("left") && !commandWord[2].equalsIgnoreCase("right")) {
+			throw new CommandMovementException("I don't understand that direction");
+		}
+		return new MoveCommand(name, shortcut, details, help, commandWord[2], commandWord[1]);
 	}
 
 }
