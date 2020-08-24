@@ -24,7 +24,11 @@ public final class Bomb extends Weapon {
 
     public String toString() {
         if (isActive()) {
-            return ".";
+            if (this.damage == 1) {
+                return ".";
+            } else {
+                return "..";
+            }
         }
         return "";
     }

@@ -176,4 +176,18 @@ public final class GameObjectBoard {
         return (objectAt(i, j) == null) ? "" : objectAt(i, j).stringify();
     }
 
+    public boolean supNear(int x, int y) {
+        x -= 1;
+        y -= 1;
+        int radius = 3;
+        for (int i = 0; i < radius; ++i) {
+            for (int j = 0; j < radius; ++j) {
+                if (objectAt(x + i, y + j) != null && objectAt(x + i, y + j).toString().startsWith("S")) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 }
