@@ -1,13 +1,17 @@
 package utils;
 
+import java.util.Random;
+
+import interfaces.IExecuteRandomActions;
 import logic.Game;
 import objects.DestroyerShip;
 import objects.GameObjectBoard;
 import objects.Ovni;
 import objects.RegularShip;
+import objects.Satellite;
 import objects.SupportShip;
 
-public final class BoardInitializer {
+public final class BoardInitializer implements IExecuteRandomActions {
 
     // ATRIBUTTES
     private Level level;
@@ -24,7 +28,23 @@ public final class BoardInitializer {
         initRegularShips();
         initDestroyerShips();
         addOvni();
+        generateSat();
         return board;
+    }
+
+    public void generateSat() {
+        int total = game.getLevel().getNumberSatellyte();
+        Random rand = new Random();
+        for (int i = 0; i < total; i++) {
+            int x = rand.nextInt(Game.DIM_X);
+            int y = rand.nextInt(Game.DIM_Y);
+            if (board.isEmpty(x, y)) {
+                if (x == Game.DIM_X - 1) {
+                    x = x - 2;
+                }
+                board.add(new Satellite(x, y, game, 1));
+            }
+        }
     }
 
     public void addOvni() {
@@ -45,11 +65,14 @@ public final class BoardInitializer {
         int x = 1 + level.getNumRowsOfRegularAliens();
         int y = 5;
         if (level.getNumDestroyerAliens() > 2) {
-            board.add(new SupportShip(x, y + 2, game, 3));
             ++y;
         }
         for (int i = 0; i < level.getNumDestroyerAliens(); ++i) {
-            board.add(new DestroyerShip(x, y - i, game, 1, null));
+            if (generateSup(game)) {
+                board.add(new DestroyerShip(x, y - i, game, 1, null));
+            } else {
+                board.add(new SupportShip(x, y - i, game, 3));
+            }
         }
 
     }

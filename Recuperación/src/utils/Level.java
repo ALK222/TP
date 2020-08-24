@@ -2,7 +2,7 @@ package utils;
 
 public enum Level {
 
-	EASY(4, 2, 0.2, 3, 0.5, 1), HARD(8, 4, 0.3, 2, 0.2, 2), INSANE(12, 4, 0.5, 1, 0.1, 3);
+	EASY(4, 2, 0.2, 3, 0.5, 1, 0, 2), HARD(8, 4, 0.3, 2, 0.2, 2, 0.1, 3), INSANE(12, 4, 0.5, 1, 0.1, 3, 0.2, 5);
 
 	private int numRegularAliens;
 	private int numDestroyerAliens;
@@ -11,15 +11,19 @@ public enum Level {
 	private double shootFrequency;
 	private int numRowsOfRegularAliens;
 	private double turnExplodeFrequency = 0.05; // actualmente no depende del nivel
+	private double supFrequency;
+	private int satNumber;
 
 	private Level(int numRegularAliens, int numDestroyerAliens, double shootFrequency, int numCyclesToMoveOneCell,
-			double ovniFrequency, int numRowsOfRegularAliens) {
+			double ovniFrequency, int numRowsOfRegularAliens, double supFrequency, int satNumber) {
 		this.numRegularAliens = numRegularAliens;
 		this.numDestroyerAliens = numDestroyerAliens;
 		this.shootFrequency = shootFrequency;
 		this.numCyclesToMoveOneCell = numCyclesToMoveOneCell;
 		this.ovniFrequency = ovniFrequency;
 		this.numRowsOfRegularAliens = numRowsOfRegularAliens;
+		this.supFrequency = supFrequency;
+		this.satNumber = satNumber;
 	}
 
 	public int getNumRegularAliens() {
@@ -63,6 +67,14 @@ public enum Level {
 
 	public double getTurnExplodeFrequency() {
 		return turnExplodeFrequency;
+	}
+
+	public double getSuppFrequency() {
+		return supFrequency;
+	}
+
+	public int getNumberSatellyte() {
+		return satNumber;
 	}
 
 }
