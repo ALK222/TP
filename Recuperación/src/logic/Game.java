@@ -9,6 +9,7 @@ import exceptions.CommandExecuteException;
 import exceptions.CommandMovementException;
 import interfaces.GamePrinter;
 import interfaces.IPlayerController;
+import objects.Berserk;
 import objects.Bomb;
 import objects.DestroyerShip;
 import objects.GameObjectBoard;
@@ -318,5 +319,9 @@ public final class Game implements IPlayerController {
 
     public boolean objectNearSat(int x, int y) {
         return !board.isEmpty(x, y);
+    }
+
+    public void addBerserk(int x, int y) {
+        board.add(new Berserk(x, y, this, 1));
     }
 }
