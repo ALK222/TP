@@ -19,4 +19,8 @@ public interface IExecuteRandomActions {
 	default boolean generateSup(Game game) {
 		return game.getRand().nextDouble() < game.getLevel().getSuppFrequency();
 	}
+
+	default boolean generateZombie(Game game) {
+		return game.getRand().nextDouble() < game.getLevel().getZombieFrequency();
+	}
 }

@@ -10,6 +10,7 @@ import objects.Ovni;
 import objects.RegularShip;
 import objects.Satellite;
 import objects.SupportShip;
+import objects.ZombieShip;
 
 public final class BoardInitializer implements IExecuteRandomActions {
 
@@ -56,6 +57,9 @@ public final class BoardInitializer implements IExecuteRandomActions {
         int y = 6;
         for (int i = 0; i < level.getNumRowsOfRegularAliens(); ++i) {
             for (int j = 0; j < level.getNumRegularAliensPerRow(); ++j) {
+                if (generateZombie(game)) {
+                    board.add(new ZombieShip(x + i, y - j, game, 2));
+                }
                 board.add(new RegularShip(x + i, y - j, game, 2, false));
             }
         }
