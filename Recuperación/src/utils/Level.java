@@ -26,6 +26,7 @@ public enum Level {
 		this.numRowsOfRegularAliens = numRowsOfRegularAliens;
 		this.supFrequency = supFrequency;
 		this.satNumber = satNumber;
+		this.zFrequency = zFrequency;
 	}
 
 	public int getNumRegularAliens() {

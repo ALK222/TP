@@ -41,7 +41,7 @@ public final class BoardInitializer implements IExecuteRandomActions {
             int y = rand.nextInt(Game.DIM_Y);
             if (board.isEmpty(x, y)) {
                 if (x == Game.DIM_X - 1) {
-                    x = x - 2;
+                    x = 6;
                 }
                 board.add(new Satellite(x, y, game, 1));
             }
