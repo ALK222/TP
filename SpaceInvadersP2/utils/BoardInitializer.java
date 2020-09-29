@@ -1,57 +1,51 @@
 package utils;
 
-import objects.*;
 import logic.Game;
+import objects.*;
 
-public class BoardInitializer {
+public final class BoardInitializer {
 
-	private Level level;
-	private GameObjectBoard board;
-	private Game game;
+    // ATRIBUTTES
+    private Level level;
 
-	public GameObjectBoard initialize(Game game, Level level) {
-		this.level = level;
-		this.game = game;
-		board = new GameObjectBoard(Game.DIM_X, Game.DIM_Y);
+    private Game game;
 
-		initializeRegularAliens();
-		initializeDestroyerAliens();
-		initializeOvni();
-		return board;
-	}
+    private GameObjectBoard board;
 
-	private void initializeOvni() {
-		board.add(new Ovni(0, 8, 1, 25, game, true, false));
-	}
+    public GameObjectBoard initialize(Game game, Level level) {
+        this.level = level;
+        this.game = game;
+        this.board = new GameObjectBoard(Game.DIM_X, Game.DIM_Y);
 
-	private void initializeRegularAliens() {
-		int x = 1;
-		int y = 6;
-		for (int i = 0; i < this.level.getNumRowsOfRegularAliens(); ++i) {
-			for (int j = 0; j < level.getNumRegularAliensPerRow(); ++j) {
-				board.add(new RegularShip(x + i, y - j, 2, 5, game, true, true, false));
-			}
-		}
-	}
+        initRegularShips();
+        initDestroyerShips();
+        addOvni();
+        return board;
+    }
 
-	private void initializeDestroyerAliens() {
-		int x = 2;
-		int y = 5;
-		if (level.getNumRegularAliens() > 4) {
-			++y;
-		}
-		if (level.getNumRegularAliens() > 8) {
-			++x;
-		}
-		if (level.getNumDestroyerAliens() > 2) {
-			++x;
-		}
+    public void addOvni() {
+        board.add(new Ovni(0, 0, game, 20, false));
+    }
 
-		for (int i = 0; i < level.getNumDestroyerAliens(); i++) {
-			Bomb bomb = new Bomb(0, 0, game, true, true, false);
-			board.add(new DestroyerShip(x, y - i, 1, 10, game, true, true, bomb));
-			board.add(bomb);
-		}
-	}
+    public void initRegularShips() {
+        int x = 1;
+        int y = 6;
+        for (int i = 0; i < level.getNumRowsOfRegularAliens(); ++i) {
+            for (int j = 0; j < level.getNumRegularAliensPerRow(); ++j) {
+                board.add(new RegularShip(x + i, y - j, game, 2, false));
+            }
+        }
+    }
 
+    public void initDestroyerShips() {
+        int x = 1 + level.getNumRowsOfRegularAliens();
+        int y = 5;
+        if (level.getNumDestroyerAliens() > 2) {
+            ++y;
+        }
+        for (int i = 0; i < level.getNumDestroyerAliens(); ++i) {
+            board.add(new DestroyerShip(x, y - i, game, 1, null));
+        }
+
+    }
 }

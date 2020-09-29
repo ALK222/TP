@@ -9,33 +9,13 @@ public class BoardPrinter implements GamePrinter {
 	String[][] board;
 	final String space = " ";
 
-	public int getNumRows() {
-		return numRows;
-	}
-
-	public void setNumRows(int numRows) {
-		this.numRows = numRows;
-	}
-
-	public int getNumCols() {
-		return numCols;
-	}
-
-	public void setNumCols(int numCols) {
-		this.numCols = numCols;
-	}
-
 	public BoardPrinter(Game game, int rows, int cols) {
 		this.numRows = rows;
 		this.numCols = cols;
 		encodeGame(game);
 	}
 
-	public BoardPrinter() {
-
-	}
-
-	private void encodeGame(Game game) {
+	public void encodeGame(Game game) {
 		board = new String[numRows][numCols];
 		for (int i = 0; i < numRows; i++) {
 			for (int j = 0; j < numCols; j++) {
@@ -44,7 +24,6 @@ public class BoardPrinter implements GamePrinter {
 		}
 	}
 
-	@Override
 	public String toString(Game game) {
 
 		int cellSize = 7;
@@ -68,22 +47,6 @@ public class BoardPrinter implements GamePrinter {
 			str.append(lineDelimiter);
 		}
 		return str.toString();
-	}
-
-	@Override
-	public GamePrinter parse(String name) {
-		return null;
-	}
-
-	@Override
-	public String helpText() {
-		return null;
-	}
-
-	@Override
-	public void setGame(Game game) {
-		this.encodeGame(game);
-
 	}
 
 }
